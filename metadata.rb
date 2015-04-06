@@ -1,0 +1,7 @@
+name             'cwb'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures cwb'
+long_description 'Installs/Configures cwb'
+version          '0.1.0'
