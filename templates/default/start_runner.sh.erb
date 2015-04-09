@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+cwb validate <%= @base_dir %>
+
+if [ $? -eq 0 ]
+then
+	cwb execute <%= @base_dir %> <%= ' &>> start.log < /dev/null' if @redirect_io %>
+else
+	<%= "./#{@benchmark_start}" %> <%= ' &>> start.log < /dev/null' if @redirect_io %>
+fi

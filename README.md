@@ -2,6 +2,11 @@
 
 TODO: Enter the cookbook description here.
 
+## TODO
+
+* Resource naming: benchmark vs benchmark_file (à la cookbook_file)
+* Library naming: BenchmarkUtil vs ... (Benchmark is already taken from the cwb client gem!)
+
 ## Supported Platforms
 
 TODO: List your supported platforms.
