@@ -43,6 +43,7 @@ TODO: Enter the cookbook description here.
   * ADVICE: "Idempotent systems are better than idempotent records" => design data driven cookbooks!
   * Consider providing a Docker image!
 * [cwb-cookbook] smarter implementation of updated_by_last_action notification method similar to: https://docs.chef.io/lwrp_custom_provider.html#updated-by-last-action
+* Fix cookbook that use `stop_and_postprocess` (not supported anymore)
 
 ## Improvements
 

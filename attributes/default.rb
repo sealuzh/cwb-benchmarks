@@ -5,6 +5,8 @@
 # does not perform a deep hash merge
 # default["cwb"]["server-ip"] = nil # No useful default value possible
 default["cwb"]["base_dir"] = "/usr/local/cloud-benchmark"
+# Support legacy benchmarks
+default["benchmark"]["dir"] = node["cwb"]["base_dir"]
 
 ### System specific
 # This attribute will overwrite owner and group
