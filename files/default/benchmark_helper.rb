@@ -19,17 +19,21 @@ class BenchmarkHelper
 
   # Benchmark has been completed and postprocessing will be started immediately
   def self.notify_benchmark_completed_and_continue(success = true, message = '')
-    warn_unsupported_method
+    self.notify_benchmark_completed(success, message, continue: true)
   end
 
   # Benchmark has been completed and postprocessing won't be started now
   # The Cloud-WorkBench starts the postprocessing on the primary machine
   def self.notify_benchmark_completed_and_wait(success = true, message = '')
-    warn_unsupported_method
+    self.notify_benchmark_completed(success, message, continue: false)
   end
 
   def self.notify_benchmark_completed(success = true, message = '', opts = {})
-    warn_unsupported_method
+    if success
+      warn_unsupported_method
+    else
+      @@cwb.notify_failed_execution
+    end
   end
 
   # Postprocessing has been completed
