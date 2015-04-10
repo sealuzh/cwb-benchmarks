@@ -1,12 +1,20 @@
-# TODO: Replace HTTP client to remove rest-client dependency
-# because rest-client requires build-essential to be installed.
-# Alternatives:
-# * chef_gem 'httparty' # first time: 13s; then 4s
-# * chef_gem 'excon' # first time 12s; then 4s
-node.set['build-essential']['compile_time'] = true
-include_recipe 'build-essential::default'
-chef_gem 'rest-client' do
+FARADAY_VERSION = '~> 0.9.1'
+chef_gem 'faraday' do
+  compile_time true if respond_to?(:compile_time)
+  options '--no-document'
+  version FARADAY_VERSION
+end
+
+chef_gem 'faraday_middleware' do
+  compile_time true  if respond_to?(:compile_time)
+  options '--no-document'
+  version FARADAY_VERSION
+end
+
+# TODO: Remove after dev. This just ensures that the most recent version is installed
+chef_gem 'cwb' do
   compile_time true
+  action :remove
 end
 
 CWB_GEM_VERSION = '0.0.1'
