@@ -14,7 +14,7 @@ TODO: Enter the cookbook description here.
   * SUGGESTION
     * [cwb-server] cloud-workbench: existing repo; contains cwb-server cookbook for installation
     * [cwb-client] cloud-workbench-client or cwb-client: client utility gem
-    * [cwb-benchmarks] benchmark-cookbooks or cwb-benchmarks: actual benchmarks (does not contain any community cookbooks! => Provide Berkshelf quick guide, should pass --no-git option!)
+    * [cwb-benchmarks] benchmark-cookbooks or cwb-benchmarks: actual benchmarks (does not contain any community cookbooks! => Provide Berkshelf quick guide, should pass --no-git option!, document FAQ such as SSL validation config + .DS_Store issue on Mac https://github.com/berkshelf/berkshelf/issues/706)
     * Where should the cwb cookbook that installs the client utility on cloud servers live?
       * cwb-server: (+) belongs to the cwb infrastructure
       * cwb-client: (+) would be logical that the client knows how to install itself on a cloud VM
@@ -36,14 +36,17 @@ TODO: Enter the cookbook description here.
 * DOCS: provide basic (getting started with a minimal example) + advanced guide
   * Example with the Benchmark Ruby library
   * Local testing with Vagrant/test-kitchen
+* Handle case where cwb.server (i.e., cwb-server IP) is available but instance requrests failed
 * Support node.yml for local testing (i.e., just beside a local benchmark file, may provide a cwb command to generate one from attributes/default.rb) => Keep in mind that the cwb utility should be kept as small as possible because it is loaded during benchmark execution!
 * Simplify cwb-server installation!!!
   * Improve installation cookbook (dependency hell!)
   * ADVICE: "Idempotent systems are better than idempotent records" => design data driven cookbooks!
   * Consider providing a Docker image!
+* [cwb-cookbook] smarter implementation of updated_by_last_action notification method similar to: https://docs.chef.io/lwrp_custom_provider.html#updated-by-last-action
 
 ## Improvements
 
+* Add the utility command cwb ssh IP to ssh into cwb instances => provide cloud-benchmarking.pem path in config or as arg!
 * Provide a mechanism for benchmark repetitions
 * Provide mechanism to post/or sync back logging within the VM
 * Provide automatic metric collection (e.g., for CPU model name), maybe also for other Ohai attributes such as network or io counters
