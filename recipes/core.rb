@@ -1,30 +1,39 @@
 require 'yaml'
 
-# Append the Chef Ruby to the path for all users.
-# This requires re-login in order to take effect which
-# might be relevant for users that already ssh'ed into
-# a machine before this resource is run
+# Append the Chef Ruby to the path for all users in order
+# to facilite debbuging using interactive shells.
+# ATTENTION: This only applies to interactive shells
+# => Remote ssh command MUST explicitly set the path!
+# NOTE: Users that already ssh'ed into a machine before
+# this resource is run is run might require to re-login.
 EMBEDDED_BIN = File.join(Chef::Config.embedded_dir, 'bin')
 file '/etc/profile.d/EMBEDDED_BIN.sh' do
   action :create
   mode '0644'
-  content "export PATH=$PATH:#{EMBEDDED_BIN}"
-end
-
-redirect_io = node['benchmark']['redirect_io'].to_s == 'true'
-template Cwb::Util.base_path_for(node['benchmark']['start_runner'], node) do
-  cwb_defaults(self)
-  mode 0755
-  variables(benchmark_start: node['benchmark']['start'],
-            redirect_io: redirect_io,
-            base_dir: Cwb::Util.base_dir(node))
-  source 'start_runner.sh.erb'
+  content "export PATH='#{EMBEDDED_BIN}':$PATH"
 end
 
 directory Cwb::Util.base_dir(node) do
   cwb_defaults(self)
   action :create
   recursive true
+end
+
+redirect_io = node['benchmark']['redirect_io'].to_s == 'true'
+template Cwb::Util.base_path_for(node['benchmark']['start_runner'], node) do
+  cwb_defaults(self)
+  mode 0755
+  source 'start_runner.sh.erb'
+  variables(embedded_bin: EMBEDDED_BIN,
+            benchmark_start: node['benchmark']['start'],
+            redirect_io: redirect_io)
+end
+
+template Cwb::Util.base_path_for(node['benchmark']['start'], node) do
+  cwb_defaults(self)
+  mode 0755
+  source 'start.sh.erb'
+  variables(base_dir: Cwb::Util.base_dir(node))
 end
 
 cwb_benchmark_suite 'cleanup suite' do
