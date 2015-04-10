@@ -17,6 +17,7 @@ action :install do
   cwb_benchmark @benchmark_util.name do
     action :add
   end
+  new_resource.updated_by_last_action(true)
 end
 
 # Create the benchmark directory structure and files
@@ -32,6 +33,7 @@ action :create do
     source new_resource.source if new_resource.source
     action :create
   end
+  new_resource.updated_by_last_action(true)
 end
 
 # Add the benchmark to the execution list
@@ -43,6 +45,7 @@ action :add do
     content "#{benchmarks_list}\n#{benchmark_util.name}"
     action :create
   end
+  new_resource.updated_by_last_action(true)
 end
 
 # Removes the benchmark directory structure and files
@@ -54,6 +57,7 @@ action :delete do
   directory @benchmark_util.path do
     action :delete
   end
+  new_resource.updated_by_last_action(true)
 end
 
 # Removes the benchmark from the execution list
@@ -65,6 +69,7 @@ action :remove do
     content benchmarks_list.gsub(benchmark_util.name, '')
     action :create
   end
+  new_resource.updated_by_last_action(true)
 end
 
 # Remove the benchmarks file
@@ -72,6 +77,7 @@ action :cleanup do
   file @benchmark_util.benchmarks_file do
     action :delete
   end
+  new_resource.updated_by_last_action(true)
 end
 
 ### Helpers
