@@ -22,6 +22,8 @@ TODO: Enter the cookbook description here.
 
 ## TODO
 
+* Document berks error on Mac!!!: berks upload could produce: Ridley::Errors::HTTPBadRequest: {"error":["Invalid element in array value of 'files'."]}
+  * `find . -name '*.DS_Store' -type f -delete`
 * Resource naming: benchmark vs benchmark_file (à la cookbook_file)
 * Library naming: BenchmarkUtil vs ... (Benchmark is already taken from the cwb client gem!)
 * deep_fetch: might be better to return nil instead of '' in order to be able to distinguish between empty and non-existing attribute

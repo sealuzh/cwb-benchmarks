@@ -6,15 +6,9 @@ chef_gem 'faraday' do
 end
 
 chef_gem 'faraday_middleware' do
-  compile_time true  if respond_to?(:compile_time)
+  compile_time true if respond_to?(:compile_time)
   options '--no-document'
   version FARADAY_VERSION
-end
-
-# TODO: Remove after dev. This just ensures that the most recent version is installed
-chef_gem 'cwb' do
-  compile_time true
-  action :remove
 end
 
 CWB_GEM_VERSION = '0.0.1'
@@ -28,7 +22,7 @@ CWB_GEM_PATH = File.join(Chef::Config[:file_cache_path], 'cookbooks', 'cwb', 'fi
 # using preferred_filename_on_disk_location(NODE, :files, SOURCE)
 # This method is defined here: https://github.com/chef/chef/blob/master/lib/chef/cookbook_version.rb
 chef_gem 'cwb' do
-  compile_time true
+  compile_time true if respond_to?(:compile_time)
   source CWB_GEM_PATH
   options('--no-document')
 end

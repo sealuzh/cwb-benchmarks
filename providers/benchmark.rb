@@ -11,11 +11,7 @@ end
 # Equivalent to :create and :add
 action :install do
   cwb_benchmark @benchmark_util.name do
-    action :create
-  end
-
-  cwb_benchmark @benchmark_util.name do
-    action :add
+    action [ :create, :add ]
   end
   new_resource.updated_by_last_action(true)
 end
@@ -44,6 +40,7 @@ action :add do
     cwb_defaults(self)
     content "#{benchmarks_list}\n#{benchmark_util.name}"
     action :create
+    notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
   end
   new_resource.updated_by_last_action(true)
 end

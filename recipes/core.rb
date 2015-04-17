@@ -48,8 +48,9 @@ end
 # will later be loaded into memory during the benchmark execution
 file Cwb::Util.config_file(node) do
   cwb_defaults(self)
-  action :create
-  content node.attributes.to_hash.to_yaml
+  # Gets notified from benchmark in a delayed manner
+  action :nothing
+  content lazy { node.attributes.to_hash.to_yaml }
 end 
 
 # In order to support existing benchmarks, the BenchmarkHelper utility forwards requests

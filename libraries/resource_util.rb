@@ -12,6 +12,7 @@ module Cwb
       lambda do |con|
         con.owner con.node['benchmark']['ssh_username'] || con.node['benchmark']['owner']
         con.group con.node['benchmark']['ssh_username'] || con.node['benchmark']['group']
+        cwb_send_if_respond_to(con, :backup, false)
       end.call(context)
     end
 
@@ -19,7 +20,7 @@ module Cwb
 
     def cwb_send_if_respond_to(context, method, *args)
       if context.respond_to?(method)
-        context.send(method, &args)
+        context.send(method, *args)
       end
     end
   end
