@@ -8,13 +8,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "chef_client", id: "chef_client" do |chef|
-    chef.add_recipe "sysbench"
+    chef.add_recipe "sysbench@1.0.0"
     chef.json =
         {
             "sysbench" => {
                 "cli_options" => {
                     "test" => "cpu",
-                    "cpu-max-prime" => "10000",
+                    "cpu-max-prime" => "20000",
                 }
             }
         }

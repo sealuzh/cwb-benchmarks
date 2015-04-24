@@ -4,9 +4,10 @@ maintainer_email 'joel.scheuner.dev@gmail.com'
 license          'Apache 2.0'
 description      'Installs/Configures sysbench'
 long_description 'Installs/Configures sysbench'
-version          '0.2.0'
+version          '1.0.0'
 
 depends 'apt'
+depends 'cwb'
 
 recipe  'sysbench::default', 'Installs and configures sysbench.'
 recipe  'sysbench::install', 'Installs sysbench'

@@ -1,5 +1,7 @@
+require_relative "../helper"
+
 source "https://api.berkshelf.com"
 
 metadata
 
-cookbook 'benchmark', path: '../benchmark'
+local_cookbook 'cwb'

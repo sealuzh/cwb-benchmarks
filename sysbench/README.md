@@ -1,4 +1,4 @@
-# sysbench-cookbook
+# Sysbench
 
 Installs the sysbench benchmark and provides utilities to integrate with Cloud WorkBench.
 Currently, only the CPU test mode is supported.
@@ -15,8 +15,10 @@ See attributes/default.rb
 
 ## Usage
 
-* Create a ratio-scale metric called `time`
-* Create a nominal-scale metric called `cpu`
+### Cloud WorkBench
+
+* Create a ratio-scale metric called `time` which reports results in `seconds`
+* Create a nominal-scale metric called `cpu` which reports the `model name`
 
 ### Sysbench Reference
 
@@ -29,13 +31,13 @@ Add the `sysbench` default recipe to your Chef configuration:
 
 ```ruby
 config.vm.provision "chef_client", id: "chef_client" do |chef|
-  chef.add_recipe "sysbench"
+  chef.add_recipe "sysbench@1.0.0"
   chef.json =
   {
     "sysbench" => {
         "cli_options" => {
             "test" => "cpu",
-            "cpu-max-prime" => "20000"
+            "cpu-max-prime" => 4_000
         }
     }
   }

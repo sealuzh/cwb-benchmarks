@@ -1,4 +1,10 @@
-# 0.2.0 (2015-19-01)
+# 1.0.0 (2015-04-25)
+
+* Major update to support the improved cwb version
+    * The cwb client utility now support local testing
+    * Use test-kitchen instead of Vagrant for automated integration testing
+
+# 0.2.0 (2015-01-19)
 
 * Reduce complexity for WWW demo paper and screencast purpose
     * Remove the repetitions feature
