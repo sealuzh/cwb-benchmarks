@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Set path of embedded Chef binaries (required for non-interactive shells)
+EMBEDDED_BIN=<%= @embedded_bin %>
+if [ -d $EMBEDDED_BIN ] ; then
+    export PATH="$EMBEDDED_BIN:$PATH"
+fi
+
+<%= "./#{@benchmark_start}" %><%= ' >> start.log ' if @redirect_io %> 2>> start.log < /dev/null
