@@ -1,0 +1,13 @@
+require_relative "../helper"
+
+source "https://supermarket.chef.io"
+
+metadata
+
+local_cookbook "www-micro-all"
+
+# Need to specify the transitive dependencies from "www-micro-all" because
+# transitive dependency resolution doesn't work automatically for local dependencies
+local_cookbook "www-micro-cpu"
+local_cookbook "www-micro-mem"
+local_cookbook "www-micro-io"

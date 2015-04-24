@@ -1,0 +1,14 @@
+DEPENDENCIES
+  www-micro-io
+    path: ../www-micro-io
+  www-micro-io-longterm
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.7.0)
+  www-micro-io (0.1.0)
+    apt (>= 0.0.0)
+  www-micro-io-longterm (0.1.0)
+    apt (>= 0.0.0)
+    www-micro-io (>= 0.0.0)

@@ -1,0 +1,7 @@
+require_relative "../helper"
+
+source "https://supermarket.chef.io"
+
+metadata
+
+local_cookbook "www-micro-cpu"
