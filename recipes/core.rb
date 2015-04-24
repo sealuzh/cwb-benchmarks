@@ -48,7 +48,7 @@ end
 # will later be loaded into memory during the benchmark execution
 file Cwb::Util.config_file(node) do
   cwb_defaults(self)
-  # Gets notified from benchmark in a delayed manner
+  # Gets notified from cwb_benchmark (or benchmark_helper for legacy benchmarks) in a delayed manner
   action :nothing
   content lazy { node.attributes.to_hash.to_yaml }
 end 
@@ -59,4 +59,5 @@ cookbook_file File.join(Cwb::Util.base_path_for('benchmark_helper.rb', node)) do
   cwb_defaults(self)
   mode 0755
   source 'benchmark_helper.rb'
+  notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
 end
