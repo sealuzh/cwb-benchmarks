@@ -27,7 +27,7 @@ config.vm.provision "chef_client", id: "chef_client" do |chef|
   chef.json =
   {
     'cli-benchmark' => {
-        'packages' => [vim, sysbench],
+        'packages' => %w(vim sysbench),
         'install' => 'echo "SUCCESS" > install.txt',
         'pre_run' => 'echo "SUCCESS" > pre_run.txt',
         'run' => 'sysbench --test=cpu --cpu-max-prime=20000 run',

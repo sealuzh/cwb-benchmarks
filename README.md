@@ -29,7 +29,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 
     3. Paste your Chef client key to `$HOME/.chef/cwb-user.pem`. Refer to https://github.com/sealuzh/cloud-workbench how to create a Chef client if you have not created one yet.
 
-4. Verify!
+4. Verify connection to Chef Server
 
     ```bash
     knife client list
@@ -136,8 +136,8 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 CWB comes with an interactive debug mode to ease benchmark development in case your benchmark fails during preparation (i.e., provisioning) or execution.
 
 *Preparation:* Click the `Enable Keep Alive` button within your benchmark execution view.
-    * **WARNING:** Make sure you toggle this button once you're done because otherwise your VMs will live and cost *FOREVER*!
-    * CWB will automatically terminate VMs on failure after a configurable timout. Per default, you'll have 15 minutes time to enable the `Keep Alive` mode.
+* **WARNING:** Make sure you toggle this button once you're done because otherwise your VMs will live and cost *FOREVER*!
+* CWB will automatically terminate VMs on failure after a configurable timout. Per default, you'll have 15 minutes time to enable the `Keep Alive` mode.
 
 ### Failed on preparing
 
@@ -145,7 +145,7 @@ CWB comes with an interactive debug mode to ease benchmark development in case y
 2. Upload your fixed cookbooks via `berks upload` (overwrite existing versions with `--force`)
 3. Click the `Reprovision` button
 4. Repeat step 1. - 3. until Chef completes successfully
-5. **IMPORTANT:** Click the `Disable Keep Alive` and `Abort` buttons to release all VMs once you're done.
+5. **IMPORTANT:** Click the `Disable Keep Alive` and `Abort` buttons to release all resources once you're done.
 
 ### Failed on running
 
@@ -175,10 +175,10 @@ You can leverage the powerful [pry](http://pryrepl.org/) shell to interactively 
 
 *Preparation:* Set a breakpoint anywhere in your code. Make sure you upload your updated cookbook to the Chef Server.
 
-    ```bash
-    require 'pry'
-    binding.pry
-    ```
+```ruby
+require 'pry'
+binding.pry
+```
 
 ### Chef recipe
 
@@ -209,7 +209,7 @@ You can leverage the powerful [pry](http://pryrepl.org/) shell to interactively 
 ## Local testing
 
 The `cwb` command line utility allows for "smoke-testing" benchmarks locally.
-Find examples in `cli-benchmark` (local attribute config), `sysbench` ([RSpec](http://rspec.info/) unit testing), `fio` (config file).
+Find examples in `cli-benchmark` (local node.yml attribute config), `sysbench` ([RSpec](http://rspec.info/) unit testing), `fio` (custom config file).
 
 ```bash
 gem install cwb
