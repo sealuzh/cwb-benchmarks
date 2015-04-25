@@ -73,6 +73,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 
 4. Write the `install` recipe that leverages Chef to install all the benchmark dependencies. 
     * Chef resources: http://docs.chef.io/resources.html
+    * Search Chef docs: https://docs.chef.io/search.html
     * Install a package (e.g., apt package on Debian system): https://docs.chef.io/resource_package.html
     * Create file: https://docs.chef.io/resource_file.html
     * Create file from cookbook: https://docs.chef.io/resource_cookbook_file.html
@@ -122,6 +123,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 
 9. Upload your benchmark cookbook to the Chef Server
     * `berks upload` will freeze your cookbook version => bump version (the `--force` flag allows to overwrite already uploaded cookbooks)
+    * Mac OS X users might get the following [error](https://github.com/berkshelf/berkshelf/issues/706): `Ridley::Errors::HTTPBadRequest: {"error":["Invalid element in array value of 'files'."]}` The workaround is to delete all `.DS_STORE` files within the cookbook directory via `find . -name '*.DS_Store' -type f -delete`
 
     ```bash
     berks install && berks upload
