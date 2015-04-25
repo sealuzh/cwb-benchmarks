@@ -1,6 +1,5 @@
 require_relative 'util'
 
-# TODO: document this monkypatching in the README
 require_relative 'inflection'
 String.send(:include, Inflection)
 
