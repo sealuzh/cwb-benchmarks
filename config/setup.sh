@@ -14,11 +14,11 @@ function check_dir_exists() {
   fi
 }
 
-check_dir_exists $BERKS_DIR
-mkdir $HOME/.berkshelf
-cp config.json $HOME/.berkshelf/config.json
+check_dir_exists "$BERKS_DIR"
+mkdir "$BERKS_DIR"
+cp config.json "$BERKS_DIR/config.json"
 
-check_dir_exists $CHEF_DIR
-mkdir $HOME/.chef
-cp knife.rb $HOME/.chef/knife.rb
-cp cwb-user.pem $HOME/.chef/cwb-user.pem
+check_dir_exists "$CHEF_DIR"
+mkdir "$CHEF_DIR"
+cp knife.rb "$CHEF_DIR/knife.rb"
+# cp cwb-user.pem "$CHEF_DIR/cwb-user.pem"
