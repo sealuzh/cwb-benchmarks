@@ -23,8 +23,8 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
     2. Copy `knife.rb` to `~/.chef/knife.rb` and `config.json` to `~/.berkshelf/config.json`
 
         ```bash
-        mkdir ~/.chef; cp knife.rb $HOME/.chef/knife.rb;
-        mkdir ~/.berkshelf; cp config.json $HOME/.berkshelf/config.json;
+        mkdir ~/.chef && cp knife.rb $HOME/.chef/knife.rb
+        mkdir ~/.berkshelf && cp config.json $HOME/.berkshelf/config.json
         ```
 
     3. Paste your Chef client key to `$HOME/.chef/cwb-user.pem`. Refer to https://github.com/sealuzh/cloud-workbench how to create a Chef client if you have not created one yet.
@@ -55,7 +55,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 
     ```bash
     cd $HOME/git/cwb-benchmarks
-    cp template benchmark-name
+    cp -r _template benchmark-name
     cd benchmark-name
     ```
 
