@@ -1,0 +1,10 @@
+name             'cli-benchmark'
+maintainer       'Joel Scheuner'
+maintainer_email 'joel.scheuner.dev@gmail.com'
+license          'MIT'
+description      'Installs/Configures cli-benchmark'
+long_description 'Installs/Configures cli-benchmark'
+version          '1.0.0'
+
+depends 'cwb'
+depends 'apt'

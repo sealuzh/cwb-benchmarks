@@ -1,0 +1,13 @@
+DEPENDENCIES
+  cli-benchmark
+    path: .
+    metadata: true
+  cwb
+    path: ../cwb
+
+GRAPH
+  apt (2.7.0)
+  cli-benchmark (1.0.0)
+    apt (>= 0.0.0)
+    cwb (>= 0.0.0)
+  cwb (0.1.0)

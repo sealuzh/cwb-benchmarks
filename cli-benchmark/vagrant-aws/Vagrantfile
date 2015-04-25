@@ -1,0 +1,39 @@
+# The following variables are available
+# benchmark_name: Name of the benchmark definition from the web interface
+# benchmark_name_sanitized: benchmark_name where all non-word-characters are replaced with an underscore '_'
+# benchmark_id: The unique benchmark definition identifier
+# execution_id: The unique benchmark execution identifier
+# chef_node_name: The default node name used for Chef client provisioning
+# tag_name: The default tag name set as aws name tag
+
+# VAGRANTFILE_API_VERSION = "2"  # Already initialized before
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider :aws do |aws, override|
+    aws.region = "eu-west-1"
+    # Official Ubuntu 14.04 LTS image for eu-west-1 from Canonical:
+    #  https://cloud-images.ubuntu.com/locator/ec2/
+    aws.ami = "ami-896c96fe"
+    override.ssh.username = "ubuntu"
+    aws.instance_type = "t1.micro"
+    # Add other security groups separated by spaces.
+    # Example: %w(default my_own_group)
+    # aws.security_groups = %w(default)
+    # A default tag name is set that you may override.
+    # aws.tags = {
+    #   'Name' => tag_name
+    # }
+  end
+
+  config.vm.provision "chef_client", id: "chef_client" do |chef|
+    chef.add_recipe "cli-benchmark"
+    chef.json =
+    {
+      'cli-benchmark' => {
+        'pre_run' => 'echo "SUCCESS" > test.txt',
+        'run' => 'date',
+        'regex' => '.*',
+        'metric' => 'time'
+      }
+    } # END json
+  end
+end
