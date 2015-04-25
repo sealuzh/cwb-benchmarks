@@ -1,13 +1,6 @@
 # benchmark-name
 
-Installs the benchmark-name benchmark and provides utilities to integrate with Cloud WorkBench.
-
-## Supported Platforms
-
-TODO: list supported platforms here:
-=== START EXAMPLE ===
-* Ubuntu 14.04 LTS (manually tested)
-=== END EXAMPLE ===
+Installs the `benchmark-name` benchmark and provides utilities to integrate with Cloud WorkBench.
 
 ## Attributes
 
@@ -17,8 +10,12 @@ See `attributes/default.rb`
 
 ### Cloud WorkBench
 
-* Create a {ratio/nominal}-scale metric called `METRIC_NAME` which reports results in `UNIT`
-* Create a nominal-scale metric called `cpu` which reports the `model name` (OPTIONAL)
+| Metric Name                  | Unit              | Scale Type    |
+| ---------------------------- | ----------------- | ------------- |
+| **metric-name**              | unit              | ratio/nominal |
+| cpu                          | model-name        | nominal       |
+
+**bold-written** metrics are mandatory
 
 ### benchmark-name::default
 
