@@ -5,13 +5,11 @@ Currently, only the CPU test mode is supported.
 
 ## Supported Platforms
 
-Should work for Ubuntu and Debian.
-
-* Ubuntu 14.04 (manually tested)
+* Ubuntu 14.04 LTS (manually tested)
 
 ## Attributes
 
-See attributes/default.rb
+See `attributes/default.rb`
 
 ## Usage
 
@@ -27,7 +25,7 @@ See attributes/default.rb
 
 ### sysbench::default
 
-Add the `sysbench` default recipe to your Chef configuration:
+Add the `sysbench` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
 config.vm.provision "chef_client", id: "chef_client" do |chef|

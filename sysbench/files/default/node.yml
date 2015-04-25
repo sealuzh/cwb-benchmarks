@@ -1,0 +1,6 @@
+---
+sysbench:
+  cli_options:
+    test: cpu
+    num-threads: 2
+    cpu-max-prime: 4000

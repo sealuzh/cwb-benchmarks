@@ -3,7 +3,10 @@ require 'cwb'
 class Sysbench < Cwb::Benchmark
   def execute
     @cwb.submit_metric('cpu', timestamp, cpu_model_name)
-    result = `sysbench #{flatten_cli_options(cli_options)} run`
+    cmd = "sysbench #{flatten_cli_options(cli_options)} run"
+    result = `#{cmd}`
+    raise "Sysbench command '#{cmd}' exited with statuscode '#{$CHILD_STATUS.exitstatus}'.\n
+           #{result}" unless $CHILD_STATUS.success?
     @cwb.submit_metric('time', timestamp, extract_time(result))
   end
 
@@ -21,6 +24,7 @@ class Sysbench < Cwb::Benchmark
 
   def flatten_cli_options(options)
     cli_options = ''
+    return cli_options if options.empty?
     options.each do |key, value|
       cli_options << "--#{key}"
       cli_options << "=#{value}" unless value.to_s.empty?
