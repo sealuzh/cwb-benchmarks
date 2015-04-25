@@ -8,14 +8,9 @@
 # chef_node_name: The default node name used for Chef client provisioning
 # tag_name: The default tag name set as aws name tag
 
-# NOTE: The automatically generated content inserted before influences the line numbers
-#       that are displayed in the log files. Just calculate -100 to get your actual line number.
-
 # VAGRANTFILE_API_VERSION = "2"  # Already initialized before
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # AWS EC2 provider
   config.vm.provider :aws do |aws, override|
-    # AWS instance configuration
     aws.region = "eu-west-1"
     # Official Ubuntu 14.04 LTS image for eu-west-1 from Canonical:
     #  https://cloud-images.ubuntu.com/locator/ec2/
@@ -29,24 +24,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # aws.tags = {
     #   'Name' => tag_name
     # }
-    aws.block_device_mapping = [
-      {
-          'DeviceName' => "/dev/sda1",
-          'VirtualName' => "root",
-          'Ebs.VolumeSize' => 20,
-          'Ebs.DeleteOnTermination' => true
-      }
-    ]
+    # You might want to specify custom EBS settings:
+    # aws.block_device_mapping = [
+    #   {
+    #       'DeviceName' => "/dev/sda1",
+    #       'VirtualName' => "root",
+    #       'Ebs.VolumeSize' => 20,
+    #       'Ebs.DeleteOnTermination' => true
+    #   }
+    # ]
   end
 
-  # Chef client provisioning
   config.vm.provision "chef_client", id: "chef_client" do |chef|
-    # NOTE: Make sure to include the 'recipe[benchmark]'
-    #       if you use chef.run_list = [...] which is NOT RECOMMENDED
-    # Optional version number possible: "fio-benchmark@0.3.1"
-    chef.add_recipe "fio-benchmark"
-    # NOTE: Do NOT use the ["benchmark"] attribute namespace for your own attributes
-    #       It is highly recommended to use the name of the cookbook as the attribute namespace.
+    chef.add_recipe "fio@1.0.0"  # Version number is optional
     chef.json =
     {
       "fio" => {

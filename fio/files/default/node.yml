@@ -1,0 +1,8 @@
+---
+cwb:
+  server: localhost
+fio:
+  metric_definition_id: seq. write
+  config_file: fio_job.ini
+  config:
+    write_bw_log: fio_write_job

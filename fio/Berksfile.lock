@@ -1,0 +1,14 @@
+DEPENDENCIES
+  cwb
+    path: ../cwb
+  fio
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.7.0)
+  build-essential (2.2.3)
+  cwb (0.1.0)
+  fio (1.0.0)
+    apt (>= 0.0.0)
+    build-essential (>= 0.0.0)
