@@ -1,6 +1,4 @@
 DEPENDENCIES
-  cwb
-    path: ../cwb
   sysbench
     path: .
     metadata: true

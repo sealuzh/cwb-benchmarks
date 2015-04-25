@@ -6,6 +6,7 @@ description      'Installs and configures the fio benchmark'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '1.0.0'
 
+depends 'cwb'
 depends 'apt'
 depends 'build-essential'
 

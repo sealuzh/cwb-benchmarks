@@ -2,8 +2,6 @@ DEPENDENCIES
   cli-benchmark
     path: .
     metadata: true
-  cwb
-    path: ../cwb
 
 GRAPH
   apt (2.7.0)
