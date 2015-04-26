@@ -18,7 +18,7 @@ suites:
     attributes:
       benchmark:
         ssh_username: vagrant
-        redirect_io: true
+        logging_enabled: true
       sysbench:
         cli_options:
           cpu-max-prime: 3000

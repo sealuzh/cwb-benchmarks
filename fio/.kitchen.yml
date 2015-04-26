@@ -18,7 +18,7 @@ suites:
     attributes:
       benchmark:
         ssh_username: vagrant
-        redirect_io: true
+        logging_enabled: true
       fio:
         config:
           size: 40m

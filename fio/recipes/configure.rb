@@ -1,7 +1,7 @@
 # Enable io redirect per default
 # + easier for debugging
 # * should not affect benchmark performance as no output is written to stdout during the benchmark
-node.default['benchmark']['redirect_io'] = 'true'
+node.default['benchmark']['logging_enabled'] = 'true'
 
 fio = Cwb::BenchmarkUtil.new('fio', node)
 
