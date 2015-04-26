@@ -21,7 +21,7 @@ cwb_benchmark 'benchmark-name'
 Instead of hardcoding `owner` and `group` you should use the `cwb_defaults(self)` utility method:
 
 ```ruby
-file "/tmp/something" do
+file '/tmp/something' do
   cwb_defaults(self)
   action :create
 end

@@ -12,28 +12,28 @@ module Cwb
       @name = name
     end
 
-    # Path of the given benchmark
+    # @return [String] the path of the given benchmark
     def path
       File.join(base_dir, name)
     end
 
-    # Returns the path for a file belonging to this benchmark
+    # @return [String] the path for a file belonging to this benchmark
     def path_for(file_name)
       File.join(path, file_name)
     end
 
-    # Path of the benchmark Ruby class file implementing the benchmark
+    # @return [String] the path of the benchmark Ruby class file implementing the benchmark
     def class_file
       path_for(class_file_name)
     end
 
-    # Name of the Ruby benchmark class file
+    # @return [String] the name of the Ruby benchmark class file
     def class_file_name
       "#{@name.underscore}.rb"
     end
 
-    # Name of the Ruby benchmark class
-    # NOTE: the implementation of camelize doesn't detect abbreviations.
+    # @return [String] the name of the Ruby benchmark class
+    # @note the implementation of camelize doesn't detect abbreviations.
     # Therefore, you have to use strict camelization.
     # Example: HttpBenchmark instead of HTTPBenchmark
     def class_name

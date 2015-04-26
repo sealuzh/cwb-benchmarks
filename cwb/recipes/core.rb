@@ -19,14 +19,21 @@ directory Cwb::Util.base_dir(node) do
   recursive true
 end
 
-redirect_io = node['benchmark']['redirect_io'].to_s == 'true'
+def logging_enabled?
+  if node['benchmark']['redirect_io'].nil?
+    node['benchmark']['logging_enabled']
+  else
+    node['benchmark']['redirect_io']
+  end
+end
+
 template Cwb::Util.base_path_for(node['benchmark']['start_runner'], node) do
   cwb_defaults(self)
   mode 0755
   source 'start_runner.sh.erb'
   variables(embedded_bin: EMBEDDED_BIN,
             benchmark_start: node['benchmark']['start'],
-            redirect_io: redirect_io)
+            logging_enabled: logging_enabled?)
 end
 
 template Cwb::Util.base_path_for(node['benchmark']['start'], node) do

@@ -50,11 +50,11 @@ class BenchmarkHelper
   private
 
     def self.print_deprecation_warning
-      $stderr.puts "BenchmarkHelper is DEPRECATED => Use the new cwb gem instead."
+      $stderr.puts 'BenchmarkHelper is DEPRECATED => Use the new cwb gem instead.'
     end
 
     def self.warn_unsupported_method
-      $stderr.puts "UNSUPPORTED METHOD"
+      $stderr.puts 'UNSUPPORTED METHOD'
     end
 
     def self.init

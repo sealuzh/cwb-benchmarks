@@ -2,7 +2,7 @@ module Cwb
   class Util
     DEFAULT_BENCHMARK_DIR = '/usr/local/etc/' unless defined? DEFAULT_BENCHMARK_DIR
 
-    # Directory wherein all benchmarks reside (currently the parent directory of path)
+    # @return [String] the directory wherein all benchmarks reside (currently the parent directory of path)
     def self.base_dir(node)
       node['cwb']['base_dir']
     rescue
@@ -10,7 +10,7 @@ module Cwb
       DEFAULT_BENCHMARK_DIR
     end
 
-    # Configuration file for the cwb client utility
+    # @return [String] the configuration file for the cwb client utility
     def self.config_file(node)
       File.join(self.base_dir(node), 'node.yml')
     end
@@ -23,22 +23,22 @@ module Cwb
       @node = node
     end
 
-      # See class method
+    # @see {base_dir}
     def base_dir
       self.class.base_dir(@node)
     end
 
-    # See class method
+    # @see {config_file}
     def config_file
       self.class.config_file(@node)
     end
 
-    # Path to the file that determines the benchmarks to be executed and its order
+    # @return [String] the path to the file that determines the benchmarks to be executed and its order
     def benchmarks_file
       File.join(base_dir, 'benchmarks.txt')
     end
 
-    # Path to the file that determies the benchmark suite to be executed
+    # @return [String] the path to the file that determies the benchmark suite to be executed
     def benchmark_suite_file
       File.join(base_dir, 'benchmark_suite.txt')
     end

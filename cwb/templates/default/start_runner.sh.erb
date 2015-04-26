@@ -6,4 +6,4 @@ if [ -d $EMBEDDED_BIN ] ; then
     export PATH="$EMBEDDED_BIN:$PATH"
 fi
 
-<%= "./#{@benchmark_start}" %><%= ' >> start.log ' if @redirect_io %> 2>> start.log < /dev/null
+<%= "./#{@benchmark_start}" %><%= ' >> start.log ' if @logging_enabled %> 2>> start.log < /dev/null
