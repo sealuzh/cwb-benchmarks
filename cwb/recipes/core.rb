@@ -27,13 +27,14 @@ def logging_enabled?
   end
 end
 
+logging_enabled = logging_enabled?
 template Cwb::Util.base_path_for(node['benchmark']['start_runner'], node) do
   cwb_defaults(self)
   mode 0755
   source 'start_runner.sh.erb'
   variables(embedded_bin: EMBEDDED_BIN,
             benchmark_start: node['benchmark']['start'],
-            logging_enabled: logging_enabled?)
+            logging_enabled: logging_enabled)
 end
 
 template Cwb::Util.base_path_for(node['benchmark']['start'], node) do
