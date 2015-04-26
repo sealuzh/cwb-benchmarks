@@ -77,7 +77,6 @@ action :benchmarks_file do
     # available here, even not with lazy evaluation.
     content ''
     action :nothing
-    notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
   end
 end
 
@@ -109,5 +108,6 @@ def update_benchmarks_file(operation)
       benchmark_file.content node['cwb']['benchmarks'].join("\n")
     end
     notifies :create, file_resource, :delayed
+    notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
   end
 end
