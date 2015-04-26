@@ -107,6 +107,14 @@ cwb execute .
 
 * This cookbook monkypatches the String class by adding the utility methods `camelize` and `underscore`. These methods are for internal use, do NOT depend on them.
 
+## Development
+
+Publish Chef Cookbook to [Chef Supermarket](https://supermarket.chef.io/) (only for owners)
+```bash
+knife cookbook site share "cwb" "Other"
+```
+
+
 ## License and Authors
 
 Author:: Joel Scheuner (joel.scheuner.dev@gmail.com)
