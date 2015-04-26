@@ -62,7 +62,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 2. Update `metadata.rb` to use the same `benchmark-name` as `name`
 
     ```bash
-    vim metadata.ruby
+    vim metadata.rb
     ```
 
 3. Update `benchmark-name` in the default recipe
@@ -218,7 +218,7 @@ gem install cwb
 cwb execute benchmark-name/benchmark_name.rb
 ```
 
-More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench` and `cli-benchmark`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`.
+More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench` and `cli-benchmark`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`. An example integration test can be found in the `cwb` cookbook.
 
 ## Local Cookbook Dependencies
 
