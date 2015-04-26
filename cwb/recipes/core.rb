@@ -44,14 +44,6 @@ template Cwb::Util.base_path_for(node['benchmark']['start'], node) do
   variables(base_dir: Cwb::Util.base_dir(node))
 end
 
-cwb_benchmark_suite 'cleanup suite' do
-  action :cleanup
-end
-
-cwb_benchmark 'cleanup benchmark' do
-  action :cleanup
-end
-
 # TODO: consider filtering here because the entire node hash
 # will later be loaded into memory during the benchmark execution
 file Cwb::Util.config_file(node) do

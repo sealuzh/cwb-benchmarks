@@ -34,14 +34,8 @@ end
 
 # Add the benchmark to the execution list
 action :add do
-  benchmarks_list = ::File.read(@benchmark_util.benchmarks_file) rescue ''
-  benchmark_util = @benchmark_util
-  file @benchmark_util.benchmarks_file do
-    cwb_defaults(self)
-    content "#{benchmarks_list}\n#{benchmark_util.name}"
-    action :create
-    notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
-  end
+  node.default['cwb']['benchmarks'].push(@benchmark_util.name)
+  update_benchmarks_file('add')
   new_resource.updated_by_last_action(true)
 end
 
@@ -59,13 +53,8 @@ end
 
 # Removes the benchmark from the execution list
 action :remove do
-  benchmarks_list = ::File.read(@benchmark_util.benchmarks_file) rescue ''
-  benchmark_util = @benchmark_util
-  file @benchmark_util.benchmarks_file do
-    cwb_defaults(self)
-    content benchmarks_list.gsub(benchmark_util.name, '')
-    action :create
-  end
+  node.default['cwb']['benchmarks'].delete(@benchmark_util.name)
+  update_benchmarks_file('remove')
   new_resource.updated_by_last_action(true)
 end
 
@@ -77,6 +66,21 @@ action :cleanup do
   new_resource.updated_by_last_action(true)
 end
 
+# Finally generates the 'benchmarks.txt' from node attributes
+# @private
+action :benchmarks_file do
+  benchmark_util = @benchmark_util
+  file @benchmark_util.benchmarks_file do
+    cwb_defaults(self)
+    # MUST be injected afterwards because the attributes of interest are
+    # set at converge time within a resource and therefore are not
+    # available here, even not with lazy evaluation.
+    content ''
+    action :nothing
+    notifies :create, "file[#{Cwb::Util.config_file(node)}]", :delayed
+  end
+end
+
 ### Helpers
 
 # Initializes all attributes passed into this method as String
@@ -86,5 +90,24 @@ def init_attributes(*attributes)
   attributes.each do |attribute|
     value = new_resource.send(attribute)
     @current_resource.send(attribute, value)
+  end
+end
+
+def update_benchmarks_file(operation)
+  cwb_benchmark 'benchmarks_file' do
+    action :benchmarks_file
+  end
+
+  # HACK: Make this value passing hack superflous by using node.yml
+  # instead of dedicated `benchmarks.txt` and `benchmark_suite.txt` files.
+  # One might need a HWRP in order to set the node attribute at compile time.
+  benchmark_util = @benchmark_util
+  file_resource = "file[#{benchmark_util.benchmarks_file}]"
+  ruby_block "#{operation} '#{@benchmark_util.name}' to benchmarks list" do
+    block do
+      benchmark_file = resources(file_resource)
+      benchmark_file.content node['cwb']['benchmarks'].join("\n")
+    end
+    notifies :create, file_resource, :delayed
   end
 end

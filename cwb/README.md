@@ -78,6 +78,7 @@ You should not explicitly include the `cwb::default` recipe within your cookbook
 ## Internal Structure
 
 The `cwb::core` recipe prepares the following structure for benchmarks that are subsequently added by custom benchmark cookbooks.
+Do NOT rely in this internal structure as it might change in the future.
 
 ```
 .

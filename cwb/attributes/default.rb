@@ -5,6 +5,10 @@
 default['cwb']['server-ip'] = nil # No useful default value possible
 default['cwb']['base_dir'] = '/usr/local/cloud-benchmark'
 
+## Benchmark and BenchmarkSuite list infrastructure
+default['cwb']['benchmarks'] = []
+# default['cwb']['benchmark_suite'] = nil
+
 ### Support legacy benchmarks
 default['benchmark']['dir'] = node['cwb']['base_dir']
 

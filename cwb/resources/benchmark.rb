@@ -1,4 +1,4 @@
-actions :install, :create, :add, :delete, :remove, :cleanup
+actions :install, :create, :add, :delete, :remove, :cleanup, :benchmarks_file
 default_action :install
 
 NON_EMPTY_REGEX = /^[^$|\s+]/
