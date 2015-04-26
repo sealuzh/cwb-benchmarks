@@ -2,7 +2,34 @@
 
 The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository install and configure benchmarks that are aimed to be used with [Cloud WorkBench](https://github.com/sealuzh/cloud-workbench).
 
+
+## Quicklinks
+
+* CWB Server: https://github.com/sealuzh/cloud-workbench
+* CWB Cookbook *(Chef)*: https://github.com/sealuzh/cwb-benchmarks/tree/master/cwb
+* CWB Client *(RubyGem)*: https://github.com/sealuzh/cwb
+    * Docs: http://www.rubydoc.info/gems/cwb/
+
+
+## Execute a basic CLI Benchmark
+
+1. Go to your CWB-server `http://cwb-server.io/benchmark_definitions/new` (i.e., BENCHMARK > Definitions > Create New Benchmark)
+2. Chose a `Name` and click `Create New Benchmark`
+3. Click `Create New Metric Definition`
+4. Fill in `Name=time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
+5. Click `Start Execution` and confirm the popup dialog.
+
+
+## Schedule a Benchmark
+
+1. Within your benchmark definition, click `Create Schedule`
+2. Enter your Cron expression (e.g., `* 0,12 * * *` for midnight and lunchtime every day) and click `Create Schedule`
+3. Don't forget to deactivate your schedules if you don't need them anymore! Review active schedules here `http://cwb-server.io/benchmark_schedules?active=true`
+
+
 ## Setup
+
+*Precondition:* You need to have access to a Cloud WorkBench Server. See: https://github.com/sealuzh/cloud-workbench
 
 1. Clone this repository
 
@@ -35,21 +62,8 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
     knife client list
     ```
 
-## Execute a basic CLI Benchmark
 
-1. Go to your CWB-server `http://cwb-server.io/benchmark_definitions/new` (i.e., BENCHMARK > Definitions > Create New Benchmark)
-2. Chose a `Name` and click `Create New Benchmark`
-3. Click `Create New Metric Definition`
-4. Fill in `Name=time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
-5. Click `Start Execution` and confirm the popup dialog.
-
-## Schedule a benchmark
-
-1. Within your benchmark definition, click `Create Schedule`
-2. Enter your Cron expression (e.g., `* 0,12 * * *` for midnight and lunchtime every day) and click `Create Schedule`
-3. Don't forget to deactivate your schedules if you don't need them anymore! Review active schedules here `http://cwb-server.io/benchmark_schedules?active=true`
-
-## Write your first benchmark
+## Write your First Benchmark *(Getting Started)*
 
 1. Copy the benchmark cookbook template (replace `benchmark-name` approprietly)
 
@@ -133,6 +147,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
     1. Create a new `Benchmark Definition` via the CWB Web interface (analoguous to `Execute a basic CLI Benchmark`)
     2. Create the corresponding metrics for your benchmark definition (metric names must match)
 
+
 ## Debug your benchmark
 
 CWB comes with an interactive debug mode to ease benchmark development in case your benchmark fails during preparation (i.e., provisioning) or execution.
@@ -171,6 +186,7 @@ CWB comes with an interactive debug mode to ease benchmark development in case y
     cwb execute .
     ```
 
+
 ## Advanced debugging
 
 You can leverage the powerful [pry](http://pryrepl.org/) shell to interactively debug your Chef recipes and your benchmark code (both are plain Ruby code).
@@ -208,6 +224,7 @@ binding.pry
 
 1. Simply manually start the benchmark according to `Debug your benchmark > Failed on running`
 
+
 ## Local testing
 
 The `cwb` command line utility allows for "smoke-testing" benchmarks locally.
@@ -219,6 +236,7 @@ cwb execute benchmark-name/benchmark_name.rb
 ```
 
 More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench` and `cli-benchmark`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`. An example integration test can be found in the `cwb` cookbook.
+
 
 ## Local Cookbook Dependencies
 
