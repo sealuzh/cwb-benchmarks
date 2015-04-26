@@ -1,40 +1,30 @@
-### cwb namespace reserved for parameters passed from cwb-server
+### cwb namespace reserved for parameters passed from cwb-server (and internal use)
 # Vagrant does not perform a deep hash merge, therefore we must use a
 # reserved namespace to avoid user overwrites. Keep in mind that these
 # attributes in the cwb namespace cannot be overridden by users.
 default['cwb']['server-ip'] = nil # No useful default value possible
 default['cwb']['base_dir'] = '/usr/local/cloud-benchmark'
 
-# Support legacy benchmarks
+### Support legacy benchmarks
 default['benchmark']['dir'] = node['cwb']['base_dir']
+
+### Runner that handles nohup and I/O redirection
+default['benchmark']['start_runner'] = 'start_runner.sh'
+default['benchmark']['stop_and_postprocess_runner'] = 'stop_and_postprocess_runner.sh'
+
+### Execution
+# May later change to true if the log files from VMs are considered
+default['benchmark']['logging_enabled'] = false
+# @deprecated use the more clearer logging_enabled instead
+default['benchmark']['redirect_io'] = nil
+default['benchmark']['start'] = 'start.sh'
+default['benchmark']['stop_and_postprocess'] = 'stop_and_postprocess.sh'
 
 ### System specific
 # This attribute will overwrite owner and group if present
 default['benchmark']['ssh_username'] = nil
 default['benchmark']['owner'] = 'ubuntu'
 default['benchmark']['group'] = 'ubuntu'
-
-### Runner that handles nohup and I/O redirection
-# May later change to true if the log files from VMs are considered
-default['benchmark']['logging_enabled'] = false
-# @deprecated use the more clearer logging_enabled instead
-default['benchmark']['redirect_io'] = nil
-default['benchmark']['start_runner'] = 'start_runner.sh'
-default['benchmark']['stop_and_postprocess_runner'] = 'stop_and_postprocess_runner.sh'
-
-### Execution
-default['benchmark']['start'] = 'start.sh'
-default['benchmark']['stop_and_postprocess'] = 'stop_and_postprocess.sh'
-
-
-### May be supported later
-# Creates a shell script with the inline content provided
-# default['benchmark']['start']['sh'] = nil
-# default['benchmark']['stop_and_postprocess']['sh'] = nil
-
-# Creates a ruby file and calls it from the shell script
-# default['benchmark']['start']['ruby'] = nil
-# default['benchmark']['stop_and_postprocess']['ruby'] = nil
 
 
 ### VM instance identification information

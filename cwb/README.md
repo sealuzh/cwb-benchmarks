@@ -2,6 +2,21 @@
 
 This cookbook prepares a machine for CWB benchmarks.
 
+## Attributes
+
+### Logging
+```ruby
+default['benchmark']['logging_enabled'] = false
+```
+
+### System Specific
+```ruby
+# This attribute will overwrite owner and group if present
+default['benchmark']['ssh_username'] = nil
+default['benchmark']['owner'] = 'ubuntu'
+default['benchmark']['group'] = 'ubuntu'
+```
+
 ## Resource
 
 Use the `cwb_benchmark` resource to define a benchmark. Make sure you place the Ruby implementation of the benchmark within `files/default/benchmark_name.rb`.
