@@ -4,7 +4,7 @@ class BenchmarkName < Cwb::Benchmark
   def execute
     @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
     result = `BENCHMARK_COMMAND`
-    @cwb.submit_metric('METRIC_NAME', timestamp, extract(result))
+    @cwb.submit_metric(metric_name, timestamp, extract(result))
   end
 
   def timestamp
@@ -15,8 +15,8 @@ class BenchmarkName < Cwb::Benchmark
     @cwb.deep_fetch('cpu', '0', 'model_name')
   end
 
-  def access_attribute
-    @cwb.deep_fetch('benchmark-name', 'attribute_1')
+  def metric_name
+    @cwb.deep_fetch('benchmark-name', 'metric_name')
   end
 
   def extract(string)

@@ -27,7 +27,7 @@ config.vm.provision 'chef_client', id: 'chef_client' do |chef|
   chef.json =
   {
     'benchmark-name' => {
-        'ATTRIBUTE_1' => 'VALUE_1',
+        'metric_name' => 'execution-time',
     },
   } # END json
 end

@@ -1,1 +1,1 @@
-# default['benchmark-name']['attribute_1'] = 'DEFAULT_VALUE_1'
+default['benchmark-name']['metric_name'] = 'execution-time'
