@@ -1,0 +1,12 @@
+------------------------------------------------------------
+Client connecting to localhost, TCP port 5001
+TCP window size:  144 KByte (default)
+------------------------------------------------------------
+[  5] local 127.0.0.1 port 52536 connected with 127.0.0.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  5]  0.0- 1.0 sec  2.10 GBytes  18.1 Gbits/sec
+[  5]  1.0- 2.0 sec  1.71 GBytes  14.7 Gbits/sec
+[  5]  2.0- 3.0 sec  2.12 GBytes  18.2 Gbits/sec
+[  5]  3.0- 4.0 sec  1.52 GBytes  13.1 Gbits/sec
+[  5]  4.0- 5.0 sec  1.48 GBytes  12.7 Gbits/sec
+[  5]  0.0- 5.0 sec  8.94 GBytes  15.4 Gbits/sec

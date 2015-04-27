@@ -1,0 +1,4 @@
+---
+iperf:
+  server: localhost
+  time: 4

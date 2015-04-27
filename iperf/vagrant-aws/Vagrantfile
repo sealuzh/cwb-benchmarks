@@ -1,0 +1,49 @@
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.provider :aws do |aws|
+    aws.region = 'eu-west-1'
+    # Ubuntu 14.04 LTS (pv:ebs) image
+    aws.ami = 'ami-896c96fe'
+    aws.instance_type = 't1.micro'
+  end
+
+  server_node_name = "#{chef_node_name}-iperf-server"
+  config.vm.define 'server' do |server|
+    server.vm.provider :aws do |aws|
+      aws.tags = { 'Name' => server_node_name }
+    end
+
+    server.vm.provision 'chef_client', id: 'chef_client' do |chef|
+      chef.node_name = server_node_name
+      chef.add_recipe 'cli-benchmark'
+      chef.json = {
+        'benchmark' => {
+          'logging_enabled' => true
+        },
+        'cli-benchmark' => {
+          'packages' => 'iperf',
+          # HACK: Start the iperf server during the chef run
+          'install' => "sudo sh -c 'nohup iperf -s >> /var/log/iperf.log 2>&1 < /dev/null & echo $! > /var/run/iperf.pid'"
+        }
+      }
+    end
+  end
+
+  client_node_name = "#{chef_node_name}-iperf-client"
+  config.vm.define 'client', primary: true do |client|
+    client.vm.provider :aws do |aws|
+      aws.tags = { 'Name' => client_node_name }
+    end
+
+    client.vm.provision 'chef_client', id: 'chef_client' do |chef|
+      chef.node_name = client_node_name
+      chef.add_recipe 'iperf::client'
+      chef.json =
+      {
+        'iperf' => {
+          'server_node_name' => server_node_name,
+          'time' => 30 # execution time in seconds
+        }
+      }
+    end
+  end
+end

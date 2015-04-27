@@ -1,0 +1,41 @@
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 1024
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: server
+    driver:
+      network:
+      - ["private_network", {ip: "33.33.33.55"}]
+    run_list:
+      - recipe[cwb::default]
+      - recipe[cli-benchmark::default]
+    attributes:
+      benchmark:
+        ssh_username: vagrant
+        logging_enabled: true
+      cli-benchmark:
+        packages: iperf
+        install: "sudo sh -c 'nohup iperf -s >> /var/log/iperf.log 2>&1 < /dev/null & echo $! > /var/run/iperf.pid'"
+  - name: client
+    driver:
+      network:
+      - ["private_network", {ip: "33.33.33.56"}]
+    run_list:
+      - recipe[cwb::default]
+      - recipe[iperf::client]
+    attributes:
+      benchmark:
+        ssh_username: vagrant
+        logging_enabled: true
+      iperf:
+        time: 10
+        server: 33.33.33.55
