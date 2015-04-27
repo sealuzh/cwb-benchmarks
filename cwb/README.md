@@ -109,7 +109,21 @@ cwb execute .
 
 ## Development
 
+### Integration Tests
+
+*Requirements:* [VirtualBox](https://www.virtualbox.org/wiki/Downloads) , [Vagrant](https://www.vagrantup.com/downloads.html), and `vagrant plugin install vagrant-omnibus`
+
+```bash
+kitchen list
+kitchen converge
+kitchen verify
+```
+
+All together with `kitchen test`
+
+### Publish Cookbook
 Publish Chef Cookbook to [Chef Supermarket](https://supermarket.chef.io/) (only for owners)
+
 ```bash
 knife cookbook site share "cwb" "Other"
 ```

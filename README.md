@@ -235,7 +235,7 @@ gem install cwb
 cwb execute benchmark-name/benchmark_name.rb
 ```
 
-More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench` and `cli-benchmark`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`. An example integration test can be found in the `cwb` cookbook.
+More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench`, `cli-benchmark`, and `iperf`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`. An example integration test can be found in the `cwb` cookbook.
 
 
 ## Local Cookbook Dependencies
