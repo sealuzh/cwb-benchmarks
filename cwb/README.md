@@ -124,8 +124,12 @@ All together with `kitchen test`
 ### Publish Cookbook
 Publish Chef Cookbook to [Chef Supermarket](https://supermarket.chef.io/) (only for owners)
 
+Bump version in `metadata.rb`
+
 ```bash
 knife cookbook site share "cwb" "Other"
+git tag -a cwb/v0.1.X -m 'COMMENT'
+git push origin --tags
 ```
 
 
