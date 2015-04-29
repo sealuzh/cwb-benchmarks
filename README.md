@@ -9,6 +9,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 * CWB Cookbook *(Chef)*: https://github.com/sealuzh/cwb-benchmarks/tree/master/cwb
 * CWB Client *(RubyGem)*: https://github.com/sealuzh/cwb
     * Docs: http://www.rubydoc.info/gems/cwb/
+    * Cwb::Client: http://www.rubydoc.info/gems/cwb/Cwb/Client
 
 
 ## Execute a basic CLI Benchmark
@@ -16,7 +17,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 1. Go to your CWB-server `http://cwb-server.io/benchmark_definitions/new` (i.e., BENCHMARK > Definitions > Create New Benchmark)
 2. Chose a `Name` and click `Create New Benchmark`
 3. Click `Create New Metric Definition`
-4. Fill in `Name=time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
+4. Fill in `Name=execution_time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
 5. Click `Start Execution` and confirm the popup dialog.
 
 
