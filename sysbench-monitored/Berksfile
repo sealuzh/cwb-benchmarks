@@ -1,0 +1,7 @@
+require_relative '../helper'
+
+source 'https://api.berkshelf.com'
+
+metadata
+
+local_cookbook 'sysbench'

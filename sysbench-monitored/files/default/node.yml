@@ -1,0 +1,11 @@
+---
+sysbench:
+  cli_options:
+    test: cpu
+    num-threads: 2
+    cpu-max-prime: 4000
+  metrics:
+    execution_time: execution_time
+    cpu: cpu
+sysbench-monitored:
+  sar_interval: 60
