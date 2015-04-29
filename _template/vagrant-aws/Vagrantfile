@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           'ssh_username' => SSH_USERNAME,
       },
       'benchmark-name' => {
-          'metric_name' => 'execution-time',
+          'metric_name' => 'execution_time',
       }
     } # END json
   end
