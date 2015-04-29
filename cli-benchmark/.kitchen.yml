@@ -21,5 +21,10 @@ suites:
         logging_enabled: true
       cli-benchmark:
         run: date
-        regex: .*
-        metric: time
+        install:
+        - cd /home/vagrant
+        - echo "first" > 1st.txt
+        - echo "second" > 2nd.txt
+        metrics:
+          execution_time: .*
+          year: UTC (\d+)

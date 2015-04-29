@@ -31,8 +31,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'cli-benchmark' => {
         'pre_run' => 'echo "SUCCESS" > test.txt',
         'run' => 'date',
-        'regex' => '.*',
-        'metric' => 'time'
+        'metrics' => {
+          'execution_time' => '.*'
+        }
       }
     } # END json
   end

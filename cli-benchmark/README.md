@@ -14,8 +14,12 @@ See `attributes/default.rb`
 
 ### Cloud WorkBench
 
-* Create a metric called `node['cli-benchmark']['metric']` (depends on specific benchmark)
-* Create a nominal-scale metric called `cpu` which reports the `model name` (OPTIONAL)
+| Metric Name                  | Unit              | Scale Type    |
+| ---------------------------- | ----------------- | ------------- |
+| **metric_name**              | unit              | ratio/nominal |
+| cpu                          | model name        | nominal       |
+
+**bold-written** metrics are mandatory
 
 ### cli-benchmark::default
 
@@ -23,16 +27,24 @@ Add the `cli-benchmark` default recipe to your Chef configuration:
 
 ```ruby
 config.vm.provision "chef_client", id: "chef_client" do |chef|
-  chef.add_recipe "cli-benchmark@1.0.0"  # Version is optional
+  chef.add_recipe "cli-benchmark@1.0.1" # Version is optional
   chef.json =
   {
     'cli-benchmark' => {
         'packages' => %w(vim sysbench),
-        'install' => 'echo "SUCCESS" > install.txt',
-        'pre_run' => 'echo "SUCCESS" > pre_run.txt',
+        # Strive for idempotency here (i.e., multiple executions shouldn't crash)
+        'install' => [
+          'mkdir -p tmp',
+          'cd /usr/local',
+          'wget http://example.com/folder/file.tar.gz',
+          'tar -xzf file.tar.gz',
+        ],
+        'pre_run' => 'echo "This will be run immediately before the benchmark starts" > pre_run.txt',
         'run' => 'sysbench --test=cpu --cpu-max-prime=20000 run',
-        'regex' => 'total time:\s*(\d+\.\d+)s',
-        'metric' => 'time'
+        'metrics' => {
+          # [name of the metric] => [regex to extract result from stdout]
+          'execution_time' => 'total time:\s*(\d+\.\d+)s'
+        }
     }
   }
 end

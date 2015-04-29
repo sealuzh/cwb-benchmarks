@@ -5,7 +5,7 @@ DEPENDENCIES
 
 GRAPH
   apt (2.7.0)
-  cli-benchmark (1.0.0)
+  cli-benchmark (1.0.1)
     apt (>= 0.0.0)
     cwb (>= 0.0.0)
   cwb (0.1.0)

@@ -2,9 +2,9 @@
 
 # System packages to be installed as dependencies
 default['cli-benchmark']['packages'] = []
-# Shell command that is in invoked during the installation,
+# Shell commands that are invoked during the installation,
 # after the benchmark is installed
-default['cli-benchmark']['install'] = nil
+default['cli-benchmark']['install'] = []
 
 
 ### Runtime attributes
@@ -13,7 +13,5 @@ default['cli-benchmark']['install'] = nil
 default['cli-benchmark']['pre_run'] = nil
 # Shell command that runs the actual benchmark
 default['cli-benchmark']['run'] = 'date'
-# Regex that extracts the resulting metric from stdout of the command
-default['cli-benchmark']['regex'] = '.*'
-# Name of the resulting metric
-default['cli-benchmark']['metric'] = 'time'
+# List of metrics to be submitted using regex to capture results from stdout
+default['cli-benchmark']['metrics'] = [ 'execution_time' => '.*' ]

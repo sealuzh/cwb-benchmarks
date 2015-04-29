@@ -1,5 +1,5 @@
 ---
 cli-benchmark:
   run: date
-  regex: .*
-  metric: time
+  metrics:
+    execution_time: .*
