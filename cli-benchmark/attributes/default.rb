@@ -14,4 +14,5 @@ default['cli-benchmark']['pre_run'] = nil
 # Shell command that runs the actual benchmark
 default['cli-benchmark']['run'] = 'date'
 # List of metrics to be submitted using regex to capture results from stdout
-default['cli-benchmark']['metrics'] = [ 'execution_time' => '.*' ]
+# @example 'execution_time' => '.*'
+default['cli-benchmark']['metrics'] = [ ]
