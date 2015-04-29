@@ -1,4 +1,4 @@
-# 1.0.1 (2015-04-28)
+# 1.0.1 (2015-04-29)
 
 * Rename metrics and make them configurable
 * Modularize `sysbench.rb` to facilite reuse
