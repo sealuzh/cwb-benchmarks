@@ -25,7 +25,7 @@ action :create do
 
   cookbook_file @benchmark_util.class_file do
     cwb_defaults(self)
-    cookbook new_resource.cookbook_name.to_s
+    cookbook lazy { new_resource.cookbook || new_resource.cookbook_name.to_s }
     source new_resource.source if new_resource.source
     action :create
   end

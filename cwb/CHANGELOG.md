@@ -1,3 +1,7 @@
+# 0.1.1 (2015-04-29)
+
+* Fix `cookbook` attribute implementation for `cwb_benchmark` and `cwb_benchmark_suite` implementations
+
 # 0.1.1 (2015-04-27)
 
 * Introduce the `benchmark.logging_enabled` attribute to replace `benchmark.redirect_io`
