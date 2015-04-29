@@ -4,3 +4,6 @@ sysbench:
     test: cpu
     num-threads: 2
     cpu-max-prime: 4000
+  metrics:
+    execution_time: execution_time
+    cpu: cpu

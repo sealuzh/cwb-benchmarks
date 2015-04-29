@@ -1,3 +1,8 @@
+# 1.0.1 (2015-04-28)
+
+* Rename metrics and make them configurable
+* Modularize `sysbench.rb` to facilite reuse
+
 # 1.0.0 (2015-04-25)
 
 * Major update to support the improved cwb version

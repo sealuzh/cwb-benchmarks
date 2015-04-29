@@ -1,8 +1,5 @@
-case node['platform_family']
-  when 'debian'
-    # Update package index
-    include_recipe 'apt'
-end
+# Update package index (i.e., apt-get update on Debian)
+include_recipe 'apt'
 
 package 'sysbench' do
   action :install

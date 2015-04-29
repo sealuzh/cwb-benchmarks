@@ -22,3 +22,6 @@ suites:
       sysbench:
         cli_options:
           cpu-max-prime: 3000
+        metrics:
+          execution_time: execution_time
+          cpu: cpu

@@ -15,8 +15,12 @@ See `attributes/default.rb`
 
 ### Cloud WorkBench
 
-* Create a ratio-scale metric called `time` which reports results in `seconds`
-* Create a nominal-scale metric called `cpu` which reports the `model name`
+| Metric Name                  | Unit              | Scale Type    |
+| ---------------------------- | ----------------- | ------------- |
+| **execution_time**           | seconds           | ratio         |
+| cpu                          | model name        | nominal       |
+
+**bold-written** metrics are mandatory
 
 ### Sysbench Reference
 
@@ -29,7 +33,7 @@ Add the `sysbench` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
 config.vm.provision 'chef_client', id: 'chef_client' do |chef|
-  chef.add_recipe 'sysbench@1.0.0'
+  chef.add_recipe 'sysbench@1.0.1'
   chef.json =
   {
     'sysbench' => {

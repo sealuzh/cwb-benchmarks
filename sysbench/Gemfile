@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
 group :development do
-  # gem 'cwb', '~> 0.0.1'
+  # gem 'cwb', '~> 0.1.0'
   gem 'rspec', '~> 3.2.0'
 end
