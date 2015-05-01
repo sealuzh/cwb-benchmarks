@@ -16,3 +16,6 @@ default['wordpress-bench']['title'] = 'Cloud Benchmarking'
 default['wordpress-bench']['admin_user'] = 'admin'
 default['wordpress-bench']['admin_password'] = 'admin'
 default['wordpress-bench']['admin_email'] = 'admin@example.com'
+
+# Fake data generator
+default['wordpress-bench']['500px_customer_key'] = ''
