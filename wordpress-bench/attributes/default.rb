@@ -19,3 +19,4 @@ default['wordpress-bench']['admin_email'] = 'admin@example.com'
 
 # Fake data generator
 default['wordpress-bench']['500px_customer_key'] = ''
+default['wordpress-bench']['batch_size'] = 25

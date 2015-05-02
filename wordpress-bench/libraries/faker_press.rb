@@ -82,7 +82,7 @@ module WordpressBench
         'fakerpress[qty][min]' => min,
         'fakerpress[qty][max]' => opts[:max] || '',
         'fakerpress[post_types]' => opts[:post_types] || 'post',
-        'fakerpress[post_parent]' => opts[:post_parent] || 1,
+        'fakerpress[post_parent]' => opts[:post_parent] || '',
         'fakerpress[comment_status]' => opts[:comment_status] || 'open',
         'fakerpress[use_html]' => opts[:use_html] ||  1,
         'fakerpress[html_tags]' => opts[:html_tags] || 'h1,h2,h3,h4,h5,h6,ul,ol,div,p,blockquote,img,hr,!-- more --',

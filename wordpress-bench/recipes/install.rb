@@ -43,7 +43,7 @@ ruby_block 'setup_wordpress' do
                      admin_password: node['wordpress-bench']['admin_password'],
                      admin_email: node['wordpress-bench']['admin_email'])
     wp.update_url!(node['wordpress-bench']['url'])
-    wp.install_plugin!('fakerpress', version: '0.2.2')
+    wp.install_plugin!('fakerpress', version: '0.3.0')
   end
   action :run
 end
@@ -59,15 +59,15 @@ end
 # generate fake data
 ruby_block 'generate_fake_data' do
   block do
-    faker = WordpressBench::FakerPress.new(node['wordpress-bench']['url'])
-    faker.login(node['wordpress-bench']['admin_user'],
-                node['wordpress-bench']['admin_password'])
-    api_customer_key = node['wordpress-bench']['500px_customer_key']
-    faker.save_api_key(api_customer_key) unless api_customer_key.empty?
-    # faker.generate_users(1, roles: 'Author,Subscriber')
-    # faker.generate_terms(1)
-    # faker.generate_posts(1, featured_image_rate: 0)
-    # faker.generate_comments(1)
-    # faker.delete_all_fake_data
+    data_set = WordpressBench::DemoDataSet.new(node['wordpress']['dir'])
+    unless data_set.applied?
+      faker = WordpressBench::BatchedFakerPress.new(node['wordpress-bench']['url'],
+                                                    node['wordpress-bench']['batch_size'])
+      faker.login(node['wordpress-bench']['admin_user'],
+                  node['wordpress-bench']['admin_password'])
+      api_customer_key = node['wordpress-bench']['500px_customer_key']
+      faker.save_api_key(api_customer_key) unless api_customer_key.empty?
+      data_set.apply!(faker)
+    end
   end
 end
