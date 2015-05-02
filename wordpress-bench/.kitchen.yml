@@ -14,7 +14,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      # - recipe[cwb::default]
+      - recipe[cwb::default]
       - recipe[wordpress-bench::default]
     attributes:
       benchmark:
@@ -22,4 +22,4 @@ suites:
         logging_enabled: true
       wordpress-bench:
         url: http://192.168.33.33
-        # 500px_customer_key: CUSTOMER_KEY
+        # 500px_customer_key: YOUR_CUSTOMER_KEY

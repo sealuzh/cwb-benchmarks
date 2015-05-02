@@ -15,6 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.ami = 'ami-3196f646'
     override.ssh.username = SSH_USERNAME
     aws.instance_type = 't1.micro'
+    # Make sure HTTP port is open!
     # aws.security_groups = %w(default my_own_group)
   end
 
@@ -24,9 +25,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     {
       'benchmark' =>  {
           'ssh_username' => SSH_USERNAME,
+          'logging_enabled' => true,
       },
       'wordpress-bench' => {
           'metric_name' => 'execution_time',
+          '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
       }
     } # END json
   end

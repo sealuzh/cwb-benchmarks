@@ -48,17 +48,17 @@ module WordpressBench
 
     def generate_posts(faker)
       faker.generate_posts(20, {post_types: 'pages', featured_image_rate: 100}.merge(date_range))
-      faker.generate_posts(800, {featured_image_rate: 75}.merge(date_range))
+      faker.generate_posts(200, {featured_image_rate: 75}.merge(date_range))
     end
 
     def generate_comments(faker)
-      faker.generate_comments(4000, {}.merge(date_range))
+      faker.generate_comments(2000, {}.merge(date_range))
     end
 
     def date_range
       {
-        date_min: '01/01/2010',
-        date_max: '01/01/2015',
+        date_min: '2010-01-01',
+        date_max: '2015-01-01',
       }
     end
   end

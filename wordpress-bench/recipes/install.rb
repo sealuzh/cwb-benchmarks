@@ -1,21 +1,13 @@
-### Install your benchmark here by leveraging
-# Chef resources: http://docs.chef.io/resources.html
-# Community cookbooks: https://supermarket.chef.io/dashboard
-
-## Example:
-# Update apt package index (make sure you declare dependencies in metadata.rb)
-# include_recipe 'apt'
-
-# package 'YOUR_PACKAGE' do
-#   action :install
-# end
-require 'pry'
-
 # install wordpress
 node.default['wordpress']['version'] = '4.2.1'
+node.default['wordpress']['wp_config_options'] = { 'AUTOMATIC_UPDATER_DISABLED' => true }
 node.default['wordpress']['db']['name'] = 'wordpress'
 node.default['wordpress']['db']['user'] = 'wordpress'
 node.default['wordpress']['db']['pass'] = 'wordpress'
+# mod_php5 (used by Wordpress) requires non-threaded MPM such as prefork
+# @see apache2/recipes/mod_php5.rb:22
+# @see attributes https://github.com/svanzoest-cookbooks/apache2/#prefork-attributes
+node.default['apache']['mpm'] = 'prefork'
 include_recipe 'wordpress::default'
 
 # install_wp_cli
@@ -48,6 +40,10 @@ ruby_block 'setup_wordpress' do
   action :run
 end
 
+# faraday-cookie_jar and nokogiri must compile native extensions
+node.default['build-essential']['compile_time'] = true
+include_recipe 'build-essential::default'
+
 # install FakerPress Ruby client dependencies
 %w(faraday faraday-cookie_jar nokogiri).each do |gem_name|
   chef_gem gem_name do
@@ -67,7 +63,9 @@ ruby_block 'generate_fake_data' do
                   node['wordpress-bench']['admin_password'])
       api_customer_key = node['wordpress-bench']['500px_customer_key']
       faker.save_api_key(api_customer_key) unless api_customer_key.empty?
+      Chef::Log.warn('Start generating fake Wordpress data')
       data_set.apply!(faker)
+      Chef::Log.warn('Finished generating fake Wordpress data')
     end
   end
 end

@@ -90,25 +90,30 @@ module WordpressBench
         'fakerpress[featured_image_rate]' => opts[:featured_image_rate] || 75,
         'fakerpress[images_origin]' => opts[:images_origin] || 'placeholdit,500px',
         'fakerpress[author]' => opts[:author] || '',
-        'fakerpress[date][min]' => opts[:date_min] || '',
-        'fakerpress[date][max]' => opts[:date_max] || '',
+        'fakerpress[interval_date][min]' => opts[:date_min] || '',
+        'fakerpress[interval_date][max]' => opts[:date_max] || '',
         'submit' => 'Generate'
       }
     end
 
     def generate_comments(min, opts = {})
       url = '/wp-admin/admin.php?page=fakerpress&view=comments'
-      @conn.post url, {
-        '_wpnonce' => wpnonce(url),
-        '_wp_http_referer' => url,
-        'fakerpress[qty][min]' => opts[:min] || 1,
-        'fakerpress[qty][max]' => opts[:max] || '',
-        'fakerpress[use_html]' => opts[:use_html] || 1,
-        'fakerpress[html_tags]' => opts[:html_tags] || 'h1,h2,h3,h4,h5,h6,ul,ol,div,p,blockquote',
-        'fakerpress[date][min]' => opts[:date_min] || '',
-        'fakerpress[date][max]' => opts[:date_max] || '',
-        'submit' => 'Generate'
-      }
+      @conn.post do |req|
+        req.url url
+        req.options.timeout = 30
+        req.options.open_timeout = 90
+        req.body = {
+          '_wpnonce' => wpnonce(url),
+          '_wp_http_referer' => url,
+          'fakerpress[qty][min]' => min,
+          'fakerpress[qty][max]' => opts[:max] || '',
+          'fakerpress[use_html]' => opts[:use_html] || 1,
+          'fakerpress[html_tags]' => opts[:html_tags] || 'h1,h2,h3,h4,h5,h6,ul,ol,div,p,blockquote',
+          'fakerpress[interval_date][min]' => opts[:date_min] || '',
+          'fakerpress[interval_date][max]' => opts[:date_max] || '',
+          'submit' => 'Generate'
+        }
+      end
     end
 
     def generate_terms(min, opts = {})
@@ -129,6 +134,9 @@ module WordpressBench
         body = @conn.get(url).body
         doc = Nokogiri::HTML(body)
         doc.xpath('//input[@type="hidden" and @name="_wpnonce" and @id="_wpnonce"]/@value').first.value
+      rescue => e
+        Chef::Log.error("Could not extract 'wpnonce' for url #{url}")
+        raise e
       end
   end
 end
