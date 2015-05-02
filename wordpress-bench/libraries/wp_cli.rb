@@ -35,7 +35,7 @@ module WordpressBench
     end
 
     def plugin_installed?(name)
-      cmd = run_cmd(wp_cmd('plugin is-installed'), no_error: true)
+      cmd = run_cmd(wp_cmd("plugin is-installed #{name}"), no_error: true)
       !cmd.error?
     end
 
