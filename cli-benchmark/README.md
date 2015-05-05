@@ -34,16 +34,16 @@ config.vm.provision "chef_client", id: "chef_client" do |chef|
         'packages' => %w(vim sysbench),
         # Strive for idempotency here (i.e., multiple executions shouldn't crash)
         'install' => [
-          'mkdir -p tmp',
-          'cd /usr/local',
-          'wget http://example.com/folder/file.tar.gz',
+          'mkdir -p /usr/local/sysbench',
+          'cd /usr/local/sysbench',
+          '[ -e file.tar.gz ] && wget http://example.com/folder/file.tar.gz',
           'tar -xzf file.tar.gz',
         ],
         'pre_run' => 'echo "This will be run immediately before the benchmark starts" > pre_run.txt',
         'run' => 'sysbench --test=cpu --cpu-max-prime=20000 run',
         'metrics' => {
           # [name of the metric] => [regex to extract result from stdout]
-          'execution_time' => 'total time:\s*(\d+\.\d+)s'
+          'execution_time' => 'total time:\s*(\d+\.\d+)s',
         }
     }
   }
