@@ -29,7 +29,7 @@ config.vm.provision 'chef_client', id: 'chef_client' do |chef|
     'benchmark-name' => {
         'metric_name' => 'execution_time',
     },
-  } # END json
+  }
 end
 ```
 

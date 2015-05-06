@@ -15,7 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.ami = 'ami-3196f646'
     override.ssh.username = SSH_USERNAME
     aws.instance_type = 't1.micro'
-    # aws.security_groups = %w(default my_own_group)
   end
 
   config.vm.provision 'chef_client', id: 'chef_client' do |chef|
@@ -28,6 +27,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'benchmark-name' => {
           'metric_name' => 'execution_time',
       }
-    } # END json
+    }
   end
 end
