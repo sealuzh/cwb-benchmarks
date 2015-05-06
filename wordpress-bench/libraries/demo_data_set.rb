@@ -1,7 +1,6 @@
 require 'yaml'
 module WordpressBench
   class DemoDataSet
-    # FakerPress is limits quantity to max 25
     # @param [String] path to directory wherein a text file
     # will be generated in order to keep track whether the
     # data set was already applied to achieve idempotence.

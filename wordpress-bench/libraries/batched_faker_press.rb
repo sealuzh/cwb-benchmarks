@@ -1,6 +1,7 @@
 require 'forwardable'
 module WordpressBench
-  # Add batch funtionality to FakterPress
+  # Add batch funtionality to FakerPress because it limits the
+  # max number to 25
   # @see FakerPress
   class BatchedFakerPress
     extend Forwardable
