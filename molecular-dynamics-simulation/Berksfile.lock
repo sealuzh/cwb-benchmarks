@@ -1,0 +1,13 @@
+DEPENDENCIES
+  molecular-dynamics-simulation
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.7.0)
+  build-essential (2.2.3)
+  cwb (0.1.2)
+  molecular-dynamics-simulation (0.1.0)
+    apt (~> 2.7.0)
+    build-essential (~> 2.2.3)
+    cwb (~> 0.1.0)
