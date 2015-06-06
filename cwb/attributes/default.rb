@@ -51,3 +51,9 @@ default['benchmark']['providers']['aws']['instance_id_request'] = "wget -q -T #{
 # Google Compute Engine (google)
 default['benchmark']['providers']['google']['name'] = 'google'
 default['benchmark']['providers']['google']['instance_id_request'] = "curl 'http://metadata.google.internal/computeMetadata/v1/instance/attributes/vagrant_id' -H 'Metadata-Flavor: Google' --max-time=#{node['benchmark']['timeout']}"
+
+# Microsoft Azure (azure) => EXPERIMENTAL
+default['benchmark']['providers']['azure']['name'] = 'azure'
+# Exits with success on azure and with non-zero on other providers
+azure_detection = 'sudo dmidecode -s system-manufacturer | grep -q "Microsoft Corporation"'
+default['benchmark']['providers']['azure']['instance_id_request'] = "echo #{node['cwb']['azure_id']} && dummy=$(#{azure_detection})"
