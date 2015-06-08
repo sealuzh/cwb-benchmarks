@@ -57,3 +57,9 @@ default['benchmark']['providers']['azure']['name'] = 'azure'
 # Exits with success on azure and with non-zero on other providers
 azure_detection = 'sudo dmidecode -s system-manufacturer | grep -q "Microsoft Corporation"'
 default['benchmark']['providers']['azure']['instance_id_request'] = "echo #{node['cwb']['azure_id']} && dummy=$(#{azure_detection})"
+
+# IBM Softlayer (softlayer) => EXPERIMENTAL
+default['benchmark']['providers']['softlayer']['name'] = 'softlayer'
+# Exits with success on softlayer and with non-zero on other providers
+softlayer_detection = (node['cwb']['provider_name'] == 'softlayer' ? 'echo softlayer-success' : 'exit 1')
+default['benchmark']['providers']['softlayer']['instance_id_request'] = "echo #{node['cwb']['softlayer_id']} && dummy=$(#{softlayer_detection})"
