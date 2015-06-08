@@ -2,6 +2,9 @@
 # or sharing to the community site.
 # Lines that start with '# ' are comments.
 
+# Test Kitchen
+.kitchen
+
 # OS generated files #
 ######################
 .DS_Store
