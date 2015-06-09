@@ -33,11 +33,11 @@ module WordpressBench
     end
 
     def generate_users(faker)
-      faker.generate_users(10, roles: 'Administrator')
-      faker.generate_users(50, roles: 'Editor')
-      faker.generate_users(100, roles: 'Author')
-      faker.generate_users(500, roles: 'Contributor')
-      faker.generate_users(1000, roles: 'Subscriber')
+      faker.generate_users(10, roles: 'administrator')
+      faker.generate_users(50, roles: 'editor')
+      faker.generate_users(100, roles: 'author')
+      faker.generate_users(500, roles: 'contributor')
+      faker.generate_users(1000, roles: 'subscriber')
     end
 
     def generate_terms(faker)
@@ -46,8 +46,8 @@ module WordpressBench
     end
 
     def generate_posts(faker)
-      faker.generate_posts(20, {post_types: 'pages', featured_image_rate: 100}.merge(date_range))
-      faker.generate_posts(200, {featured_image_rate: 75}.merge(date_range))
+      faker.generate_posts(20, { post_types: 'pages', featured_image_rate: 100 }.merge(date_range).merge(images_origin))
+      faker.generate_posts(200, { featured_image_rate: 75 }.merge(date_range).merge(images_origin))
     end
 
     def generate_comments(faker)
@@ -59,6 +59,13 @@ module WordpressBench
         date_min: '2010-01-01',
         date_max: '2015-01-01',
       }
+    end
+
+    # Supports:
+    #  placeholdit
+    #  500px (requires customer key)
+    def images_origin
+      { images_origin: '500px' }
     end
   end
 end

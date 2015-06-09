@@ -28,8 +28,7 @@ module WordpressBench
 
     def install_plugin!(name, opts = {})
       unless plugin_installed?(name)
-        run_cmd(wp_cmd("plugin install #{name} #{options_string(opts)}"))
-        run_cmd(wp_cmd("plugin activate #{name}"))
+        run_cmd(wp_cmd("plugin install #{name} --activate #{options_string(opts)}"))
         Chef::Log.info("Installed and activated the Wordpress plugin #{name} #{options_string(opts)}.")
       end
     end

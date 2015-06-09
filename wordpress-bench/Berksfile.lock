@@ -80,6 +80,7 @@ GRAPH
     selinux (~> 0.7)
     tar (>= 0.3.1)
   wordpress-bench (0.1.0)
+    apt (~> 2.7.0)
     build-essential (~> 2.2.3)
     cwb (~> 0.1.0)
     wordpress (~> 3.0.0)

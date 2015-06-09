@@ -28,9 +28,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           'logging_enabled' => true,
       },
       'wordpress-bench' => {
-          'metric_name' => 'execution_time',
+          'metric_name' => 'response_time',
+          'load_generator' => 'http://LOAD_GENERATOR',
           '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
       }
-    } # END json
+    }
   end
 end

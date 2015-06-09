@@ -1,7 +1,7 @@
 extend WordpressBench::Helpers
 
 # Cloud WorkBench
-default['wordpress-bench']['metric_name'] = 'execution_time'
+default['wordpress-bench']['metric_name'] = 'response_time'
 
 # wp-cli
 default['wordpress-bench']['wp_cli_url'] = 'https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'
@@ -20,3 +20,10 @@ default['wordpress-bench']['admin_email'] = 'admin@example.com'
 # Fake data generator
 default['wordpress-bench']['500px_customer_key'] = ''
 default['wordpress-bench']['batch_size'] = 25
+
+# Load generator endpoint
+default['wordpress-bench']['load_generator'] = 'http://localhost'
+
+# JMeter properties
+default['wordpress-bench']['jmeter']['properties']['site'] = default_ip
+default['wordpress-bench']['jmeter']['properties']['httpclient.timeout'] = 60 * 1000 # milliseconds

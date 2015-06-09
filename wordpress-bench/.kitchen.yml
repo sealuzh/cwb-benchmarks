@@ -8,7 +8,7 @@ driver:
     memory: 1024
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
   - name: ubuntu-14.04
@@ -24,4 +24,5 @@ suites:
         logging_enabled: true
       wordpress-bench:
         url: http://192.168.33.33
+        # load_generator: http://LOAD_GENERATOR
         # 500px_customer_key: YOUR_CUSTOMER_KEY

@@ -70,6 +70,8 @@ module WordpressBench
         'fakerpress[use_html]' => opts[:use_html] || 1,
         'fakerpress[html_tags]' => opts[:html_tags] || 'h3,h4,h5,h6,p',
         'fakerpress[roles]' => opts[:roles] || '',
+        'fakerpress[meta][0][type]' => '', 
+        'fakerpress[meta][0][name]' => '', 
         'submit' => 'Generate'
       }
     end

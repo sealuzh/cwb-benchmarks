@@ -2,6 +2,14 @@
 
 Installs the `wordpress-bench` benchmark and provides utilities to integrate with Cloud WorkBench.
 
+Currently uses a dedicated load generator server https://github.com/joe4dev/load-generator.
+
+## Dependencies
+
+* Worpress cookbook: https://supermarket.chef.io/cookbooks/wordpress
+* FakerPress Worpress plugin: https://wordpress.org/plugins/fakerpress/
+    * Github: https://github.com/bordoni/fakerpress
+
 ## Attributes
 
 See `attributes/default.rb`
@@ -12,7 +20,7 @@ See `attributes/default.rb`
 
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
-| **metric-name**              | unit              | ratio/nominal |
+| **response_time**            | milliseconds      | ratio         |
 | cpu                          | model-name        | nominal       |
 
 **bold-written** metrics are mandatory
@@ -27,12 +35,19 @@ config.vm.provision 'chef_client', id: 'chef_client' do |chef|
   chef.json =
   {
     'wordpress-bench' => {
-        'metric_name' => 'execution_time',
+        'metric_name' => 'response_time',
+        'load_generator' => 'http://192.168.33.44',
+        # Used to generate sample images
+        '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
     },
-  } # END json
+  }
 end
 ```
 
+## Troubleshooting
+
+Manually stopping and restarting leads to database issues caused by the wordpress cookbook. Simply reprovision to overcome this issue. See https://github.com/brint/wordpress-cookbook/issues/55
+
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Joel Scheuner (joel.scheuner.dev@gmail.com)
