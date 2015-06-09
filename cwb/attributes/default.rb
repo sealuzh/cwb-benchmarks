@@ -2,7 +2,7 @@
 # Vagrant does not perform a deep hash merge, therefore we must use a
 # reserved namespace to avoid user overwrites. Keep in mind that these
 # attributes in the cwb namespace cannot be overridden by users.
-default['cwb']['server-ip'] = nil # No useful default value possible
+default['cwb']['server'] = nil # No useful default value possible
 default['cwb']['base_dir'] = '/usr/local/cloud-benchmark'
 
 ## Benchmark and BenchmarkSuite list infrastructure
