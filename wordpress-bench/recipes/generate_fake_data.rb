@@ -34,6 +34,7 @@ ruby_block 'generate_fake_data' do
   block do
     data_set = WordpressBench::DemoDataSet.new(node['wordpress']['dir'])
     unless data_set.applied?
+      sleep(30) # Make sure the server is ready
       faker = WordpressBench::BatchedFakerPress.new(node['wordpress-bench']['url'],
                                                     node['wordpress-bench']['batch_size'])
       faker.login(node['wordpress-bench']['admin_user'],
