@@ -79,7 +79,7 @@ GRAPH
     php-fpm (~> 0.6.10)
     selinux (~> 0.7)
     tar (>= 0.3.1)
-  wordpress-bench (0.1.0)
+  wordpress-bench (0.1.1)
     apt (~> 2.7.0)
     build-essential (~> 2.2.3)
     cwb (~> 0.1.0)

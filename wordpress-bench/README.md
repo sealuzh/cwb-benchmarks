@@ -7,8 +7,9 @@ Currently uses a dedicated load generator server https://github.com/joe4dev/load
 ## Dependencies
 
 * Worpress cookbook: https://supermarket.chef.io/cookbooks/wordpress
-* FakerPress Worpress plugin: https://wordpress.org/plugins/fakerpress/
+* Worpress plugin `FakerPress`: https://wordpress.org/plugins/fakerpress/
     * Github: https://github.com/bordoni/fakerpress
+* Wordpress plugin `Disable check comment flood`: https://wordpress.org/plugins/disable-check-comment-flood
 
 ## Attributes
 
@@ -36,9 +37,17 @@ config.vm.provision 'chef_client', id: 'chef_client' do |chef|
   {
     'wordpress-bench' => {
         'metric_name' => 'response_time',
+        'num_repetitions' => 1,
         'load_generator' => 'http://192.168.33.44',
         # Used to generate sample images
         '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
+        'jmeter' => {
+            'properties' => {
+                # i.e., users
+                'num_threads' => 2,
+                'ramp_up_period' => 0,
+            },
+        },
     },
   }
 end
@@ -46,7 +55,7 @@ end
 
 ## Troubleshooting
 
-Manually stopping and restarting leads to database issues caused by the wordpress cookbook. Simply reprovision to overcome this issue. See https://github.com/brint/wordpress-cookbook/issues/55
+The wordpress cookbook causes some database issues when stopping or restarting the machine. Simply reprovision and `install.rb` will fix this issue. See https://github.com/brint/wordpress-cookbook/issues/55
 
 ## License and Authors
 
