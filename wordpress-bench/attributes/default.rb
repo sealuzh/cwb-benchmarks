@@ -28,3 +28,5 @@ default['wordpress-bench']['load_generator'] = 'http://localhost'
 # JMeter properties
 default['wordpress-bench']['jmeter']['properties']['site'] = default_ip
 default['wordpress-bench']['jmeter']['properties']['httpclient.timeout'] = 60 * 1000 # milliseconds
+default['wordpress-bench']['jmeter']['properties']['num_threads'] = 2 # i.e., users
+default['wordpress-bench']['jmeter']['properties']['ramp_up_period'] = 0 # seconds
