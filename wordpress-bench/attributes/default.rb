@@ -2,6 +2,7 @@ extend WordpressBench::Helpers
 
 # Cloud WorkBench
 default['wordpress-bench']['metric_name'] = 'response_time'
+default['wordpress-bench']['num_repetitions'] = 1
 
 # wp-cli
 default['wordpress-bench']['wp_cli_url'] = 'https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar'

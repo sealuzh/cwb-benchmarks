@@ -3,6 +3,12 @@ require 'cwb'
 
 class WordpressBenchClient < Cwb::Benchmark
   def execute
+    num_repetitions.times do
+      run_scenario
+    end
+  end
+
+  def run_scenario
     delete_old_results
     create_properties_file
     system(run_cmd)
@@ -44,6 +50,10 @@ class WordpressBenchClient < Cwb::Benchmark
 
   def metric_name
     @cwb.deep_fetch('wordpress-bench', 'metric_name')
+  end
+
+  def num_repetitions
+    @cwb.deep_fetch('wordpress-bench', 'num_repetitions').to_i
   end
 
   def average_response_time
