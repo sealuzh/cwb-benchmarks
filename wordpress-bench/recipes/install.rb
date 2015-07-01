@@ -40,7 +40,12 @@ ruby_block 'setup_wordpress' do
                      admin_user: node['wordpress-bench']['admin_user'],
                      admin_password: node['wordpress-bench']['admin_password'],
                      admin_email: node['wordpress-bench']['admin_email'])
+    # Reconfigure the url of the wordpress instance
     wp.update_url!(node['wordpress-bench']['url'])
+    # Install a plugin that disables comment flood prevention. This is required
+    # that the benchmark can frequently (more often than once every 15 seconds)
+    # create comments: https://wordpress.org/plugins/disable-check-comment-flood/faq/
+    wp.install_plugin!('disable-check-comment-flood')
     # Install fakerpress plugin via zip because older version doesn't exist anymore at
     # the Wordpress plugin registry: https://wordpress.org/plugins/fakerpress
     # wp.install_plugin!('fakerpress', version: '0.3.1')
