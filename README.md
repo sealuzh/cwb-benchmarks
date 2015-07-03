@@ -86,16 +86,16 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
     vim recipes/default.rb
     ```
 
-4. Write the `install` recipe that leverages Chef to install all the benchmark dependencies. 
-    * Chef resources: http://docs.chef.io/resources.html
+4. Write the `install` recipe that leverages Chef to install all the benchmark dependencies.
     * Search Chef docs: https://docs.chef.io/search.html
-    * Install a package (e.g., apt package on Debian system): https://docs.chef.io/resource_package.html
-    * Create file: https://docs.chef.io/resource_file.html
-    * Create file from cookbook: https://docs.chef.io/resource_cookbook_file.html
-    * Create file from template: https://docs.chef.io/resource_template.html
-    * Download file from URI: https://docs.chef.io/resource_remote_file.html
-    * Create directory: https://docs.chef.io/resource_directory.html
-    * Execute command: https://docs.chef.io/resource_execute.html
+    * Chef resources: http://docs.chef.io/resources.html
+        * Install a package (e.g., apt package on Debian system): https://docs.chef.io/resource_package.html
+        * Create file: https://docs.chef.io/resource_file.html
+        * Create file from cookbook: https://docs.chef.io/resource_cookbook_file.html
+        * Create file from template: https://docs.chef.io/resource_template.html
+        * Download file from URI: https://docs.chef.io/resource_remote_file.html
+        * Create directory: https://docs.chef.io/resource_directory.html
+        * Execute command: https://docs.chef.io/resource_execute.html
 
     ```bash
     vim recipes/install.rb
