@@ -2,7 +2,13 @@
 # or sharing to the community site.
 # Lines that start with '# ' are comments.
 
-# jmeter testing stuff
+# local testing
+files/default/archive
+files/default/run.sh
+files/default/set_num_threads.sh
+files/default/archive.sh
+files/default/results.csv
+local.properties
 jmeter
 
 # Test-Kitchen

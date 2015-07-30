@@ -22,6 +22,8 @@ See `attributes/default.rb`
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
 | **response_time**            | milliseconds      | ratio         |
+| num_failures                 | count             | ratio         |
+| failure_rate                 | ratio             | ratio         |
 | cpu                          | model-name        | nominal       |
 
 **bold-written** metrics are mandatory

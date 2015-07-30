@@ -13,7 +13,10 @@ class WordpressBenchClient < Cwb::Benchmark
     create_properties_file
     system(run_cmd)
     fail 'JMeter exited with non-zero value' unless $?.success?
-    @cwb.submit_metric(metric_name, timestamp, average_response_time)
+    results = process_results
+    @cwb.submit_metric(metric_name, timestamp, results[:average_response_time])
+    @cwb.submit_metric('num_failures', timestamp, results[:num_failures])
+    @cwb.submit_metric('failure_rate', timestamp, results[:failure_rate])
   end
 
   def delete_old_results
@@ -56,13 +59,20 @@ class WordpressBenchClient < Cwb::Benchmark
     @cwb.deep_fetch('wordpress-bench', 'num_repetitions').to_i
   end
 
-  def average_response_time
+  # NOTE: Fails if count == 0
+  def process_results
     total = 0
     count = 0
+    num_failures = 0
     CSV.foreach(results_file, headers: true) do |row|
       total += row['elapsed'].to_i
       count += 1
+      (num_failures += 1) if (row['success'] != 'true')
     end
-    total.to_f / count
+    results = {
+      average_response_time: (total.to_f / count),
+      num_failures: num_failures,
+      failure_rate: (num_failures.to_f / total),
+    }
   end
 end

@@ -1,3 +1,7 @@
+# 0.1.2 (2015-07-22)
+
+* Additionally report failure metrics `num_failures` and `failure_rate`
+
 # 0.1.1 (2015-07-01)
 
 * Fix create-comment scenario with random number (or alternatively counter) suffix

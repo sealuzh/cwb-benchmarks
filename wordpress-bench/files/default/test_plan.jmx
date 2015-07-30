@@ -23,7 +23,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__property(num_threads,,2)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__property(num_threads,,1)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__property(ramp_up_period,,0)}</stringProp>
         <longProp name="ThreadGroup.start_time">1433877410000</longProp>
         <longProp name="ThreadGroup.end_time">1433877410000</longProp>
@@ -4712,6 +4712,7 @@
                     <stringProp name="Argument.name">ver</stringProp>
                     <stringProp name="Argument.value">20150330</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                 </collectionProp>
               </elementProp>
@@ -11057,7 +11058,7 @@ And bye the way, this is a really nice picture, good choice!
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -11090,7 +11091,7 @@ And bye the way, this is a really nice picture, good choice!
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="false">
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -11110,7 +11111,7 @@ And bye the way, this is a really nice picture, good choice!
               <responseData>false</responseData>
               <samplerData>false</samplerData>
               <xml>false</xml>
-              <fieldNames>false</fieldNames>
+              <fieldNames>true</fieldNames>
               <responseHeaders>false</responseHeaders>
               <requestHeaders>false</requestHeaders>
               <responseDataOnError>false</responseDataOnError>
