@@ -1,0 +1,143 @@
+ubuntu@ip-10-0-3-98:~/.phoronix-test-suite$ cat tmp/stream.log
+
+Phoronix Test Suite v4.8.3
+System Information
+
+Hardware:
+Processor: Intel Xeon E5-2670 v2 @ 2.49GHz (1 Core), Motherboard: Xen HVM domU, Chipset: Intel 440FX- 82441FX PMC, Memory: 1024MB, Disk: 8GB, Graphics: Cirrus Logic GD 5446
+
+Software:
+OS: Ubuntu 14.04, Kernel: 3.13.0-46-generic (x86_64), Compiler: GCC 4.8, File-System: ext4, System Layer: Xen HVM domU 4.2.amazon
+
+
+
+Stream 2013-01-17:
+    pts/stream-1.2.0 [Type: Copy]
+    Test 1 of 4
+    Estimated Trial Run Count:    10
+    Estimated Test Run-Time:      2 Minutes
+    Estimated Time To Completion: 8 Minutes
+        Started Run 1 @ 18:37:36
+        Started Run 2 @ 18:37:39
+        Started Run 3 @ 18:37:42
+        Started Run 4 @ 18:37:45
+        Started Run 5 @ 18:37:48
+        Started Run 6 @ 18:37:50
+        Started Run 7 @ 18:37:53
+        Started Run 8 @ 18:37:56
+        Started Run 9 @ 18:37:59
+        Started Run 10 @ 18:38:02 [Std. Dev: 1.86%]
+
+    Test Results:
+        12035.5
+        12168.2
+        12270.8
+        12067.3
+        12096.5
+        12001.1
+        12010.3
+        12245.5
+        12021.9
+        11462.8
+
+    Average: 12037.99 MB/s
+
+
+Stream 2013-01-17:
+    pts/stream-1.2.0 [Type: Scale]
+    Test 2 of 4
+    Estimated Trial Run Count:    10
+    Estimated Test Run-Time:      2 Minutes
+    Estimated Time To Completion: 6 Minutes
+        Started Run 1 @ 18:38:03
+        Started Run 2 @ 18:38:03
+        Started Run 3 @ 18:38:03
+        Started Run 4 @ 18:38:03
+        Started Run 5 @ 18:38:03
+        Started Run 6 @ 18:38:03
+        Started Run 7 @ 18:38:03
+        Started Run 8 @ 18:38:03
+        The test run ended prematurely.
+        Started Run 9 @ 18:38:03
+        Started Run 10 @ 18:38:03 [Std. Dev: 1.75%]
+        Started Run 11 @ 18:38:03
+        The test exited with a non-zero exit status. [Std. Dev: 1.75%]
+
+    Test Results:
+        12026.5
+        12110.2
+        12101.1
+        11928.8
+        11967.1
+        12054.5
+        12064.5
+        12021.1
+        11432.5
+
+    Average: 11967.37 MB/s
+
+
+Stream 2013-01-17:
+    pts/stream-1.2.0 [Type: Triad]
+    Test 3 of 4
+    Estimated Trial Run Count:    10
+    Estimated Test Run-Time:      2 Minutes
+    Estimated Time To Completion: 4 Minutes
+        Started Run 1 @ 18:38:03
+        Started Run 2 @ 18:38:03
+        Started Run 3 @ 18:38:03
+        Started Run 4 @ 18:38:03
+        The test run ended prematurely.
+        Started Run 5 @ 18:38:03
+        Started Run 6 @ 18:38:03
+        Started Run 7 @ 18:38:03
+        Started Run 8 @ 18:38:03
+        Started Run 9 @ 18:38:03
+        Started Run 10 @ 18:38:03 [Std. Dev: 1.11%]
+        Started Run 11 @ 18:38:03
+        The test exited with a non-zero exit status. [Std. Dev: 1.11%]
+
+    Test Results:
+        12226.8
+        12461.7
+        12442.3
+        12300.2
+        12543.1
+        12383.8
+        12250.5
+        12222.5
+        12122.4
+
+    Average: 12328.14 MB/s
+
+
+Stream 2013-01-17:
+    pts/stream-1.2.0 [Type: Add]
+    Test 4 of 4
+    Estimated Trial Run Count:    10
+    Estimated Time To Completion: 2 Minutes
+        Started Run 1 @ 18:38:03
+        Started Run 2 @ 18:38:03
+        Started Run 3 @ 18:38:03
+        Started Run 4 @ 18:38:03
+        Started Run 5 @ 18:38:03
+        Started Run 6 @ 18:38:03
+        Started Run 7 @ 18:38:03
+        Started Run 8 @ 18:38:03
+        Started Run 9 @ 18:38:03
+        Started Run 10 @ 18:38:03 [Std. Dev: 1.22%]
+
+    Test Results:
+        12142.7
+        12303.3
+        12326.1
+        12161.1
+        12239.3
+        12088.2
+        11939.7
+        12234.8
+        12097.4
+        11870.7
+
+    Average: 12140.33 MB/s
+

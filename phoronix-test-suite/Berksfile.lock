@@ -1,0 +1,11 @@
+DEPENDENCIES
+  phoronix-test-suite
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.7.0)
+  cwb (0.1.2)
+  phoronix-test-suite (0.1.0)
+    apt (~> 2.7.0)
+    cwb (~> 0.1.0)
