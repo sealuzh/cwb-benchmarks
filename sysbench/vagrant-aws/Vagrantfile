@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = 't1.micro'
   end
 
-  config.vm.provision 'chef_client', id: 'chef_client' do |chef|
+  config.vm.provision 'chef_client' do |chef|
     chef.add_recipe 'sysbench@1.0.1'
     chef.json =
         {

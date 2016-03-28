@@ -21,7 +21,7 @@ See `attributes/default.rb`
 Add the `minimal-example` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
-config.vm.provision 'chef_client', id: 'chef_client' do |chef|
+config.vm.provision 'chef_client' do |chef|
   chef.add_recipe 'minimal-example@0.1.0'  # Version is optional
   chef.json =
   {

@@ -28,7 +28,7 @@ See `attributes/default.rb`
 Add the `iperf` client recipe to your Chef configuration:
 
 ```ruby
-config.vm.provision 'chef_client', id: 'chef_client' do |chef|
+config.vm.provision 'chef_client' do |chef|
   chef.add_recipe 'iperf::client@1.0.0'  # Version is optional
   chef.json =
   {
