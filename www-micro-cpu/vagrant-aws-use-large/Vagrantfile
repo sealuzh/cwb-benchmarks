@@ -25,7 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       region.ami = "ami-018c9568"
       region.keypair_name = "rubis"
     end
-    override.ssh.private_key_path = ENV['EC2_PRIVATE_KEY']
     override.ssh.username = "ubuntu"
     aws.instance_type = "m3.large"
     aws.security_groups = ["default"]

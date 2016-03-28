@@ -25,7 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       region.ami = "ami-116b9166"     # this is Ubuntu Trusty 14.04 with Instance-Store instead of EBS
       region.keypair_name = ENV['EC2_KEYPAIR']
     end
-    override.ssh.private_key_path = ENV['EC2_PRIVATE_KEY']
     override.ssh.username = "ubuntu"
     aws.instance_type = "m1.small"
     aws.security_groups = ["default"]
