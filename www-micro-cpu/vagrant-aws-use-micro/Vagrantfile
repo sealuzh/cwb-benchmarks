@@ -23,9 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.region = "us-east-1"
     aws.region_config "us-east-1" do |region|
       region.ami = "ami-018c9568"
-      region.keypair_name = ENV['EC2_KEYPAIR']
     end
-    override.ssh.private_key_path = ENV['EC2_PRIVATE_KEY']
     override.ssh.username = "ubuntu"
     aws.instance_type = "t1.micro"
     aws.security_groups = ["default"]

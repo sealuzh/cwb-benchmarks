@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # aws.security_groups = %w(default my_own_group)
   end
 
-  config.vm.provision 'chef_client', id: 'chef_client' do |chef|
+  config.vm.provision 'chef_client' do |chef|
     chef.add_recipe 'wordpress-bench@0.1.0'  # Version is optional
     chef.json =
     {

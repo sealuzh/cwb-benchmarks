@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.tags = { 'Name' => server_node_name }
     end
 
-    server.vm.provision 'chef_client', id: 'chef_client' do |chef|
+    server.vm.provision 'chef_client' do |chef|
       chef.node_name = server_node_name
       chef.add_recipe 'cli-benchmark'
       chef.json = {
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.tags = { 'Name' => client_node_name }
     end
 
-    client.vm.provision 'chef_client', id: 'chef_client' do |chef|
+    client.vm.provision 'chef_client' do |chef|
       chef.node_name = client_node_name
       chef.add_recipe 'iperf::client'
       chef.json =

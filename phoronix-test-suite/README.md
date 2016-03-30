@@ -17,7 +17,7 @@ Metrics depends on what tests and metric names you define.
 Add the `phoronix-test-suite` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
-config.vm.provision 'chef_client', id: 'chef_client' do |chef|
+config.vm.provision 'chef_client' do |chef|
   chef.add_recipe 'phoronix-test-suite'
   chef.json =
   {
