@@ -1,4 +1,8 @@
-# 0.1.1 (2015-04-29)
+# 0.1.3 (2016-07-25)
+
+* Fix metadata request for google provider to obtain the `provider_instance_id`
+
+# 0.1.2 (2015-04-29)
 
 * Fix `cookbook` attribute implementation for `cwb_benchmark` and `cwb_benchmark_suite` implementations
 
