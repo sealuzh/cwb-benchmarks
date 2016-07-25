@@ -50,7 +50,7 @@ default['benchmark']['providers']['aws']['instance_id_request'] = "wget -q -T #{
 
 # Google Compute Engine (google)
 default['benchmark']['providers']['google']['name'] = 'google'
-default['benchmark']['providers']['google']['instance_id_request'] = "curl 'http://metadata.google.internal/computeMetadata/v1/instance/attributes/vagrant_id' -H 'Metadata-Flavor: Google' --max-time=#{node['benchmark']['timeout']}"
+default['benchmark']['providers']['google']['instance_id_request'] = "curl 'http://metadata.google.internal/computeMetadata/v1/instance/attributes/vagrant_id' -H 'Metadata-Flavor: Google' --max-time #{node['benchmark']['timeout']}"
 
 # Microsoft Azure (azure) => EXPERIMENTAL
 default['benchmark']['providers']['azure']['name'] = 'azure'
