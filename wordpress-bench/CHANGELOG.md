@@ -1,3 +1,7 @@
+# 0.1.3 (2017-01-10)
+
+* Bump outdated nokogiri gem dependency causing installation error
+
 # 0.1.2 (2015-07-22)
 
 * Additionally report failure metrics `num_failures` and `failure_rate`
