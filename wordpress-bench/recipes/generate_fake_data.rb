@@ -19,7 +19,7 @@ end.run_action(:install)
 gem_dependencies = {
   'faraday' => '0.9.1',
   'faraday-cookie_jar' => '0.0.6',
-  'nokogiri' => '1.6.6.2',
+  'nokogiri' => '1.6.8.1',
 }
 gem_dependencies.each do |gem_name, gem_version|
   chef_gem gem_name do
