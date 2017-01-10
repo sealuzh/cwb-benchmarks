@@ -1,2 +1,5 @@
 # Ignore jmeter testing directory
 jmeter
+
+# Ignore secret install folder
+/install/*
