@@ -52,10 +52,7 @@ ruby_block 'setup_wordpress' do
     # wp.install_plugin!('fakerpress', version: '0.3.1')
     wp.install_plugin!('https://github.com/bordoni/fakerpress/archive/0.3.1.zip')
 
-    file setup_status_file do
-      cwb_defaults(self)
-      content lazy { ::Time.now.to_s }
-    end
+    ::File.write(setup_status_file, ::Time.now.to_s)
   end
   action :run
   not_if { ::File.exist?(setup_status_file) }
