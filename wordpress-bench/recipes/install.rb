@@ -29,6 +29,7 @@ remote_file node['wordpress-bench']['wp_cli_bin'] do
   source node['wordpress-bench']['wp_cli_url']
 end
 
+setup_status_file = "#{node['wordpress']['dir']}/setup_wordpress.txt"
 # Setup wordpress including data generation plugin
 ruby_block 'setup_wordpress' do
   block do
@@ -50,6 +51,12 @@ ruby_block 'setup_wordpress' do
     # the Wordpress plugin registry: https://wordpress.org/plugins/fakerpress
     # wp.install_plugin!('fakerpress', version: '0.3.1')
     wp.install_plugin!('https://github.com/bordoni/fakerpress/archive/0.3.1.zip')
+
+    file setup_status_file do
+      cwb_defaults(self)
+      content lazy { ::Time.now.to_s }
+    end
   end
   action :run
+  not_if { ::File.exist?(setup_status_file) }
 end
