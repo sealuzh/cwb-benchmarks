@@ -56,8 +56,8 @@ module WordpressBench
 
     def date_range
       {
-        date_min: '2010-01-01',
-        date_max: '2015-01-01',
+        date_min: '2012-01-01',
+        date_max: '2017-01-01',
       }
     end
 
