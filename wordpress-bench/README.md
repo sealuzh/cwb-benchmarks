@@ -6,10 +6,10 @@ Currently uses a dedicated load generator server https://github.com/joe4dev/load
 
 ## Dependencies
 
-* Worpress cookbook: https://supermarket.chef.io/cookbooks/wordpress
-* Worpress plugin `FakerPress`: https://wordpress.org/plugins/fakerpress/
+* Adapted [wordpress](https://supermarket.chef.io/cookbooks/wordpress) cookbook: https://github.com/joe4dev/wordpress
+* WordPress plugin `FakerPress`: https://wordpress.org/plugins/fakerpress/
     * Github: https://github.com/bordoni/fakerpress
-* Wordpress plugin `Disable check comment flood`: https://wordpress.org/plugins/disable-check-comment-flood
+* WordPress plugin `Disable check comment flood`: https://wordpress.org/plugins/disable-check-comment-flood
 
 ## Attributes
 
@@ -57,7 +57,7 @@ end
 
 ## Troubleshooting
 
-The wordpress cookbook causes some database issues when stopping or restarting the machine. Simply reprovision and `install.rb` will fix this issue. See https://github.com/brint/wordpress-cookbook/issues/55
+1) Restarting the VM yields the error `Error establishing a database connection`. Reprovision the `wordpress` recipe will fix this issue. See [fix](https://github.com/joe4dev/wordpress/commit/9385b53564edf683bd3a70a846d6d9daf593900a) and [discussion](https://github.com/brint/wordpress-cookbook/issues/55).
 
 ## License and Authors
 

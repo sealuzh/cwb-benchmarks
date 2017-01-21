@@ -1,3 +1,7 @@
+# 2.0.0 (2017-01-22)
+
+* Leverage the `joe4dev/wordpress` cookbook for WordPress setup and plugin install. This is not part of the benchmark cookbook anymore.
+
 # 0.1.3 (2017-01-10)
 
 * Bump outdated nokogiri gem dependency causing installation error

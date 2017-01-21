@@ -5,7 +5,7 @@ require 'faraday_middleware'
 class WordpressBench < Cwb::Benchmark
   def execute
     @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
-    start_service('mysql')
+    start_service('mysql-default')
     start_service('apache2')
     start_load_generator
     # HACK: Exit with success without bothering about notifying that

@@ -30,21 +30,22 @@ gem_dependencies.each do |gem_name, gem_version|
 end
 
 # Generate fake data
+site = node['wordpress']['site']
 ruby_block 'generate_fake_data' do
   block do
     data_set = WordpressBench::DemoDataSet.new(node['wordpress']['dir'])
     unless data_set.applied?
       sleep(30) # Make sure the server is ready
-      faker = WordpressBench::BatchedFakerPress.new(node['wordpress-bench']['url'],
+      faker = WordpressBench::BatchedFakerPress.new(site['url'],
                                                     node['wordpress-bench']['batch_size'])
-      faker.login(node['wordpress-bench']['admin_user'],
-                  node['wordpress-bench']['admin_password'])
+      faker.login(site['admin_user'],
+                  site['admin_password'])
       api_customer_key = node['wordpress-bench']['500px_customer_key']
       sleep(4)
       faker.save_api_key(api_customer_key) unless api_customer_key.empty?
-      Chef::Log.warn('Start generating fake Wordpress data')
+      Chef::Log.info('Start generating fake Wordpress data!')
       data_set.apply!(faker)
-      Chef::Log.warn('Finished generating fake Wordpress data')
+      Chef::Log.info('Finished generating fake Wordpress data!')
     end
   end
 end

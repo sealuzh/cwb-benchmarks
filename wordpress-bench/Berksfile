@@ -2,4 +2,4 @@ source "https://supermarket.chef.io"
 
 metadata
 
-cookbook "wordpress", github: "atomic-penguin/wordpress"
+cookbook "wordpress", github: "joe4dev/wordpress"
