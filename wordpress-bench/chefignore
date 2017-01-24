@@ -2,6 +2,9 @@
 # or sharing to the community site.
 # Lines that start with '# ' are comments.
 
+# Installation directory (may contain secrets)
+install
+
 # local testing
 files/default/archive
 files/default/run.sh
