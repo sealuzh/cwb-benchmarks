@@ -44,6 +44,13 @@ gem_dependencies.each do |gem_name, gem_version|
   end
 end
 
+# Reload and restart apache config here to make WordPress available
+# NOTICE: the apache2 recipe delays the reload and restart to the end of the Chef run
+#    see: https://github.com/sous-chefs/apache2/blob/master/recipes/default.rb#L155
+service 'apache2' do
+  action [:reload, :restart]
+end
+
 # Generate fake data
 site = node['wordpress']['site']
 ruby_block 'generate_fake_data' do
