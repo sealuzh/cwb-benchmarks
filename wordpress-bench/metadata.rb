@@ -9,7 +9,8 @@ version          '1.0.0'
 
 depends 'cwb', '~> 0.1.0'
 depends 'wordpress', '~> 3.2.0'
-depends 'build-essential', '~> 2.2.3'
-depends 'apt', '~> 2.7.0'
+depends 'build-essential', '~> 7.0.3'
+depends 'apt', '~> 5.0.1'
+
 # Is this required on some *nix distributions?
 # depends 'libxml2', '~> 0.1.1'
