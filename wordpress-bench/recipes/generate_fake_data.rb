@@ -1,8 +1,23 @@
-node.default['apt']['compile_time_update'] = true
+node.override['apt']['compile_time_update'] = true
+# Workaround to run `apt-get update` first on compile time before `build-essential`
+# See: https://github.com/chef-cookbooks/build-essential/issues/41#issuecomment-84178604
+first_run_file = "/tmp/apt-get-update-stamp"
+if node['apt']['compile_time_update'] && !::File.exist?(first_run_file)
+  e = bash 'apt-get-update at compile time' do
+    code <<-EOH
+      apt-get update
+      touch #{first_run_file}
+    EOH
+    ignore_failure true
+    only_if { apt_installed? }
+    action :nothing
+  end
+  e.run_action(:run)
+end
 include_recipe 'apt::default'
 
 # faraday-cookie_jar and nokogiri must compile native extensions
-node.default['build-essential']['compile_time'] = true
+node.override['build-essential']['compile_time'] = true
 include_recipe 'build-essential::default'
 
 # node.default['libxml2']['compile_time'] = true
