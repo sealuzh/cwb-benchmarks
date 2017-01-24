@@ -56,11 +56,13 @@ ruby_block 'generate_fake_data' do
       faker.login(site['admin_user'],
                   site['admin_password'])
       api_customer_key = node['wordpress-bench']['500px_customer_key']
-      sleep(4)
+      sleep(5)
       faker.save_api_key(api_customer_key) unless api_customer_key.empty?
       Chef::Log.info('Start generating fake Wordpress data!')
       data_set.apply!(faker)
       Chef::Log.info('Finished generating fake Wordpress data!')
     end
   end
+  retries 2
+  retry_delay 30 # seconds
 end
