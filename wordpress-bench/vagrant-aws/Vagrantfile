@@ -8,19 +8,20 @@
 
 SSH_USERNAME = 'ubuntu'
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.ssh.username = SSH_USERNAME
+
   config.vm.provider :aws do |aws, override|
     aws.region = 'eu-west-1'
-    # Official Ubuntu 14.04 LTS (pv:ebs) image for eu-west-1 from Canonical:
+    aws.availability_zone = 'eu-west-1a'
+    # Official Ubuntu 14.04 LTS (hvm:ebs) image for eu-west-1 from Canonical:
     #  https://cloud-images.ubuntu.com/locator/ec2/
-    aws.ami = 'ami-3196f646'
-    override.ssh.username = SSH_USERNAME
-    aws.instance_type = 't1.micro'
-    # Make sure HTTP port is open!
-    # aws.security_groups = %w(default my_own_group)
+    aws.ami = 'ami-acb59bdf'
+    aws.instance_type = 't2.micro'
+    aws.security_groups = ['cwb-web']
   end
 
-  config.vm.provision 'chef_client' do |chef|
-    chef.add_recipe 'wordpress-bench@0.1.0'  # Version is optional
+  config.vm.provision 'cwb', type: 'chef_client' do |chef|
+    chef.add_recipe 'wordpress-bench::default@1.0.0'  # Version is optional
     chef.json =
     {
       'benchmark' =>  {
@@ -29,8 +30,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       },
       'wordpress-bench' => {
           'metric_name' => 'response_time',
+          'num_repetitions' => 1,
           'load_generator' => 'http://LOAD_GENERATOR',
-          '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
+          '500px_customer_key' => 'PX500_CUSTOMER_KEY',
+          'jmeter' => {
+            'properties' => {
+                # i.e., users
+                'num_threads' => 2,
+                'ramp_up_period' => 0,
+            },
+          },
       }
     }
   end
