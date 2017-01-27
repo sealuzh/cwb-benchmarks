@@ -34,7 +34,7 @@ Add the `wordpress-bench` default recipe to your Chef configuration in the Vagra
 
 ```ruby
 config.vm.provision 'chef_client' do |chef|
-  chef.add_recipe 'wordpress-bench@0.1.0'  # Version is optional
+  chef.add_recipe 'wordpress-bench@2.0.0'  # Version is optional
   chef.json =
   {
     'wordpress-bench' => {

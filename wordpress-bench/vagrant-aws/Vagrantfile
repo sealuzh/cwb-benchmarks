@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision 'cwb', type: 'chef_client' do |chef|
-    chef.add_recipe 'wordpress-bench::default@1.0.0'  # Version is optional
+    chef.add_recipe 'wordpress-bench::default@2.0.0'  # Version is optional
     chef.json =
     {
       'benchmark' =>  {

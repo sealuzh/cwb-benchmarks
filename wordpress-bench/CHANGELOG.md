@@ -1,6 +1,8 @@
-# 2.0.0 (2017-01-22)
+# 2.0.0 (2017-01-27)
 
 * Leverage the `joe4dev/wordpress` cookbook for WordPress setup and plugin install. This is not part of the benchmark cookbook anymore.
+* Update the `test_plan` for the new data set
+* Update Vagrantfile examples
 
 # 0.1.3 (2017-01-10)
 
