@@ -25,12 +25,12 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 
 1. Within your benchmark definition, click `Create Schedule`
 2. Enter your Cron expression (e.g., `* 0,12 * * *` for midnight and lunchtime every day) and click `Create Schedule`
-3. Don't forget to deactivate your schedules if you don't need them anymore! Review active schedules here `http://cwb-server.io/benchmark_schedules?active=true`
+3. Don't forget to deactivate your schedules if you don't need them anymore! Review active schedules here http://cwb-server.io/benchmark_schedules?active=true
 
 
 ## Setup
 
-*Precondition:* You need to have access to a Cloud WorkBench Server. See: https://github.com/sealuzh/cloud-workbench
+*Precondition:* You need to have access to a [Cloud WorkBench](https://github.com/sealuzh/cloud-workbench) Server. Find the installation instructions here: https://github.com/sealuzh/cwb-chef-repo#installation
 
 1. Clone this repository
 
@@ -55,7 +55,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
         mkdir ~/.berkshelf && cp config.json $HOME/.berkshelf/config.json
         ```
 
-    3. Paste your Chef client key to `$HOME/.chef/cwb-user.pem`. Refer to https://github.com/sealuzh/cloud-workbench how to create a Chef client if you have not created one yet.
+    3. Paste your Chef client key to `$HOME/.chef/cwb-user.pem`. Refer to https://github.com/sealuzh/cwb-chef-repo#installation how to create a Chef client if you have not created one yet.
 
 4. Verify connection to Chef Server
 
