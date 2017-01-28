@@ -12,11 +12,11 @@
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :aws do |aws, override|
     aws.region = "eu-west-1"
-    # Official Ubuntu 14.04 LTS image for eu-west-1 from Canonical:
+    # Official Ubuntu 14.04 LTS (hvm:ebs) image for eu-west-1 from Canonical:
     #  https://cloud-images.ubuntu.com/locator/ec2/
-    aws.ami = "ami-896c96fe"
-    override.ssh.username = "ubuntu"
-    aws.instance_type = "t1.micro"
+    aws.ami = 'ami-acb59bdf'
+    aws.instance_type = 't2.micro'
+    override.ssh.username = 'ubuntu'
     # Add other security groups separated by spaces.
     # Example: %w(default my_own_group)
     aws.security_groups = %w(default)
@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "chef_client", id: "chef_client" do |chef|
-    chef.add_recipe "fio@1.0.0"  # Version number is optional
+    chef.add_recipe "fio@1.0.1"  # Version number is optional
     chef.json =
     {
       "fio" => {

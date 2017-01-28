@@ -4,7 +4,7 @@ maintainer_email 'joel.scheuner.dev@gmail.com'
 license          'Apache 2.0'
 description      'Installs and configures the fio benchmark'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.0'
+version          '1.0.1'
 
 depends 'cwb'
 depends 'apt'

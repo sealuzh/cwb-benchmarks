@@ -22,7 +22,7 @@ class Fio < Cwb::Benchmark
   end
 
   def fio_log_file
-    "#{fio_config('write_bw_log')}_bw.1.log"
+    "#{fio_config('write_bw_log')}_bw.log"
   end
 
   def metric_definition_id
