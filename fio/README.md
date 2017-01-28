@@ -35,7 +35,7 @@ Vagrant example:
 
 ```ruby
 config.vm.provision "chef_client" do |chef|
-  chef.add_recipe 'fio@0.3.0'  # Version number is optional
+  chef.add_recipe 'fio@1.0.0'  # Version number is optional
   chef.json = {
     'fio' => {
       'version' => '2.1.10',
