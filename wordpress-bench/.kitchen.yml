@@ -2,10 +2,10 @@
 driver:
   name: vagrant
   network:
-  # - ["forwarded_port", {guest: 80, host: 8080}]
-  - ["private_network", {ip: "192.168.33.33"}]
+  - ["private_network", {ip: "33.33.33.81"}]
   customize:
     memory: 1024
+    cpus: 2
 
 provisioner:
   name: chef_zero
@@ -23,6 +23,8 @@ suites:
         ssh_username: vagrant
         logging_enabled: true
       wordpress-bench:
-        url: http://192.168.33.33
         # load_generator: http://LOAD_GENERATOR
         # 500px_customer_key: YOUR_CUSTOMER_KEY
+      wordpress:
+        site:
+          url: http://33.33.33.81

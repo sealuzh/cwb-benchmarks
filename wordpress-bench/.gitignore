@@ -1,2 +1,8 @@
-# Ignore jmeter testing directory
-jmeter
+# Ignore local testing output
+files/default/jmeter.log
+files/default/node.yml
+files/default/results.csv
+files/default/test_plan.jtl
+
+# Ignore secret install folder
+/install/*

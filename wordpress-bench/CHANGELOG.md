@@ -1,3 +1,13 @@
+# 2.0.0 (2017-01-27)
+
+* Leverage the `joe4dev/wordpress` cookbook for WordPress setup and plugin install. This is not part of the benchmark cookbook anymore.
+* Update the `test_plan` for the new data set
+* Update Vagrantfile examples
+
+# 0.1.3 (2017-01-10)
+
+* Bump outdated nokogiri gem dependency causing installation error
+
 # 0.1.2 (2015-07-22)
 
 * Additionally report failure metrics `num_failures` and `failure_rate`
