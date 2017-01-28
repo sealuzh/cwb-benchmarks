@@ -12,7 +12,7 @@ GRAPH
     seven_zip (>= 0.0.0)
   compat_resource (12.16.3)
   cwb (0.1.3)
-  fio (1.0.0)
+  fio (1.0.1)
     apt (>= 0.0.0)
     build-essential (>= 0.0.0)
     cwb (>= 0.0.0)

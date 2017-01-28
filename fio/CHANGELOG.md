@@ -1,5 +1,9 @@
 # fio-benchmark CHANGELOG
 
+# 1.0.1 (2017-01-28)
+
+* Update to new fio log format (without `.1` suffix)
+
 # 1.0.0 (2015-04-25)
 
 * Major update to support the improved cwb version
