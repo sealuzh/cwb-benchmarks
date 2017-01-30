@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision 'chef_client' do |chef|
-    chef.add_recipe 'sysbench@1.0.1'
+    chef.add_recipe 'sysbench@1.0.2'
     chef.json =
         {
             'sysbench' => {

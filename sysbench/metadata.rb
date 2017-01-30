@@ -4,7 +4,7 @@ maintainer_email 'joel.scheuner.dev@gmail.com'
 license          'Apache 2.0'
 description      'Installs/Configures sysbench'
 long_description 'Installs/Configures sysbench'
-version          '1.0.1'
+version          '1.0.2'
 
 depends 'cwb', '~> 0.1.3'
 depends 'apt', '~> 5.0.1'
