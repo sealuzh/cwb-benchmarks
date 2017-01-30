@@ -6,8 +6,8 @@ description      'Installs/Configures sysbench'
 long_description 'Installs/Configures sysbench'
 version          '1.0.1'
 
-depends 'cwb', '~> 0.1.0'
-depends 'apt', '~> 2.7.0'
+depends 'cwb', '~> 0.1.3'
+depends 'apt', '~> 5.0.1'
 
 recipe  'sysbench::default', 'Installs and configures sysbench.'
 recipe  'sysbench::install', 'Installs sysbench'
