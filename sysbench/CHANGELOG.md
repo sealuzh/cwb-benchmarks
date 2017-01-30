@@ -1,3 +1,7 @@
+# 1.0.2 (2017-01-30)
+
+* Update dependencies
+
 # 1.0.1 (2015-04-29)
 
 * Rename metrics and make them configurable

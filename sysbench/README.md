@@ -33,7 +33,7 @@ Add the `sysbench` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
 config.vm.provision 'chef_client' do |chef|
-  chef.add_recipe 'sysbench@1.0.1'
+  chef.add_recipe 'sysbench@1.0.2'
   chef.json =
   {
     'sysbench' => {
