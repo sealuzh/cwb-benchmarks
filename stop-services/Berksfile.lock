@@ -1,0 +1,7 @@
+DEPENDENCIES
+  stop-services
+    path: .
+    metadata: true
+
+GRAPH
+  stop-services (0.1.0)
