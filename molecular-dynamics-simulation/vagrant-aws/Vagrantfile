@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision 'chef_client' do |chef|
-    chef.add_recipe 'molecular-dynamics-simulation@0.1.0'  # Version is optional
+    chef.add_recipe 'molecular-dynamics-simulation@0.1.1'  # Version is optional
     chef.json =
     {
       'benchmark' =>  {
