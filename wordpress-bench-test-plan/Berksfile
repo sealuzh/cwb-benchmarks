@@ -1,0 +1,12 @@
+require_relative "../helper"
+
+source "https://supermarket.chef.io"
+
+# Need to copy this dependency from `wordpress-bench` Berksfile
+# due to recursive dependency resolution of Berkshelf: https://github.com/berkshelf/berkshelf/issues/1515
+# Otherwise the following error is produced: "Unable to satisfy constraints on package wordpress due to solution constraint"
+cookbook "wordpress", github: "joe4dev/wordpress"
+
+local_cookbook "wordpress-bench"
+
+metadata

@@ -1,0 +1,47 @@
+SSH_USERNAME = 'ubuntu'
+VAGRANTFILE_API_VERSION = 2
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = 'aws'
+  config.vm.box_url = 'https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box'
+
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+
+    aws.keypair_name = ENV['EC2_KEYPAIR']
+    override.ssh.private_key_path = ENV['EC2_PRIVATE_KEY']
+    override.ssh.username = SSH_USERNAME
+
+    aws.region = 'eu-west-1'
+    aws.availability_zone = 'eu-west-1a'
+    # Official Ubuntu 14.04 LTS (hvm:ebs) image for eu-west-1 from Canonical:
+    #  https://cloud-images.ubuntu.com/locator/ec2/
+    aws.ami = 'ami-acb59bdf'
+    aws.instance_type = 'm3.medium'
+    # # Make sure HTTP port is open!
+    aws.security_groups = ['cwb-web']
+    aws.tags = { 'Name' => 'cwb-wordpress-bench' }
+  end
+
+  config.omnibus.chef_version = '12.8.1'
+  config.berkshelf.enabled = true
+  config.berkshelf.berksfile_path = '../Berksfile'
+  config.vm.provision 'chef_solo' do |chef|
+    chef.provisioning_path = '/etc/chef'
+    chef.cookbooks_path = '../../cwb-benchmarks'
+    chef.add_recipe 'cwb'
+    chef.add_recipe 'wordpress-bench-test-plan'
+    chef.json =
+    {
+      'benchmark' =>  {
+          'ssh_username' => SSH_USERNAME,
+          'logging_enabled' => true,
+      },
+      'wordpress-bench' => {
+          'metric_name' => 'response_time',
+          'load_generator' => 'http://' + ENV['LOAD_GENERATOR'],
+          '500px_customer_key' => ENV['PX500_CUSTOMER_KEY'],
+      }
+    }
+  end
+end
