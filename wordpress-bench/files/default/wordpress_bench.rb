@@ -7,6 +7,7 @@ class WordpressBench < Cwb::Benchmark
     @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
     start_service('mysql-default')
     start_service('apache2')
+    start_service('perfmon')
     start_load_generator
     # HACK: Exit with success without bothering about notifying that
     # the execution is finished. The load generator will do this.
