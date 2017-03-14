@@ -60,55 +60,57 @@
         <boolProp name="include_checkbox_state">false</boolProp>
         <boolProp name="exclude_checkbox_state">false</boolProp>
         <collectionProp name="metricConnections">
-          <collectionProp name="-942725942">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="-285341661">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="66952">CPU</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="1051527033">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="1708911314">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="-1993889503">Memory</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="-1354431012">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="-697046731">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="2112896831">Disks I/O</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="1163867049">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="1821251330">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="-274342153">Network I/O</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="9953193">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="-285341661">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
-            <stringProp name="73589">JMX</stringProp>
+            <stringProp name="66952">CPU</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="1038647180">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="1696031461">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="82881">TCP</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
-          <collectionProp name="1938137884">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="-1699445131">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="66952">CPU</stringProp>
             <stringProp name="3227604">idle</stringProp>
           </collectionProp>
-          <collectionProp name="-904915833">
-            <stringProp name="1221227423">${site}</stringProp>
+          <collectionProp name="-247531552">
+            <stringProp name="1771728366">${__property(site,,127.0.0.1)}</stringProp>
             <stringProp name="1600768">4444</stringProp>
             <stringProp name="66952">CPU</stringProp>
             <stringProp name="-892072665">stolen</stringProp>
           </collectionProp>
         </collectionProp>
+        <stringProp name="TestPlan.comments">Cannot use JMeter variable here because only JMeter properties are supported on distributed mode.
+See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-with-use-of-variables-in-jmeter-distributed-mode</stringProp>
       </kg.apc.jmeter.perfmon.PerfMonCollector>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
