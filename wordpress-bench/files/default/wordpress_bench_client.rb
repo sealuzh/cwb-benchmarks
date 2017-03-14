@@ -11,7 +11,8 @@ class WordpressBenchClient < Cwb::Benchmark
   def run_scenario
     delete_old_results
     create_properties_file
-    system(run_cmd)
+    cmd = runremote? ? run_cmd_remote : run_cmd
+    system(cmd)
     fail 'JMeter exited with non-zero value' unless $?.success?
     results = process_results
     @cwb.submit_metric(metric_name, timestamp, results[:average_response_time])
@@ -30,7 +31,7 @@ class WordpressBenchClient < Cwb::Benchmark
   def create_properties_file
     open(properties_file, 'w') do |f|
       properties.each do |key, value|
-        f << "#{key} = #{value}\n"
+        f << "#{key}=#{value}\n"
       end
     end
   end
@@ -43,8 +44,16 @@ class WordpressBenchClient < Cwb::Benchmark
     'test_plan.properties'
   end
 
+  def runremote?
+    @cwb.deep_fetch('wordpress-bench', 'jmeter', 'runremote').to_s == 'true'
+  end
+
   def run_cmd
     "jmeter --nongui --testfile test_plan.jmx --addprop #{properties_file}"
+  end
+
+  def run_cmd_remote
+    "jmeter --nongui --testfile test_plan.jmx --addprop #{properties_file} --runremote -G#{properties_file}"
   end
 
   def timestamp

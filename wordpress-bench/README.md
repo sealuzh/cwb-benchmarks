@@ -58,6 +58,21 @@ config.vm.provision 'chef_client' do |chef|
 end
 ```
 
+## Remote JMeter Testing
+
+NOTICE: The slaves must be in the same subnet. Therefore, we use private IP addresses here.
+
+```ruby
+'wordpress-bench' => {
+    'jmeter' => {
+        'runremote' => true,
+        'properties' => {
+            'remote_hosts' => '172.31.7.214' # or '172.31.7.214,172.31.7.215'
+        }
+    }
+}
+```
+
 ## Troubleshooting
 
 1) Restarting the VM yields the error `Error establishing a database connection`. Reprovision the `wordpress` recipe will fix this issue. See [fix](https://github.com/joe4dev/wordpress/commit/9385b53564edf683bd3a70a846d6d9daf593900a) and [discussion](https://github.com/brint/wordpress-cookbook/issues/55).

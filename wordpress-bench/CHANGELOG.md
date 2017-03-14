@@ -1,3 +1,7 @@
+# 2.0.4 (2017-03-14)
+
+* Add support and docs for distributed testing mode
+
 # 2.0.3 (2017-03-14)
 
 * Adjust result calculation
