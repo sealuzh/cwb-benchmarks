@@ -24,7 +24,7 @@ class WordpressBenchClient < Cwb::Benchmark
   end
 
   def results_file
-    'results.csv'
+    'scenario1-read-only.csv'
   end
 
   def create_properties_file
@@ -65,14 +65,20 @@ class WordpressBenchClient < Cwb::Benchmark
     count = 0
     num_failures = 0
     CSV.foreach(results_file, headers: true) do |row|
-      total += row['elapsed'].to_i
-      count += 1
-      (num_failures += 1) if (row['success'] != 'true')
+      unless is_parent(row) # skip aggregated parent rows
+        total += row['elapsed'].to_i
+        count += 1
+        (num_failures += 1) if (row['success'] != 'true')
+      end
     end
     results = {
       average_response_time: (total.to_f / count),
       num_failures: num_failures,
       failure_rate: (num_failures.to_f / total),
     }
+  end
+
+  def is_parent(row)
+    row['label'].include?(' => ')
   end
 end

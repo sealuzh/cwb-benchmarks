@@ -1,3 +1,7 @@
+# 2.0.3 (2017-03-14)
+
+* Adjust result calculation
+
 # 2.0.2 (2017-03-13)
 
 * Add perfmon support (stop, start process). Add the `perfmon` recipe to install and enable the perfmon service.
