@@ -1,3 +1,7 @@
+# 0.1.5 (2017-03-15)
+
+* Use machine-dependent thread names for distributed testing
+
 # 0.1.4 (2017-03-15)
 
 * Add failure message column (required for JMeter graph generation)
