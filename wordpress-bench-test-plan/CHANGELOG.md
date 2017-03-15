@@ -1,3 +1,7 @@
+# 0.1.3 (2017-03-15)
+
+* Enable hostname logging to analyze distributed testing scenarios
+
 # 0.1.2 (2017-03-14)
 
 * Bump `wordpress-bench` dependency to fix result calculation

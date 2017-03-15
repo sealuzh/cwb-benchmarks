@@ -6196,6 +6196,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <hostname>true</hostname>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
@@ -9339,6 +9340,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <hostname>true</hostname>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
@@ -11887,6 +11889,7 @@ And bye the way, this is a really nice picture, good choice!
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <hostname>true</hostname>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
