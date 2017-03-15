@@ -1,3 +1,7 @@
+# 0.1.4 (2017-03-15)
+
+* Add failure message column (required for JMeter graph generation)
+
 # 0.1.3 (2017-03-15)
 
 * Enable hostname logging to analyze distributed testing scenarios
