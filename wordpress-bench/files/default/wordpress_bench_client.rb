@@ -11,7 +11,8 @@ class WordpressBenchClient < Cwb::Benchmark
   def run_scenario
     delete_old_results
     create_properties_file
-    system(run_cmd)
+    cmd = runremote? ? run_cmd_remote : run_cmd
+    system(cmd)
     fail 'JMeter exited with non-zero value' unless $?.success?
     results = process_results
     @cwb.submit_metric(metric_name, timestamp, results[:average_response_time])
@@ -24,13 +25,13 @@ class WordpressBenchClient < Cwb::Benchmark
   end
 
   def results_file
-    'results.csv'
+    'scenario1-read-only.csv'
   end
 
   def create_properties_file
     open(properties_file, 'w') do |f|
       properties.each do |key, value|
-        f << "#{key} = #{value}\n"
+        f << "#{key}=#{value}\n"
       end
     end
   end
@@ -43,8 +44,16 @@ class WordpressBenchClient < Cwb::Benchmark
     'test_plan.properties'
   end
 
+  def runremote?
+    @cwb.deep_fetch('wordpress-bench', 'jmeter', 'runremote').to_s == 'true'
+  end
+
   def run_cmd
     "jmeter --nongui --testfile test_plan.jmx --addprop #{properties_file}"
+  end
+
+  def run_cmd_remote
+    "jmeter --nongui --testfile test_plan.jmx --addprop #{properties_file} --runremote -G#{properties_file}"
   end
 
   def timestamp
@@ -65,14 +74,20 @@ class WordpressBenchClient < Cwb::Benchmark
     count = 0
     num_failures = 0
     CSV.foreach(results_file, headers: true) do |row|
-      total += row['elapsed'].to_i
-      count += 1
-      (num_failures += 1) if (row['success'] != 'true')
+      unless is_parent(row) # skip aggregated parent rows
+        total += row['elapsed'].to_i
+        count += 1
+        (num_failures += 1) if (row['success'] != 'true')
+      end
     end
     results = {
       average_response_time: (total.to_f / count),
       num_failures: num_failures,
       failure_rate: (num_failures.to_f / total),
     }
+  end
+
+  def is_parent(row)
+    row['label'].include?(' => ')
   end
 end

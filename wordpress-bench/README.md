@@ -15,6 +15,8 @@ Currently uses a dedicated load generator server https://github.com/joe4dev/load
 
 See `attributes/default.rb`
 
+Use the attribute `['wordpress-bench']['test_plan_cookbook']` to configure an alternative cookbook that provides the test plan under `files/default/test_plan.jmx`.
+
 ## Usage
 
 ### Cloud WorkBench
@@ -45,14 +47,30 @@ config.vm.provision 'chef_client' do |chef|
         '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
         'jmeter' => {
             'properties' => {
-                # i.e., users
-                'num_threads' => 2,
-                'ramp_up_period' => 0,
+                'target_concurrency' => 180,
+                'ramp_up_time' => 6,
+                'ramp_up_steps_count' => 9,
+                'hold_target_rate_time' => 3,
             },
         },
     },
   }
 end
+```
+
+## Remote JMeter Testing
+
+NOTICE: The slaves must be in the same subnet. Therefore, we use private IP addresses here.
+
+```ruby
+'wordpress-bench' => {
+    'jmeter' => {
+        'runremote' => true,
+        'properties' => {
+            'remote_hosts' => '172.31.7.214' # or '172.31.7.214,172.31.7.215'
+        }
+    }
+}
 ```
 
 ## Troubleshooting

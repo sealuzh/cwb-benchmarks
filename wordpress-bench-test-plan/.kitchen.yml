@@ -1,0 +1,30 @@
+---
+driver:
+  name: vagrant
+  network:
+  - ["private_network", {ip: "33.33.33.91"}]
+  customize:
+    memory: 1024
+    cpus: 2
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[cwb::default]
+      - recipe[wordpress-bench-test-plan::default]
+    attributes:
+      benchmark:
+        ssh_username: vagrant
+        logging_enabled: true
+      wordpress-bench:
+        # load_generator: http://LOAD_GENERATOR
+        # 500px_customer_key: YOUR_CUSTOMER_KEY
+      wordpress:
+        site:
+          url: http://33.33.33.91

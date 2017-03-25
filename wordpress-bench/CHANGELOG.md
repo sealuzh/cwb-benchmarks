@@ -1,3 +1,21 @@
+# 2.0.4 (2017-03-14)
+
+* Add support and docs for distributed testing mode
+
+# 2.0.3 (2017-03-14)
+
+* Adjust result calculation
+
+# 2.0.2 (2017-03-13)
+
+* Add perfmon support (stop, start process). Add the `perfmon` recipe to install and enable the perfmon service.
+
+# 2.0.1 (2017-03-07)
+
+* Use JMeter 3.1
+* Improve modularization to support "test plan cookbooks". Allow to create a seperate cookbook that encapsulates other test plans.
+* Update testplan to support currency thread group using the JMeter plugin `jpgc-casutg`
+
 # 2.0.0 (2017-01-27)
 
 * Leverage the `joe4dev/wordpress` cookbook for WordPress setup and plugin install. This is not part of the benchmark cookbook anymore.
