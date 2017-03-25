@@ -1,0 +1,9 @@
+DEPENDENCIES
+  rmit-combined
+    path: .
+    metadata: true
+
+GRAPH
+  cwb (0.1.3)
+  rmit-combined (0.1.0)
+    cwb (~> 0.1.0)
