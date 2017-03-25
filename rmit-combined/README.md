@@ -10,11 +10,14 @@ See `attributes/default.rb`
 
 ### Cloud WorkBench
 
-| Metric Name                  | Unit              | Scale Type    |
-| ---------------------------- | ----------------- | ------------- |
-| cpu                          | model-name        | nominal       |
-| benchmark-order              | model-name        | nominal       |
-
+| Metric Name                  | Unit                   | Scale Type    |
+| ---------------------------- | ---------------------- | ------------- |
+| cpu-model                    | model name             | nominal       |
+| cpu-cores                    | number of cores        | nominal       |
+| benchmark-order              | ordered benchmark list | nominal       |
+| sysbench/version             | version number         | nominal       |
+| sysbench/cpu-single-thread   | execution time         | nominal       |
+| sysbench/cpu-multi-thread    | execution time         | nominal       |
 
 **bold-written** metrics are mandatory
 

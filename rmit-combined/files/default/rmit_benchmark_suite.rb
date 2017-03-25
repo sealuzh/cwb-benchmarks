@@ -3,14 +3,20 @@ require 'cwb'
 module Cwb
   class RmitBenchmarkSuite < Cwb::BenchmarkSuite
     def execute_suite(cwb_benchmarks)
+      submit_global_metrics
       rmit_benchmarks = rmit_list(cwb_benchmarks)
       @cwb.submit_metric('benchmark-order', timestamp, rmit_benchmarks.map(&:class).to_s)
-      @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
       execute_all(rmit_benchmarks)
       @cwb.notify_finished_execution
     rescue => error
       @cwb.notify_failed_execution(error.message)
       raise error
+    end
+
+    def submit_global_metrics
+      @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
+      @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
+      @cwb.submit_metric('sysbench/version', timestamp, sysbench_version)
     end
 
     private
@@ -34,6 +40,14 @@ module Cwb
 
       def cpu_model_name
         @cwb.deep_fetch('cpu', '0', 'model_name')
+      end
+
+      def cpu_cores
+        @cwb.deep_fetch('cpu', '0', 'cores')
+      end
+
+      def sysbench_version
+        `sysbench --version`
       end
 
       def timestamp
