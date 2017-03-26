@@ -39,6 +39,15 @@ config.vm.provision 'cwb', type: 'chef_client' do |chef|
 end
 ```
 
+## Testing
+
+Prepare: Install Ruby dependencies via `bundle install`
+
+```shell
+cd spec/
+rspec .
+```
+
 ## License and Authors
 
 Author:: Joel Scheuner (joel.scheuner.dev@gmail.com)
