@@ -1,6 +1,6 @@
-# 0.1.0 (2017-03-26)
+# 0.1.1 (2017-03-26)
 
-* Add sysbench cpu
+* Add sysbench: cpu, memory
 
 # 0.1.0 (2017-03-25)
 

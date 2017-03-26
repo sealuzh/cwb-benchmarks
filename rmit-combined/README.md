@@ -18,6 +18,8 @@ See `attributes/default.rb`
 | sysbench/version             | version number         | nominal       |
 | sysbench/cpu-single-thread   | execution time         | nominal       |
 | sysbench/cpu-multi-thread    | execution time         | nominal       |
+| sysbench/memory-default-block-size    | throughput         | nominal       |
+| sysbench/memory-large-block-size    | throughput         | nominal       |
 
 **bold-written** metrics are mandatory
 
