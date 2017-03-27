@@ -26,6 +26,8 @@ See `attributes/default.rb`
 | sysbench/threads-128         | execution time         | nominal       |
 | sysbench/threads-1-latency   | average latency        | nominal       |
 | sysbench/threads-128-latency | average latency        | nominal       |
+| sysbench/mutex               | execution time         | nominal       |
+| sysbench/mutex-latency       | average latency        | nominal       |
 
 **bold-written** metrics are mandatory
 
