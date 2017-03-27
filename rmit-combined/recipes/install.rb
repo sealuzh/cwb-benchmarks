@@ -5,3 +5,4 @@
 include_recipe 'apt'
 
 package 'sysbench'
+include_recipe 'rmit-combined::install_fio'

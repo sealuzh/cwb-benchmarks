@@ -18,6 +18,7 @@ module Cwb
       @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
       @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
       @cwb.submit_metric('sysbench/version', timestamp, sysbench_version)
+      @cwb.submit_metric('fio/version', timestamp, fio_version)
     end
 
     private
@@ -53,6 +54,10 @@ module Cwb
 
       def sysbench_version
         `sysbench --version`
+      end
+
+      def fio_version
+        `fio --version`
       end
 
       def timestamp

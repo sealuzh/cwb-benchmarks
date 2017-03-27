@@ -42,7 +42,17 @@ See `attributes/default.rb`
 | sysbench/fileio-4k-rand-read-throughput | throughput | nominal |
 | sysbench/fileio-4k-rand-read-latency  | average latency | nominal |
 | sysbench/fileio-4k-rand-read-latency-95-percentile  | 95% latency percentile | nominal |
-
+| fio/version                  | version number         | nominal       |
+| fio/4k-seq-write-bandwidth | bandwidth | nominal |
+| fio/4k-seq-write-iops | iops | nominal |
+| fio/4k-seq-write-latency | microseconds | nominal |
+| fio/4k-seq-write-latency-95-percentile | microseconds | nominal |
+| fio/4k-seq-write-disk-util | utilization | nominal |
+| fio/8k-rand-write-bandwidth | bandwidth | nominal |
+| fio/8k-rand-write-iops | iops | nominal |
+| fio/8k-rand-write-latency | microseconds | nominal |
+| fio/8k-rand-write-latency-95-percentile | microseconds | nominal |
+| fio/8k-rand-write-disk-util | utilization | nominal |
 
 **bold-written** metrics are mandatory
 

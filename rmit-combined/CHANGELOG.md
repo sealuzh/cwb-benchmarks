@@ -1,4 +1,8 @@
-# 0.1.1 (2017-03-26)
+# 0.1.2 (2017-03-28)
+
+* Add fio
+
+# 0.1.1 (2017-03-27)
 
 * Add sysbench: cpu, memory, threads, mutex, fileio
 
