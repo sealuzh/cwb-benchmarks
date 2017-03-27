@@ -18,8 +18,14 @@ See `attributes/default.rb`
 | sysbench/version             | version number         | nominal       |
 | sysbench/cpu-single-thread   | execution time         | nominal       |
 | sysbench/cpu-multi-thread    | execution time         | nominal       |
-| sysbench/memory-default-block-size    | throughput         | nominal       |
-| sysbench/memory-large-block-size    | throughput         | nominal       |
+| sysbench/memory-default-block-size | execution time   | nominal       |
+| sysbench/memory-large-block-size   | execution time   | nominal       |
+| sysbench/memory-default-block-size-throughput | throughput       | nominal       |
+| sysbench/memory-large-block-size-throughput   | throughput       | nominal       |
+| sysbench/threads-1           | execution time         | nominal       |
+| sysbench/threads-128         | execution time         | nominal       |
+| sysbench/threads-1-latency   | average latency        | nominal       |
+| sysbench/threads-128-latency | average latency        | nominal       |
 
 **bold-written** metrics are mandatory
 

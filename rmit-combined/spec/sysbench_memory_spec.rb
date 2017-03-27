@@ -5,6 +5,10 @@ RSpec.describe 'SysbenchMemory' do
   let(:sample_result) { File.read('sysbench_memory_stdout.txt') }
 
   it 'extracts the total time from the result' do
-    expect(sysbench.extract(sample_result)).to eq('1499.93 MB/sec')
+    expect(sysbench.extract(sample_result)).to eq('0.6827s')
+  end
+
+  it 'extracts the average throughput from the result' do
+    expect(sysbench.extract_throughput(sample_result)).to eq('1499.93 MB/sec')
   end
 end
