@@ -14,6 +14,7 @@ See `attributes/default.rb`
 | ---------------------------- | ---------------------- | ------------- |
 | cpu-model                    | model name             | nominal       |
 | cpu-cores                    | number of cores        | nominal       |
+| ram-total                    | total ram in kb        | nominal       |
 | benchmark-order              | ordered benchmark list | nominal       |
 | sysbench/version             | version number         | nominal       |
 | sysbench/cpu-single-thread   | execution time         | nominal       |
@@ -28,6 +29,20 @@ See `attributes/default.rb`
 | sysbench/threads-128-latency | average latency        | nominal       |
 | sysbench/mutex               | execution time         | nominal       |
 | sysbench/mutex-latency       | average latency        | nominal       |
+| sysbench/fileio-file-total-size | GB                  | nominal       |
+| sysbench/fileio-1m-seq-write | execution time         | nominal       |
+| sysbench/fileio-1m-seq-write-throughput | throughput  | nominal       |
+| sysbench/fileio-1m-seq-write-latency | average latency | nominal |
+| sysbench/fileio-1m-seq-write-latency-95-percentile  | 95% latency percentile | nominal |
+| sysbench/fileio-4k-rand-write | execution time | nominal |
+| sysbench/fileio-4k-rand-write-throughput  | throughput | nominal |
+| sysbench/fileio-4k-rand-write-latency | average latency | nominal |
+| sysbench/fileio-4k-rand-write-latency-95-percentile | 95% latency percentile | nominal |
+| sysbench/fileio-4k-rand-read  | execution time | nominal |
+| sysbench/fileio-4k-rand-read-throughput | throughput | nominal |
+| sysbench/fileio-4k-rand-read-latency  | average latency | nominal |
+| sysbench/fileio-4k-rand-read-latency-95-percentile  | 95% latency percentile | nominal |
+
 
 **bold-written** metrics are mandatory
 

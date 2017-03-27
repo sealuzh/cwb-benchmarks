@@ -16,6 +16,7 @@ module Cwb
     def submit_global_metrics
       @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
       @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
+      @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
       @cwb.submit_metric('sysbench/version', timestamp, sysbench_version)
     end
 
@@ -44,6 +45,10 @@ module Cwb
 
       def cpu_cores
         @cwb.deep_fetch('cpu', '0', 'cores')
+      end
+
+      def node_ram_in_kB
+        @cwb.deep_fetch('memory', 'total')
       end
 
       def sysbench_version
