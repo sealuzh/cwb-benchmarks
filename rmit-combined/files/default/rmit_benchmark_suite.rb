@@ -1,6 +1,7 @@
 require 'cwb'
 
 module Cwb
+  # Parent class: https://github.com/sealuzh/cwb/blob/master/lib/cwb/benchmark_suite.rb
   class RmitBenchmarkSuite < Cwb::BenchmarkSuite
     def execute_suite(cwb_benchmarks)
       submit_global_metrics
@@ -13,14 +14,21 @@ module Cwb
       raise error
     end
 
+    def execute_all(cwb_benchmarks)
+      cwb_benchmarks.each do |cwb_benchmark|
+        cwb_benchmark.execute_in_working_dir
+        sleep inter_benchmark_sleep
+      end
+    end
+
     def submit_global_metrics
       @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
       @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
       @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
-      @cwb.submit_metric('gcc-version', timestamp, gcc_version)
-      @cwb.submit_metric('sysbench/version', timestamp, sysbench_version)
-      @cwb.submit_metric('fio/version', timestamp, fio_version)
-      @cwb.submit_metric('stressng/version', timestamp, stressng_version)
+      @cwb.submit_metric('gcc-version', timestamp, `gcc --version | head -n 1`)
+      @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`)
+      @cwb.submit_metric('fio/version', timestamp, `fio --version`)
+      @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`)
     end
 
     private
@@ -42,6 +50,10 @@ module Cwb
         @cwb.deep_fetch('rmit-combined', 'repetitions')
       end
 
+      def inter_benchmark_sleep
+        @cwb.deep_fetch('rmit-combined', 'inter_benchmark_sleep')
+      end
+
       def cpu_model_name
         @cwb.deep_fetch('cpu', '0', 'model_name')
       end
@@ -52,22 +64,6 @@ module Cwb
 
       def node_ram_in_kB
         @cwb.deep_fetch('memory', 'total')
-      end
-
-      def sysbench_version
-        `sysbench --version`
-      end
-
-      def fio_version
-        `fio --version`
-      end
-
-      def stressng_version
-        `stress-ng --version`
-      end
-
-      def gcc_version
-        `gcc --version | head -n 1`
       end
 
       def timestamp

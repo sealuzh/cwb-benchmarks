@@ -1,4 +1,5 @@
 default['rmit-combined']['repetitions'] = 3
+default['rmit-combined']['inter_benchmark_sleep'] = 0 # seconds
 
 ### Installation
 # Version of FIO. Only relevant for installation from source code.
