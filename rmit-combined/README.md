@@ -16,6 +16,7 @@ See `attributes/default.rb`
 | cpu-cores                    | number of cores        | nominal       |
 | ram-total                    | total ram in kb        | nominal       |
 | benchmark-order              | ordered benchmark list | nominal       |
+| gcc-version                  | version number         | nominal       |
 | sysbench/version             | version number         | nominal       |
 | sysbench/cpu-single-thread   | execution time         | nominal       |
 | sysbench/cpu-multi-thread    | execution time         | nominal       |
@@ -53,6 +54,8 @@ See `attributes/default.rb`
 | fio/8k-rand-write-latency | microseconds | nominal |
 | fio/8k-rand-write-latency-95-percentile | microseconds | nominal |
 | fio/8k-rand-write-disk-util | utilization | nominal |
+| stressng/version | version number | nominal |
+
 
 **bold-written** metrics are mandatory
 

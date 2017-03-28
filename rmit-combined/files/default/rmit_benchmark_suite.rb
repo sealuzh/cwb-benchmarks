@@ -17,8 +17,10 @@ module Cwb
       @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
       @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
       @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
+      @cwb.submit_metric('gcc-version', timestamp, gcc_version)
       @cwb.submit_metric('sysbench/version', timestamp, sysbench_version)
       @cwb.submit_metric('fio/version', timestamp, fio_version)
+      @cwb.submit_metric('stressng/version', timestamp, stressng_version)
     end
 
     private
@@ -58,6 +60,14 @@ module Cwb
 
       def fio_version
         `fio --version`
+      end
+
+      def stressng_version
+        `stress-ng --version`
+      end
+
+      def gcc_version
+        `gcc --version | head -n 1`
       end
 
       def timestamp
