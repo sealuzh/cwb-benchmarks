@@ -55,7 +55,14 @@ See `attributes/default.rb`
 | fio/8k-rand-write-latency-95-percentile | microseconds | nominal |
 | fio/8k-rand-write-disk-util | utilization | nominal |
 | stressng/version | version number | nominal |
-
+| stressng/cpu-callfunc-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-double-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-euler-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-fibonacci-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-fft-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-int64-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-loop-bogo-ops | bogo operations per second | nominal |
+| stressng/cpu-matrixprod-bogo-ops | bogo operations per second | nominal |
 
 **bold-written** metrics are mandatory
 
