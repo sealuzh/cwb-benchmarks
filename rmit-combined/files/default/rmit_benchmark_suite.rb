@@ -1,4 +1,5 @@
 require 'cwb'
+require 'open3'
 
 module Cwb
   # Parent class: https://github.com/sealuzh/cwb/blob/master/lib/cwb/benchmark_suite.rb
@@ -29,7 +30,7 @@ module Cwb
       @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`)
       @cwb.submit_metric('fio/version', timestamp, `fio --version`)
       @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`)
-      @cwb.submit_metric('iperf/version', timestamp, `iperf --version`)
+      @cwb.submit_metric('iperf/version', timestamp, Open3.capture3('iperf --version')[1])
     end
 
     private
