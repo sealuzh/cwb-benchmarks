@@ -10,6 +10,7 @@ require 'fileutils'
 class Fio < Cwb::Benchmark
   def execute
     run('fio/4k-seq-write', seq_write_cmd)
+    cleanup_test_files
     run('fio/8k-rand-write', rand_read_cmd)
     cleanup_test_files
   end

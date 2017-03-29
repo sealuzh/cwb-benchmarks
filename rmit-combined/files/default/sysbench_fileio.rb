@@ -12,7 +12,9 @@ class SysbenchFileio < Cwb::Benchmark
   def execute
     @cwb.submit_metric('sysbench/fileio-file-total-size', timestamp, "#{file_total_size_gb}G")
     run('sysbench/fileio-1m-seq-write', seq_write_cmd)
+    cleanup_test_files
     run('sysbench/fileio-4k-rand-write', rand_write_cmd)
+    cleanup_test_files
     run('sysbench/fileio-4k-rand-read', rand_read_cmd, rand_read_prepare)
     cleanup_test_files
   end
