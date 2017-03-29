@@ -29,6 +29,7 @@ module Cwb
       @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`)
       @cwb.submit_metric('fio/version', timestamp, `fio --version`)
       @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`)
+      @cwb.submit_metric('iperf/version', timestamp, `iperf --version`)
     end
 
     private

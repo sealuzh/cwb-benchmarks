@@ -1,5 +1,13 @@
+# Attributed required in the helper need to be initialized first
+default['rmit-combined']['public_ip_query'] = 'wget http://ipecho.net/plain -O - -q'
+extend Hostname::Helpers
+default['rmit-combined']['public_host'] = guess_public_ip
+
 default['rmit-combined']['repetitions'] = 3
 default['rmit-combined']['inter_benchmark_sleep'] = 0 # seconds
+
+# Dynamic attributes
+default['rmit-combined']['load_generator'] = '172.31.10.209'
 
 ### Installation
 # Version of FIO. Only relevant for installation from source code.

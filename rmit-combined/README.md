@@ -68,6 +68,9 @@ See `attributes/default.rb`
 | stressng/network-icmp-flood-bogo-ops | bogo operations per second | nominal |
 | stressng/network-sockfd-bogo-ops | bogo operations per second | nominal |
 | stressng/network-udp-bogo-ops | bogo operations per second | nominal |
+| iperf/version | version number | nominal |
+| iperf/single_thread | bandwidth | nominal |
+| iperf/multi_thread | bandwidth | nominal |
 
 **bold-written** metrics are mandatory
 
