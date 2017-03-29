@@ -1,23 +1,28 @@
 require 'csv'
 require 'cwb'
+require 'open3'
 
 class WordpressBenchClient < Cwb::Benchmark
   def execute
     num_repetitions.times do
       run_scenario
     end
+    notify_completion
+    # Exit with success without bothering about notifyingthat the
+    # execution is finished because this would terminate the benchmark.
+    exit
   end
 
   def run_scenario
     delete_old_results
     create_properties_file
     cmd = runremote? ? run_cmd_remote : run_cmd
-    system(cmd)
-    fail 'JMeter exited with non-zero value' unless $?.success?
+    stdout, stderr, status = Open3.capture3(cmd)
+    raise "[wordpress-bench] #{stderr}" unless status.success?
     results = process_results
     @cwb.submit_metric(metric_name, timestamp, results[:average_response_time])
-    @cwb.submit_metric('num_failures', timestamp, results[:num_failures])
-    @cwb.submit_metric('failure_rate', timestamp, results[:failure_rate])
+    @cwb.submit_metric('wordpress-bench/num_failures', timestamp, results[:num_failures])
+    @cwb.submit_metric('wordpress-bench/failure_rate', timestamp, results[:failure_rate])
   end
 
   def delete_old_results
@@ -89,5 +94,20 @@ class WordpressBenchClient < Cwb::Benchmark
 
   def is_parent(row)
     row['label'].include?(' => ')
+  end
+
+  def notify_completion
+    server = TCPSocket.new(host, port)
+    line = server.gets
+    raise "[iperf/load-generator] Could not notify completion to #{host}:#{port}" if line.strip != 'OK'
+    server.close
+  end
+
+  def host
+    @cwb.deep_fetch('wordpress-bench','jmeter','properties','site')
+  end
+
+  def port
+    5678
   end
 end

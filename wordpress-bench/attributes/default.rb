@@ -1,5 +1,5 @@
 # Cloud WorkBench
-default['wordpress-bench']['metric_name'] = 'response_time'
+default['wordpress-bench']['metric_name'] = 'wordpress-bench/response_time'
 default['wordpress-bench']['num_repetitions'] = 1
 
 # Fake data generator
@@ -7,7 +7,7 @@ default['wordpress-bench']['500px_customer_key'] = ''
 default['wordpress-bench']['batch_size'] = 25
 
 # Load generator endpoint
-default['wordpress-bench']['load_generator'] = 'http://localhost'
+default['wordpress-bench']['load_generator'] = 'localhost'
 
 # Cookbook wherein the `test_plan.jmx` resides
 default['wordpress-bench']['test_plan_cookbook'] = 'wordpress-bench'

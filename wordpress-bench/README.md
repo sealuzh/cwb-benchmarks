@@ -23,10 +23,9 @@ Use the attribute `['wordpress-bench']['test_plan_cookbook']` to configure an al
 
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
-| **response_time**            | milliseconds      | ratio         |
-| num_failures                 | count             | ratio         |
-| failure_rate                 | ratio             | ratio         |
-| cpu                          | model-name        | nominal       |
+| **wordpress-bench/response_time** | milliseconds | nominal       |
+| wordpress-bench/num_failures | count             | nominal       |
+| wordpress-bench/failure_rate | ratio             | nominal       |
 
 **bold-written** metrics are mandatory
 
@@ -36,13 +35,12 @@ Add the `wordpress-bench` default recipe to your Chef configuration in the Vagra
 
 ```ruby
 config.vm.provision 'chef_client' do |chef|
-  chef.add_recipe 'wordpress-bench@2.0.0'  # Version is optional
+  chef.add_recipe 'wordpress-bench'
   chef.json =
   {
     'wordpress-bench' => {
-        'metric_name' => 'response_time',
         'num_repetitions' => 1,
-        'load_generator' => 'http://192.168.33.44',
+        'load_generator' => '192.168.33.44',
         # Used to generate sample images
         '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
         'jmeter' => {

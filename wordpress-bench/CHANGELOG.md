@@ -1,3 +1,9 @@
+# 2.1.0 (2017-03-29)
+
+* Use new notification scheme. Upon completed execution, the load-generator (i.e., `wordpress-bench-client.rb`) instance now notifies the server where Wordpress is installed that the load testing is completed using a TCP connection.
+* Remove `http://` prefix for load-generator config
+* Update testplan according to `wordpress-bench-test-plan` (see CHANGELOG up to `0.1.5` there)
+
 # 2.0.4 (2017-03-14)
 
 * Add support and docs for distributed testing mode
