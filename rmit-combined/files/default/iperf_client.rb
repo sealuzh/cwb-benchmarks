@@ -7,6 +7,9 @@ class IperfClient < Cwb::Benchmark
     run('single-thread', single_thread_cmd)
     run('multi-thread', multi_thread_cmd)
     notify_completion
+    # Exit with success without bothering about notifyingthat the
+    # execution is finished because this would terminate the benchmark.
+    exit
   end
 
   def run(method, cmd)
