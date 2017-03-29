@@ -2,6 +2,6 @@ require_relative "../helper"
 
 source "https://supermarket.chef.io"
 
-# local_cookbook "my-first-benchmark"
+local_cookbook "stop-services"
 
 metadata

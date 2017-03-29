@@ -2,6 +2,8 @@ DEPENDENCIES
   rmit-combined
     path: .
     metadata: true
+  stop-services
+    path: ../stop-services
 
 GRAPH
   apt (6.0.1)
@@ -16,7 +18,9 @@ GRAPH
     apt (~> 6.0.1)
     build-essential (~> 8.0.0)
     cwb (~> 0.1.0)
+    stop-services (~> 0.1.0)
   seven_zip (2.0.2)
     windows (>= 1.2.2)
+  stop-services (0.1.0)
   windows (3.0.2)
     ohai (>= 4.0.0)

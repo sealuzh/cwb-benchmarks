@@ -11,3 +11,8 @@ cwb_benchmark 'stressng-cpu'
 cwb_benchmark 'stressng-network'
 cwb_benchmark 'iperf'
 include_recipe 'rmit-combined::configure_remote_client'
+
+# Make sure that unnecessary services are stopped
+
+node.default['stop-services']['stop_list'] = %w(cron rsyslog atd)
+include_recipe 'stop-services'

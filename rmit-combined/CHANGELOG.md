@@ -1,6 +1,7 @@
 # 0.1.4 (2017-03-29)
 
 * Add iperf
+* Add stop-services
 
 # 0.1.3 (2017-03-28)
 
