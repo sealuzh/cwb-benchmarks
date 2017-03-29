@@ -1,6 +1,6 @@
 # 0.1.3 (2017-03-28)
 
-* Add stress-ng
+* Add stress-ng: cpu, network
 
 # 0.1.2 (2017-03-28)
 

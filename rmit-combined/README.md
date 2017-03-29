@@ -63,6 +63,11 @@ See `attributes/default.rb`
 | stressng/cpu-int64-bogo-ops | bogo operations per second | nominal |
 | stressng/cpu-loop-bogo-ops | bogo operations per second | nominal |
 | stressng/cpu-matrixprod-bogo-ops | bogo operations per second | nominal |
+| stressng/network | execution time | nominal |
+| stressng/network-epoll-bogo-ops | bogo operations per second | nominal |
+| stressng/network-icmp-flood-bogo-ops | bogo operations per second | nominal |
+| stressng/network-sockfd-bogo-ops | bogo operations per second | nominal |
+| stressng/network-udp-bogo-ops | bogo operations per second | nominal |
 
 **bold-written** metrics are mandatory
 

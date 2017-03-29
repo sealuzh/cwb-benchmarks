@@ -36,6 +36,6 @@ class StressngCpu < Cwb::Benchmark
 
   # bogo ops/s (real time)
   def extract_bogo_ops(string)
-    string[/stress-ng: info:  \[\d*\] cpu .* (\d*.\d*)       .*/, 1]
+    string[/stress-ng: info:  \[\d*\] cpu\s+(\d*.\d*)\s+(\d*.\d*)\s+(\d*.\d*)\s+(\d*.\d*)\s+(\d*.\d*)\s+(\d*.\d*)/, 5]
   end
 end
