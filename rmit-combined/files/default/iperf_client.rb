@@ -4,8 +4,8 @@ require 'socket'
 # Also see `iperf.rb`
 class IperfClient < Cwb::Benchmark
   def execute
-    run('single_thread', single_thread_cmd)
-    run('multi_thread', multi_thread_cmd)
+    run('single-thread', single_thread_cmd)
+    run('multi-thread', multi_thread_cmd)
     notify_completion
   end
 

@@ -69,8 +69,9 @@ See `attributes/default.rb`
 | stressng/network-sockfd-bogo-ops | bogo operations per second | nominal |
 | stressng/network-udp-bogo-ops | bogo operations per second | nominal |
 | iperf/version | version number | nominal |
-| iperf/single_thread | bandwidth | nominal |
-| iperf/multi_thread | bandwidth | nominal |
+| iperf/single-thread | bandwidth | nominal |
+| iperf/multi-thread | bandwidth | nominal |
+| md-sim | execution time | nominal |
 
 **bold-written** metrics are mandatory
 
