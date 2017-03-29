@@ -1,3 +1,7 @@
+# 1.0.0 (2017-03-29)
+
+* Add wordpress-bench
+
 # 0.1.4 (2017-03-29)
 
 * Add iperf

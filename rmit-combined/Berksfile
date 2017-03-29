@@ -3,5 +3,8 @@ require_relative "../helper"
 source "https://supermarket.chef.io"
 
 local_cookbook "stop-services"
+cookbook "wordpress", github: "joe4dev/wordpress"
+local_cookbook "wordpress-bench"
+local_cookbook "perfmon"
 
 metadata

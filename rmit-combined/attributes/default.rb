@@ -8,6 +8,9 @@ default['rmit-combined']['inter_benchmark_sleep'] = 0 # seconds
 
 # Dynamic attributes
 default['rmit-combined']['load_generator'] = '172.31.10.209'
+# Setting it here in the attributes makes sure that it is available when
+# `cwb` writes the `node.yml` config.
+default['wordpress-bench']['load_generator'] = node['rmit-combined']['load_generator']
 
 ### Installation
 # Version of FIO. Only relevant for installation from source code.

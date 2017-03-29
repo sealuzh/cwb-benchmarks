@@ -72,8 +72,9 @@ See `attributes/default.rb`
 | iperf/single-thread | bandwidth | nominal |
 | iperf/multi-thread | bandwidth | nominal |
 | md-sim | execution time | nominal |
-
-**bold-written** metrics are mandatory
+| wordpress-bench/response_time | milliseconds | nominal       |
+| wordpress-bench/num_failures | count             | nominal       |
+| wordpress-bench/failure_rate | ratio             | nominal       |
 
 ### rmit-combined::default
 
@@ -86,6 +87,7 @@ config.vm.provision 'cwb', type: 'chef_client' do |chef|
   {
     'rmit-combined' => {
         'repetitions' => 3,
+        'load_generator' => '172.31.10.209',
     },
   }
 end
