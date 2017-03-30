@@ -1,6 +1,7 @@
 require 'csv'
 require 'cwb'
 require 'open3'
+require 'socket'
 
 class WordpressBenchClient < Cwb::Benchmark
   def execute
@@ -108,6 +109,6 @@ class WordpressBenchClient < Cwb::Benchmark
   end
 
   def port
-    5678
+    5679
   end
 end

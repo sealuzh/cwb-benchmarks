@@ -1,6 +1,7 @@
 require 'cwb'
 require 'faraday'
 require 'faraday_middleware'
+require 'socket'
 
 class WordpressBench < Cwb::Benchmark
   def execute
@@ -36,7 +37,7 @@ class WordpressBench < Cwb::Benchmark
   end
 
   def port
-    5678
+    5679
   end
 
   def start_load_generator
