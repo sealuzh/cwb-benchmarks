@@ -30,6 +30,7 @@ class WordpressBench < Cwb::Benchmark
     session = server.accept
     session.puts 'OK'
     session.close
+    server.close
   end
 
   def host
