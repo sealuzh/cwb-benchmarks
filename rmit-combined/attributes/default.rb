@@ -4,10 +4,10 @@ extend Hostname::Helpers
 default['rmit-combined']['public_host'] = guess_public_ip
 
 default['rmit-combined']['repetitions'] = 3
-default['rmit-combined']['inter_benchmark_sleep'] = 0 # seconds
+default['rmit-combined']['inter_benchmark_sleep'] = 5 # seconds
 
 # Dynamic attributes
-default['rmit-combined']['load_generator'] = '172.31.10.209'
+default['rmit-combined']['load_generator'] = '172.31.10.151'
 # Setting it here in the attributes makes sure that it is available when
 # `cwb` writes the `node.yml` config.
 default['wordpress-bench']['load_generator'] = node['rmit-combined']['load_generator']

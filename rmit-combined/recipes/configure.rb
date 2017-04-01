@@ -21,10 +21,10 @@ def config_jmeter(properties)
 end
 
 props = {
-  'target_concurrency' => 10,
-  'ramp_up_time' => 0,
-  'ramp_up_steps_count' => 1,
-  'hold_target_rate_time' => 1,
+  'target_concurrency' => 100,
+  'ramp_up_time' => 5,
+  'ramp_up_steps_count' => 10,
+  'hold_target_rate_time' => 3,
   'forcePerfmonFile' => true,
 }
 config_jmeter(props)
