@@ -8,6 +8,8 @@ require 'fileutils'
 # * http://blog.siphos.be/2013/04/comparing-performance-with-sysbench/
 #   * Database: rand read (for select data) + seq write (transaction logs)
 #   * File server: rand read/write
+# Make sure your instance has enough disk space attached. An example how to increase disk space on AWS can be found here:
+# https://github.com/cruskit/vagrant-ghost/blob/master/Vagrantfile
 class SysbenchFileio < Cwb::Benchmark
   def execute
     @cwb.submit_metric('sysbench/fileio-file-total-size', timestamp, "#{file_total_size_gb}G")
@@ -21,7 +23,7 @@ class SysbenchFileio < Cwb::Benchmark
 
   def run(name, cmd, prepare = 'true')
     o, s = Open3.capture2(prepare)
-    raise "[#{name}-prepare] #{stderr}" unless s.success?
+    raise "[#{name}-prepare] #{s}" unless s.success?
 
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[#{name}] #{stderr}" unless status.success?
@@ -62,7 +64,7 @@ class SysbenchFileio < Cwb::Benchmark
   # Recommended to be 2x the amount of RAM to avoid caching
   # Example: given 900 MB RAM, file_total_size_gb == 2
   def file_total_size_gb
-    ((total_ram_mb * 2).to_f / 1024).ceil
+    ((total_ram_mb.to_f * 2).to_f / 1024).ceil
   end
 
   def total_ram_mb

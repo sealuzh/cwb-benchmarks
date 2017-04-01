@@ -1,5 +1,4 @@
 # Cloud WorkBench
-default['wordpress-bench']['metric_name'] = 'wordpress-bench/response_time'
 default['wordpress-bench']['num_repetitions'] = 1
 
 # Fake data generator

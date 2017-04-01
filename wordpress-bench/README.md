@@ -21,13 +21,20 @@ Use the attribute `['wordpress-bench']['test_plan_cookbook']` to configure an al
 
 ### Cloud WorkBench
 
-| Metric Name                  | Unit              | Scale Type    |
-| ---------------------------- | ----------------- | ------------- |
-| **wordpress-bench/response_time** | milliseconds | nominal       |
-| wordpress-bench/num_failures | count             | nominal       |
-| wordpress-bench/failure_rate | ratio             | nominal       |
-
-**bold-written** metrics are mandatory
+| Metric Name                      | Unit           | Scale Type    |
+| -------------------------------- | -------------- | ------------- |
+| wordpress-bench/s1-response_time | milliseconds   | nominal       |
+| wordpress-bench/s1-throughput    | operations per second | nominal       |
+| wordpress-bench/s1-num_failures  | count          | nominal       |
+| wordpress-bench/s1-failure_rate  | ratio          | nominal       |
+| wordpress-bench/s2-response_time | milliseconds   | nominal       |
+| wordpress-bench/s2-throughput    | operations per second | nominal       |
+| wordpress-bench/s2-num_failures  | count          | nominal       |
+| wordpress-bench/s2-failure_rate  | ratio          | nominal       |
+| wordpress-bench/s3-response_time | milliseconds   | nominal       |
+| wordpress-bench/s3-throughput    | operations per second | nominal       |
+| wordpress-bench/s3-num_failures  | count          | nominal       |
+| wordpress-bench/s3-failure_rate  | ratio          | nominal       |
 
 ### wordpress-bench::default
 

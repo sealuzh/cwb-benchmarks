@@ -72,9 +72,18 @@ See `attributes/default.rb`
 | iperf/single-thread | bandwidth | nominal |
 | iperf/multi-thread | bandwidth | nominal |
 | md-sim | execution time | nominal |
-| wordpress-bench/response_time | milliseconds | nominal       |
-| wordpress-bench/num_failures | count             | nominal       |
-| wordpress-bench/failure_rate | ratio             | nominal       |
+| wordpress-bench/s1-response_time | milliseconds   | nominal       |
+| wordpress-bench/s1-throughput    | operations per second | nominal |
+| wordpress-bench/s1-num_failures  | count          | nominal       |
+| wordpress-bench/s1-failure_rate  | ratio          | nominal       |
+| wordpress-bench/s2-response_time | milliseconds   | nominal       |
+| wordpress-bench/s2-throughput    | operations per second | nominal |
+| wordpress-bench/s2-num_failures  | count          | nominal       |
+| wordpress-bench/s2-failure_rate  | ratio          | nominal       |
+| wordpress-bench/s3-response_time | milliseconds   | nominal       |
+| wordpress-bench/s3-throughput    | operations per second | nominal |
+| wordpress-bench/s3-num_failures  | count          | nominal       |
+| wordpress-bench/s3-failure_rate  | ratio          | nominal       |
 
 ### rmit-combined::default
 
