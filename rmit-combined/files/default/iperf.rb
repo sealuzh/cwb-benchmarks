@@ -47,7 +47,7 @@ class Iperf < Cwb::Benchmark
 
   def run_sh(cmd)
     success = system(cmd)
-    raise "[iperf] #{stderr}" unless success
+    raise "[iperf] Failed to start/stop iperf server using: #{cmd}" unless success
   end
 
   def start_load_generator
