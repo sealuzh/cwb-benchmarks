@@ -26,11 +26,11 @@ module Cwb
       @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
       @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
       @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
-      @cwb.submit_metric('gcc-version', timestamp, `gcc --version | head -n 1`)
-      @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`)
-      @cwb.submit_metric('fio/version', timestamp, `fio --version`)
-      @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`)
-      @cwb.submit_metric('iperf/version', timestamp, Open3.capture3('iperf --version')[1])
+      @cwb.submit_metric('gcc-version', timestamp, `gcc --version | head -n 1`.strip)
+      @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`.strip)
+      @cwb.submit_metric('fio/version', timestamp, `fio --version`.strip)
+      @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`.strip)
+      @cwb.submit_metric('iperf/version', timestamp, Open3.capture3('iperf --version')[1].strip)
     end
 
     private
