@@ -6,7 +6,8 @@ module Cwb
   class RmitBenchmarkSuite < Cwb::BenchmarkSuite
     def execute_suite(cwb_benchmarks)
       submit_global_metrics
-      rmit_benchmarks = rmit_list(cwb_benchmarks)
+      filtered_benchmarks = filtered_list(cwb_benchmarks)
+      rmit_benchmarks = rmit_list(filtered_benchmarks)
       @cwb.submit_metric('benchmark/order', timestamp, rmit_benchmarks.map(&:class).to_s)
       execute_all(rmit_benchmarks)
       @cwb.notify_finished_execution
@@ -41,6 +42,30 @@ module Cwb
 
     private
 
+      def filtered_list(list)
+        filtered_v1 = include_filter(list)
+        filtered_v2 = exclude_filter(filtered_v1)
+        filtered_v2
+      end
+
+      def include_filter(list)
+        include_list = parse_flag_list(includes)
+        if include_list.empty?
+          list
+        else
+          list.select { |item| include_list.include?(item.class.to_s) }
+        end
+      end
+
+      def exclude_filter(list)
+        exclude_list = parse_flag_list(excludes)
+        if exclude_list.empty?
+          list
+        else
+          list.select { |item| !exclude_list.include?(item.class.to_s) }
+        end
+      end
+
       # Reorders a list to follow the Randomized Multiple Interleaved Trials (RMIT) methodology
       # described in the paper: Conducting Repeatable Experiments in Highly Variable Cloud Computing Environments
       # A. Abedi and T. Brecht (2017)
@@ -52,6 +77,23 @@ module Cwb
         repeated_list = []
         repetitions.times { repeated_list.concat list }
         repeated_list
+      end
+
+      def includes
+        @cwb.deep_fetch('rmit-combined', 'includes')
+      end
+
+      def excludes
+        @cwb.deep_fetch('rmit-combined', 'excludes')
+      end
+
+      # Example: parse_flag_list({'SysbenchCpu' => true, 'Wordpress-Bench' => false}) = ['SysbenchCpu']
+      def parse_flag_list(flag_set)
+        list = []
+        flag_set.each do |key, flag|
+          list << key if flag
+        end
+        list
       end
 
       def repetitions

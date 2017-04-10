@@ -6,6 +6,11 @@ default['rmit-combined']['public_host'] = guess_public_ip
 default['rmit-combined']['repetitions'] = 3
 default['rmit-combined']['inter_benchmark_sleep'] = 5 # seconds
 
+# Example: ['rmit-combined']['includes']['SysbenchCpu'] = true
+default['rmit-combined']['includes'] = {} # all by default
+# Example: ['rmit-combined']['excludes']['WordpressBench'] = true
+default['rmit-combined']['excludes'] = {} # none by default
+
 # Dynamic attributes
 default['rmit-combined']['load_generator'] = '172.31.10.151'
 # Setting it here in the attributes makes sure that it is available when
