@@ -85,7 +85,7 @@ class WordpressBenchClient < Cwb::Benchmark
     results = {
       response_time: (total_time.to_f / num_requests), # in ms
       num_failures: num_failures, # count
-      failure_rate: (num_failures.to_f / total_time), # in %
+      failure_rate: (num_failures.to_f / total_time).round(4), # in %
       throughput: num_requests.to_f / (total_time.to_f / 1000) # in seconds
     }
   end
