@@ -1,6 +1,7 @@
 require 'cwb'
 require 'open3'
 require 'fileutils'
+require 'benchmark'
 
 # Guidance on Sysbench Fileio Tests:
 # * https://wiki.mikejung.biz/Sysbench#Sysbench_Fileio_Options
@@ -21,16 +22,25 @@ class SysbenchFileio < Cwb::Benchmark
     cleanup_test_files
   end
 
-  def run(name, cmd, prepare = 'true')
-    o, s = Open3.capture2(prepare)
-    raise "[#{name}-prepare] #{s}" unless s.success?
+  def run(name, cmd, prepare_cmd = 'true')
+    run_measured_prepare(name, prepare_cmd)
 
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[#{name}] #{stderr}" unless status.success?
-    @cwb.submit_metric(name, timestamp, extract(stdout))
+    @cwb.submit_metric("#{name}-duration", timestamp, extract_duration(stdout))
     @cwb.submit_metric("#{name}-throughput", timestamp, extract_throughput(stdout))
     @cwb.submit_metric("#{name}-latency", timestamp, extract_latency(stdout))
     @cwb.submit_metric("#{name}-latency-95-percentile", timestamp, extract_latency_percentile(stdout))
+  end
+
+  def run_measured_prepare(name, prepare_cmd)
+    prepare_duration = Benchmark.realtime { run_prepare(name, prepare_cmd) }.round(2)
+    @cwb.submit_metric("#{name}-prepare-duration", timestamp, prepare_duration) if prepare_cmd != 'true'
+  end
+
+  def run_prepare(name, prepare_cmd)
+    o, s = Open3.capture2(prepare_cmd)
+    raise "[#{name}-prepare] #{s}" unless s.success?
   end
 
   def seq_write_cmd
@@ -75,7 +85,7 @@ class SysbenchFileio < Cwb::Benchmark
     @cwb.deep_fetch('memory', 'total')
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/total time:\s*(\d+\.\d+s)/, 1]
   end
 

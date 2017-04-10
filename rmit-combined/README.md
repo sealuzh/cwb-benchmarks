@@ -10,80 +10,98 @@ See `attributes/default.rb`
 
 ### Cloud WorkBench
 
-| Metric Name                  | Unit                   | Scale Type    |
-| ---------------------------- | ---------------------- | ------------- |
-| cpu-model                    | model name             | nominal       |
-| cpu-cores                    | number of cores        | nominal       |
-| ram-total                    | total ram in kb        | nominal       |
-| benchmark-order              | ordered benchmark list | nominal       |
-| gcc-version                  | version number         | nominal       |
-| sysbench/version             | version number         | nominal       |
-| sysbench/cpu-single-thread   | execution time         | nominal       |
-| sysbench/cpu-multi-thread    | execution time         | nominal       |
-| sysbench/memory-default-block-size | execution time   | nominal       |
-| sysbench/memory-large-block-size   | execution time   | nominal       |
-| sysbench/memory-default-block-size-throughput | throughput       | nominal       |
-| sysbench/memory-large-block-size-throughput   | throughput       | nominal       |
-| sysbench/threads-1           | execution time         | nominal       |
-| sysbench/threads-128         | execution time         | nominal       |
-| sysbench/threads-1-latency   | average latency        | nominal       |
-| sysbench/threads-128-latency | average latency        | nominal       |
-| sysbench/mutex               | execution time         | nominal       |
-| sysbench/mutex-latency       | average latency        | nominal       |
-| sysbench/fileio-file-total-size | GB                  | nominal       |
-| sysbench/fileio-1m-seq-write | execution time         | nominal       |
-| sysbench/fileio-1m-seq-write-throughput | throughput  | nominal       |
-| sysbench/fileio-1m-seq-write-latency | average latency | nominal |
-| sysbench/fileio-1m-seq-write-latency-95-percentile  | 95% latency percentile | nominal |
-| sysbench/fileio-4k-rand-write | execution time | nominal |
-| sysbench/fileio-4k-rand-write-throughput  | throughput | nominal |
-| sysbench/fileio-4k-rand-write-latency | average latency | nominal |
-| sysbench/fileio-4k-rand-write-latency-95-percentile | 95% latency percentile | nominal |
-| sysbench/fileio-4k-rand-read  | execution time | nominal |
-| sysbench/fileio-4k-rand-read-throughput | throughput | nominal |
-| sysbench/fileio-4k-rand-read-latency  | average latency | nominal |
-| sysbench/fileio-4k-rand-read-latency-95-percentile  | 95% latency percentile | nominal |
-| fio/version                  | version number         | nominal       |
-| fio/4k-seq-write-bandwidth | bandwidth | nominal |
-| fio/4k-seq-write-iops | iops | nominal |
-| fio/4k-seq-write-latency | microseconds | nominal |
-| fio/4k-seq-write-latency-95-percentile | microseconds | nominal |
-| fio/4k-seq-write-disk-util | utilization | nominal |
-| fio/8k-rand-write-bandwidth | bandwidth | nominal |
-| fio/8k-rand-write-iops | iops | nominal |
-| fio/8k-rand-write-latency | microseconds | nominal |
-| fio/8k-rand-write-latency-95-percentile | microseconds | nominal |
-| fio/8k-rand-write-disk-util | utilization | nominal |
-| stressng/version | version number | nominal |
-| stressng/cpu-callfunc-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-double-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-euler-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-fibonacci-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-fft-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-int64-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-loop-bogo-ops | bogo operations per second | nominal |
-| stressng/cpu-matrixprod-bogo-ops | bogo operations per second | nominal |
-| stressng/network | execution time | nominal |
-| stressng/network-epoll-bogo-ops | bogo operations per second | nominal |
-| stressng/network-icmp-flood-bogo-ops | bogo operations per second | nominal |
-| stressng/network-sockfd-bogo-ops | bogo operations per second | nominal |
-| stressng/network-udp-bogo-ops | bogo operations per second | nominal |
-| iperf/version | version number | nominal |
-| iperf/single-thread | bandwidth | nominal |
-| iperf/multi-thread | bandwidth | nominal |
-| md-sim | execution time | nominal |
-| wordpress-bench/s1-response_time | milliseconds   | nominal       |
-| wordpress-bench/s1-throughput    | operations per second | nominal |
-| wordpress-bench/s1-num_failures  | count          | nominal       |
-| wordpress-bench/s1-failure_rate  | ratio          | nominal       |
-| wordpress-bench/s2-response_time | milliseconds   | nominal       |
-| wordpress-bench/s2-throughput    | operations per second | nominal |
-| wordpress-bench/s2-num_failures  | count          | nominal       |
-| wordpress-bench/s2-failure_rate  | ratio          | nominal       |
-| wordpress-bench/s3-response_time | milliseconds   | nominal       |
-| wordpress-bench/s3-throughput    | operations per second | nominal |
-| wordpress-bench/s3-num_failures  | count          | nominal       |
-| wordpress-bench/s3-failure_rate  | ratio          | nominal       |
+* All metrics are `nominal` scale to unify the DB export process
+* Suffixes:
+  * duration: execution time (prepare-duration: preparation time)
+  * version: version number
+
+| Metric Name                  | Unit                   |
+| ---------------------------- | ---------------------- |
+| benchmark/execution-log | {benchmark class name}\_{START or END} |
+| benchmark/order | [{benchmark class name}, ...] |
+| fio/4k-seq-write-bandwidth | KiB/s |
+| fio/4k-seq-write-disk-util | % |
+| fio/4k-seq-write-duration | milliseconds |
+| fio/4k-seq-write-iops | iops |
+| fio/4k-seq-write-latency | microseconds |
+| fio/4k-seq-write-latency-95-percentile | microseconds |
+| fio/8k-rand-write-bandwidth | KiB/s |
+| fio/8k-rand-write-disk-util | % |
+| fio/8k-rand-write-iops | iops |
+| fio/8k-rand-write-latency | microseconds |
+| fio/8k-rand-write-latency-95-percentile | microseconds |
+| fio/version | version number |
+| instance/cpu-cores | number of cores |
+| instance/cpu-model | model name |
+| instance/gcc-version | version number |
+| instance/ram-total | kB |
+| iperf/multi-thread-bandwidth | Mbits/sec or Gbits/sec |
+| iperf/multi-thread-duration | seconds |
+| iperf/single-thread-bandwidth | Mbits/sec or Gbits/sec |
+| iperf/single-thread-duration | seconds |
+| iperf/version | version number |
+| md-sim-duration | seconds |
+| stressng/cpu-callfunc-bogo-ops | bogo operations per second |
+| stressng/cpu-callfunc-duration | seconds |
+| stressng/cpu-double-bogo-ops | bogo operations per second |
+| stressng/cpu-double-duration | seconds |
+| stressng/cpu-euler-bogo-ops | bogo operations per second |
+| stressng/cpu-euler-duration | seconds |
+| stressng/cpu-fft-bogo-ops | bogo operations per second |
+| stressng/cpu-fft-duration | seconds |
+| stressng/cpu-fibonacci-bogo-ops | bogo operations per second |
+| stressng/cpu-fibonacci-duration | seconds |
+| stressng/cpu-int64-bogo-ops | bogo operations per second |
+| stressng/cpu-int64-duration | seconds |
+| stressng/cpu-loop-bogo-ops | bogo operations per second |
+| stressng/cpu-loop-duration | seconds |
+| stressng/cpu-matrixprod-bogo-ops | bogo operations per second |
+| stressng/cpu-matrixprod-duration | seconds |
+| stressng/network-epoll-bogo-ops | bogo operations per second |
+| stressng/network-icmp-flood-bogo-ops | bogo operations per second |
+| stressng/network-sockfd-bogo-ops | bogo operations per second |
+| stressng/network-total-duration | seconds |
+| stressng/network-udp-bogo-ops | bogo operations per second |
+| stressng/version | version number |
+| sysbench/cpu-multi-thread-duration | seconds |
+| sysbench/cpu-single-thread-duration | seconds |
+| sysbench/fileio-1m-seq-write-duration | seconds |
+| sysbench/fileio-1m-seq-write-latency | milliseconds |
+| sysbench/fileio-1m-seq-write-latency-95-percentile | milliseconds |
+| sysbench/fileio-1m-seq-write-throughput | Mb/s |
+| sysbench/fileio-4k-rand-read-duration  | seconds |
+| sysbench/fileio-4k-rand-read-latency | milliseconds |
+| sysbench/fileio-4k-rand-read-latency-95-percentile | milliseconds |
+| sysbench/fileio-4k-rand-read-prepare-duration  | seconds |
+| sysbench/fileio-4k-rand-read-throughput | Mb/s |
+| sysbench/fileio-4k-rand-write-duration | seconds |
+| sysbench/fileio-4k-rand-write-latency | milliseconds |
+| sysbench/fileio-4k-rand-write-latency-95-percentile | milliseconds |
+| sysbench/fileio-4k-rand-write-throughput | Mb/s |
+| sysbench/fileio-file-total-size | GB |
+| sysbench/memory-default-block-size-duration | seconds |
+| sysbench/memory-default-block-size-throughput | throughput (MB/s) |
+| sysbench/memory-large-block-size-duration | execution time (s) |
+| sysbench/memory-large-block-size-throughput | throughput (MB/s) |
+| sysbench/mutex-duration | seconds |
+| sysbench/mutex-latency | milliseconds |
+| sysbench/threads-1-duration | seconds |
+| sysbench/threads-1-latency | milliseconds |
+| sysbench/threads-128-duration | seconds |
+| sysbench/threads-128-latency | milliseconds |
+| sysbench/version | version number |
+| wordpress-bench/s1-failure_rate  | ratio |
+| wordpress-bench/s1-num_failures  | count |
+| wordpress-bench/s1-response_time | milliseconds |
+| wordpress-bench/s1-throughput    | operations per second |
+| wordpress-bench/s2-failure_rate  | ratio |
+| wordpress-bench/s2-num_failures  | count |
+| wordpress-bench/s2-response_time | milliseconds |
+| wordpress-bench/s2-throughput    | operations per second |
+| wordpress-bench/s3-failure_rate  | ratio |
+| wordpress-bench/s3-num_failures  | count |
+| wordpress-bench/s3-response_time | milliseconds |
+| wordpress-bench/s3-throughput    | operations per second |
 
 ### rmit-combined::default
 

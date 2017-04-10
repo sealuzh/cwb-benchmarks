@@ -18,7 +18,7 @@ class StressngCpu < Cwb::Benchmark
   def run(method)
     stdout, stderr, status = Open3.capture3(cmd(method))
     raise "[stressng/cpu-#{method}] #{stderr}" unless status.success?
-    @cwb.submit_metric("stressng/cpu-#{method}", timestamp, extract(stderr))
+    @cwb.submit_metric("stressng/cpu-#{method}-duration", timestamp, extract_duration(stderr))
     @cwb.submit_metric("stressng/cpu-#{method}-bogo-ops", timestamp, extract_bogo_ops(stderr))
   end
 
@@ -30,7 +30,7 @@ class StressngCpu < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/stress-ng: info:  \[\d*\] successful run completed in (\d*.\d*s)/, 1]
   end
 

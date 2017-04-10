@@ -7,7 +7,7 @@ class StressngNetwork < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(cmd(exclude))
     raise "[stressng/network] #{stderr}" unless status.success?
-    @cwb.submit_metric("stressng/network", timestamp, extract(stderr))
+    @cwb.submit_metric("stressng/network-total-duration", timestamp, extract_duration(stderr))
     methods.each do |method|
       @cwb.submit_metric("stressng/network-#{method}-bogo-ops", timestamp, extract_bogo_ops(stderr, method))
     end
@@ -37,7 +37,7 @@ class StressngNetwork < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/stress-ng: info:  \[\d*\] successful run completed in (\d*.\d*s)/, 1]
   end
 

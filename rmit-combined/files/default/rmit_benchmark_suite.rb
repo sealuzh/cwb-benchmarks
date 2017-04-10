@@ -7,7 +7,7 @@ module Cwb
     def execute_suite(cwb_benchmarks)
       submit_global_metrics
       rmit_benchmarks = rmit_list(cwb_benchmarks)
-      @cwb.submit_metric('benchmark-order', timestamp, rmit_benchmarks.map(&:class).to_s)
+      @cwb.submit_metric('benchmark/order', timestamp, rmit_benchmarks.map(&:class).to_s)
       execute_all(rmit_benchmarks)
       @cwb.notify_finished_execution
     rescue => error
@@ -17,16 +17,22 @@ module Cwb
 
     def execute_all(cwb_benchmarks)
       cwb_benchmarks.each do |cwb_benchmark|
-        cwb_benchmark.execute_in_working_dir
-        sleep inter_benchmark_sleep
+        execute_single(cwb_benchmark)
       end
     end
 
+    def execute_single(cwb_benchmark)
+      @cwb.submit_metric('benchmark/execution-log', timestamp, "#{cwb_benchmark.class}_START")
+      cwb_benchmark.execute_in_working_dir
+      @cwb.submit_metric('benchmark/execution-log', timestamp, "#{cwb_benchmark.class}_END")
+      sleep inter_benchmark_sleep
+    end
+
     def submit_global_metrics
-      @cwb.submit_metric('cpu-model', timestamp, cpu_model_name)
-      @cwb.submit_metric('cpu-cores', timestamp, cpu_cores)
-      @cwb.submit_metric('ram-total', timestamp, node_ram_in_kB)
-      @cwb.submit_metric('gcc-version', timestamp, `gcc --version | head -n 1`.strip)
+      @cwb.submit_metric('instance/cpu-model', timestamp, cpu_model_name)
+      @cwb.submit_metric('instance/cpu-cores', timestamp, cpu_cores)
+      @cwb.submit_metric('instance/ram-total', timestamp, node_ram_in_kB)
+      @cwb.submit_metric('instance/gcc-version', timestamp, `gcc --version | head -n 1`.strip)
       @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`.strip)
       @cwb.submit_metric('fio/version', timestamp, `fio --version`.strip)
       @cwb.submit_metric('stressng/version', timestamp, `stress-ng --version`.strip)

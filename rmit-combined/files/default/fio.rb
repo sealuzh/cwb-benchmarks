@@ -18,7 +18,7 @@ class Fio < Cwb::Benchmark
   def run(name, cmd)
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[#{name}] #{stderr}" unless status.success?
-    @cwb.submit_metric(name, timestamp, extract(stdout))
+    @cwb.submit_metric("#{name}-duration", timestamp, extract_duration(stdout))
     @cwb.submit_metric("#{name}-bandwidth", timestamp, extract_throughput(stdout))
     @cwb.submit_metric("#{name}-iops", timestamp, extract_iops(stdout))
     @cwb.submit_metric("#{name}-latency", timestamp, extract_latency(stdout))
@@ -46,7 +46,7 @@ class Fio < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[regex, 3]
   end
 

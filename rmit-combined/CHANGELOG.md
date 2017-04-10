@@ -1,3 +1,8 @@
+# 1.1.0 (2017-04-10)
+
+* Unify metric names
+* Add additional metrics to track the total time and execution progress
+
 # 1.0.0 (2017-03-29)
 
 * Add wordpress-bench

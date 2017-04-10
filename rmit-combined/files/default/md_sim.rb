@@ -9,7 +9,7 @@ class MdSim < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[md-sim] #{stderr}" unless status.success?
-    @cwb.submit_metric("md-sim", timestamp, extract(stdout))
+    @cwb.submit_metric("md-sim-duration", timestamp, extract(stdout))
   end
 
   def cmd
@@ -21,6 +21,7 @@ class MdSim < Cwb::Benchmark
   end
 
   # Varghese et. al. use 10_000 but that might take ~5h to complete
+  # 1_000 takes ~8' on a 1 core `m3.medium` or ~2.6' on a 2 core `m3.large` aws instance
   def np
     1_000
   end

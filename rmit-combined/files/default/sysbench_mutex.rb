@@ -7,7 +7,7 @@ class SysbenchMutex < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(mutex_cmd)
     raise "[sysbench/mutex] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/mutex', timestamp, extract(stdout))
+    @cwb.submit_metric('sysbench/mutex-duration', timestamp, extract_duration(stdout))
     @cwb.submit_metric('sysbench/mutex-latency', timestamp, extract_latency(stdout))
   end
 
@@ -19,7 +19,7 @@ class SysbenchMutex < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/total time:\s*(\d+\.\d+s)/, 1]
   end
 

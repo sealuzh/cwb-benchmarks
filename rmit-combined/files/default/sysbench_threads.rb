@@ -8,12 +8,12 @@ class SysbenchThreads < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(threads_cmd(1))
     raise "[sysbench/threads-1] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/threads-1', timestamp, extract(stdout))
+    @cwb.submit_metric('sysbench/threads-1-duration', timestamp, extract_duration(stdout))
     @cwb.submit_metric('sysbench/threads-1-latency', timestamp, extract_latency(stdout))
 
     stdout, stderr, status = Open3.capture3(threads_cmd(128))
     raise "[sysbench/threads-128] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/threads-128', timestamp, extract(stdout))
+    @cwb.submit_metric('sysbench/threads-128-duration', timestamp, extract_duration(stdout))
     @cwb.submit_metric('sysbench/threads-128-latency', timestamp, extract_latency(stdout))
   end
 
@@ -25,7 +25,7 @@ class SysbenchThreads < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/total time:\s*(\d+\.\d+s)/, 1]
   end
 

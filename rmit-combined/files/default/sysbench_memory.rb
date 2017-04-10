@@ -8,12 +8,12 @@ class SysbenchMemory < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(default_block_size_cmd)
     raise "[sysbench/memory-default-block-size] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/memory-default-block-size', timestamp, extract(stdout))
+    @cwb.submit_metric('sysbench/memory-default-block-size-duration', timestamp, extract_duration(stdout))
     @cwb.submit_metric('sysbench/memory-default-block-size-throughput', timestamp, extract_throughput(stdout))
 
     stdout, stderr, status = Open3.capture3(large_block_size_cmd)
     raise "[sysbench/memory-large-block-size] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/memory-large-block-size', timestamp, extract(stdout))
+    @cwb.submit_metric('sysbench/memory-large-block-size-duration', timestamp, extract_duration(stdout))
     @cwb.submit_metric('sysbench/memory-large-block-size-throughput', timestamp, extract_throughput(stdout))
   end
 
@@ -29,7 +29,7 @@ class SysbenchMemory < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_duration(string)
     string[/total time:\s*(\d+\.\d+s)/, 1]
   end
 

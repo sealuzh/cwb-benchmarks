@@ -15,15 +15,21 @@ class IperfClient < Cwb::Benchmark
   def run(method, cmd)
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[iperf/load-generator-#{method}] #{stderr}" unless status.success?
-    @cwb.submit_metric("iperf/#{method}", timestamp, extract(stdout))
+    @cwb.submit_metric("iperf/#{method}-duration", timestamp, duration)
+    @cwb.submit_metric("iperf/#{method}-bandwidth", timestamp, extract_bandwidth(stdout))
   end
 
   def single_thread_cmd
-    "iperf -c #{host} -l 128k -t 30"
+    "iperf -c #{host} -l 128k -t #{duration}"
   end
 
   def multi_thread_cmd
-    "iperf -c #{host} -l 128k -t 30 -P #{cpu_cores}"
+    "iperf -c #{host} -l 128k -t #{duration} -P #{cpu_cores}"
+  end
+
+  # in seconds
+  def duration
+    30
   end
 
   def cpu_cores
@@ -53,7 +59,7 @@ class IperfClient < Cwb::Benchmark
     Time.now.to_i
   end
 
-  def extract(string)
+  def extract_bandwidth(string)
     string.lines.last[/(\d*.\d* \w+\/sec)/, 1]
   end
 end
