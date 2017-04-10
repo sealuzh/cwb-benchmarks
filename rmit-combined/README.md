@@ -4,7 +4,7 @@ This benchmark implements the `Randomized Multiple Interleaved Trials (RMIT)` me
 
 ## Attributes
 
-See `attributes/default.rb`
+See `attributes/default.rb` for all details or the Vagrantfile usage example below.
 
 ## Usage
 
@@ -109,7 +109,7 @@ Add the `rmit-combined` default recipe to your Chef configuration in the Vagrant
 
 ```ruby
 config.vm.provision 'cwb', type: 'chef_client' do |chef|
-  chef.add_recipe 'rmit-combined@0.1.0'  # Version is optional
+  chef.add_recipe 'rmit-combined'
   chef.json =
   {
     'rmit-combined' => {
