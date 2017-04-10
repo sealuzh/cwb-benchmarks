@@ -27,6 +27,7 @@ See `attributes/default.rb` for all details or the Vagrantfile usage example bel
 | fio/4k-seq-write-latency-95-percentile | microseconds |
 | fio/8k-rand-write-bandwidth | KiB/s |
 | fio/8k-rand-write-disk-util | % |
+| fio/8k-rand-write-duration | milliseconds |
 | fio/8k-rand-write-iops | iops |
 | fio/8k-rand-write-latency | microseconds |
 | fio/8k-rand-write-latency-95-percentile | microseconds |
@@ -113,8 +114,19 @@ config.vm.provision 'cwb', type: 'chef_client' do |chef|
   chef.json =
   {
     'rmit-combined' => {
-        'repetitions' => 3,
+        # MANDATORY
         'load_generator' => '172.31.10.209',
+        # OPTIONAL
+        'repetitions' => 3,
+        'inter_benchmark_sleep' => 5, # seconds
+        'includes' => {
+          'StressngNetwork' => true,
+          'StressngCpu' => true,
+          'SysbenchCpu' => false,
+        },
+        'excludes' => {
+          'StressngCpu' => true,
+        },
     },
   }
 end
