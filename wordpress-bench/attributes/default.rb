@@ -26,3 +26,11 @@ default['wordpress-bench']['jmeter']['properties']['hold_target_rate_time'] = 2 
 # HTTP defaults
 default['wordpress-bench']['jmeter']['properties']['connect_timeout'] = 10000
 default['wordpress-bench']['jmeter']['properties']['response_timeout'] = 40000
+
+### EXTERNAL
+# Setting here at attribute resolution time because of the dependent
+# attribute `default['wordpress']['url']` in the `wordpress` cookbook
+default['wordpress']['version'] = '4.7.1'
+default['wordpress']['url'] = "https://wordpress.org/wordpress-#{node['wordpress']['version']}.tar.gz"
+# # Make sure the dependent wordpress url gets updated
+# include_attribute 'wordpress::default'
