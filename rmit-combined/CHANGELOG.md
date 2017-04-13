@@ -1,3 +1,8 @@
+# 1.2.0 (2017-04-13)
+
+* Bump `wordpress-bench` dependency.
+    * **WARNING**: MUST provide a data set cookbook (example `test-plan-aws-pv`) and add it BEFORE `rmit-combined` in the Chef run list!
+
 # 1.1.0 (2017-04-10)
 
 * Unify metric names

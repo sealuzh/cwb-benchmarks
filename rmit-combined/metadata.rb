@@ -7,7 +7,7 @@ issues_url       'https://github.com/sealuzh/cwb-benchmarks/issues'
 license          'MIT'
 description      'Installs/Configures `rmit-combined` for cwb'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.1.0'
+version          '1.2.0'
 
 # CWB
 depends 'cwb', '~> 0.1.0'
