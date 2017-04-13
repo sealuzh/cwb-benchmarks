@@ -1,0 +1,7 @@
+DEPENDENCIES
+  test-plan-aws-hvm
+    path: .
+    metadata: true
+
+GRAPH
+  test-plan-aws-hvm (0.1.0)
