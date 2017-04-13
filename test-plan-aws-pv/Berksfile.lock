@@ -1,0 +1,7 @@
+DEPENDENCIES
+  test-plan-aws-pv
+    path: .
+    metadata: true
+
+GRAPH
+  test-plan-aws-pv (0.1.0)
