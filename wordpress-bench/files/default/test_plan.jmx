@@ -4575,7 +4575,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="87 /wp-content/uploads/2015/06/49a9f2d7-8f6f-37c2-84aa-f1bb67f7995e.jpg" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="87 /wp-content/uploads/2015/06/49a9f2d7-8f6f-37c2-84aa-f1bb67f7995e.jpg" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -4621,7 +4621,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="88 /wp-content/uploads/2015/06/b7bf2420-0c6f-3916-8d10-d3ebfe4e6e7b.jpg" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="88 /wp-content/uploads/2015/06/b7bf2420-0c6f-3916-8d10-d3ebfe4e6e7b.jpg" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -4667,7 +4667,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="71 /wp-content/uploads/2015/06/dbbb0034-5de1-35ef-90dc-e2e64e03789f.jpg" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="71 /wp-content/uploads/2015/06/dbbb0034-5de1-35ef-90dc-e2e64e03789f.jpg" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
@@ -6122,7 +6122,7 @@ See: http://stackoverflow.com/questions/35715562/perfmon-plugin-throwing-error-w
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="110 /wp-content/uploads/2015/06/5838bf87-4760-325c-9d2e-5167896ba1bd.jpg" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="110 /wp-content/uploads/2015/06/5838bf87-4760-325c-9d2e-5167896ba1bd.jpg" enabled="true">
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
