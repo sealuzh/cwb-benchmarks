@@ -21,20 +21,30 @@ Use the attribute `['wordpress-bench']['test_plan_cookbook']` to configure an al
 
 ### Cloud WorkBench
 
-| Metric Name                      | Unit           | Scale Type    |
-| -------------------------------- | -------------- | ------------- |
-| wordpress-bench/s1-response_time | milliseconds   | nominal       |
-| wordpress-bench/s1-throughput    | operations per second | nominal       |
-| wordpress-bench/s1-num_failures  | count          | nominal       |
-| wordpress-bench/s1-failure_rate  | ratio          | nominal       |
-| wordpress-bench/s2-response_time | milliseconds   | nominal       |
-| wordpress-bench/s2-throughput    | operations per second | nominal       |
-| wordpress-bench/s2-num_failures  | count          | nominal       |
-| wordpress-bench/s2-failure_rate  | ratio          | nominal       |
-| wordpress-bench/s3-response_time | milliseconds   | nominal       |
-| wordpress-bench/s3-throughput    | operations per second | nominal       |
-| wordpress-bench/s3-num_failures  | count          | nominal       |
-| wordpress-bench/s3-failure_rate  | ratio          | nominal       |
+* All metrics are `nominal` scale to unify the DB export process
+
+| Metric Name                      | Unit           |
+| -------------------------------- | -------------- |
+| wordpress-bench/s1-response_time | milliseconds   |
+| wordpress-bench/s1-throughput    | operations per second |
+| wordpress-bench/s1-num_failures  | count          |
+| wordpress-bench/s1-failure_rate  | ratio          |
+| wordpress-bench/s2-response_time | milliseconds   |
+| wordpress-bench/s2-throughput    | operations per second |
+| wordpress-bench/s2-num_failures  | count          |
+| wordpress-bench/s2-failure_rate  | ratio          |
+| wordpress-bench/s3-response_time | milliseconds   |
+| wordpress-bench/s3-throughput    | operations per second |
+| wordpress-bench/s3-num_failures  | count          |
+| wordpress-bench/s3-failure_rate  | ratio          |
+
+### Testplan migration
+
+See `files/default/update_testplan.rb`
+
+Whenever a new data set is created, the URLs of the image resources need to be migrated. Given a hostname of an instance running the target data set, the update script automatically rewrites the test plan URLs and yields a list of samplers to disable.
+
+Encapsulate the new `test_plan.jmx` into a cookbook and add it to the Chef run list BEFORE the wordpress benchmark. See `test-plan-aws-pv`.
 
 ### wordpress-bench::default
 
