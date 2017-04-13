@@ -1,3 +1,8 @@
+# 2.1.1 (2017-04-13)
+
+* Enable all samplers on `test_plan.jmx` to ease migration
+* Improve test plan updater documentation
+
 # 2.1.0 (2017-03-29)
 
 * Use new notification scheme. Upon completed execution, the load-generator (i.e., `wordpress-bench-client.rb`) instance now notifies the server where Wordpress is installed that the load testing is completed using a TCP connection.
