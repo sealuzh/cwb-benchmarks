@@ -1,3 +1,7 @@
+# 2.1.2 (2017-04-15)
+
+* Stop services in a delayed manner such that delayed restarts (e.g., apache2) do not start the service again at the end of the Chef run
+
 # 2.1.1 (2017-04-13)
 
 * Enable all samplers on `test_plan.jmx` to ease migration
