@@ -1,14 +1,14 @@
 require_relative '../files/default/sysbench_mutex'
 
 RSpec.describe 'SysbenchMutex' do
-  let(:sysbench) { SysbenchMutex.new }
-  let(:sample_result) { File.read('sysbench_mutex_stdout.txt') }
+  let(:bm) { SysbenchMutex.new }
+  let(:sample1) { File.read('sysbench_mutex_stdout1.txt') }
 
   it 'extracts the total time from the result' do
-    expect(sysbench.extract(sample_result)).to eq('2.3840s')
+    expect(bm.extract_duration(sample1)).to eq('2.3840s')
   end
 
   it 'extracts the average latency result' do
-    expect(sysbench.extract_latency(sample_result)).to eq('2383.86ms')
+    expect(bm.extract_latency(sample1)).to eq('2383.86ms')
   end
 end
