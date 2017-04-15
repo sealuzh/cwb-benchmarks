@@ -91,7 +91,7 @@ GRAPH
     selinux (~> 0.9.0)
     tar (~> 1.1.0)
     yum-mysql-community (>= 0.0.0)
-  wordpress-bench (2.1.1)
+  wordpress-bench (2.1.2)
     apt (>= 0.0.0)
     build-essential (>= 0.0.0)
     cwb (~> 0.1.0)
