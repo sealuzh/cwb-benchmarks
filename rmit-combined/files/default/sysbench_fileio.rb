@@ -90,7 +90,7 @@ class SysbenchFileio < Cwb::Benchmark
   end
 
   def extract_throughput(string)
-    string[/Total transferred .*  \((\d*.\d*Mb\/sec)\)/, 1]
+    string[/Total transferred .*  \((\d*.\d*\wb\/sec)\)/, 1]
   end
 
   def extract_latency(string)

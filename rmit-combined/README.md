@@ -78,7 +78,7 @@ See `attributes/default.rb` for all details or the Vagrantfile usage example bel
 | sysbench/fileio-4k-rand-write-duration | seconds |
 | sysbench/fileio-4k-rand-write-latency | milliseconds |
 | sysbench/fileio-4k-rand-write-latency-95-percentile | milliseconds |
-| sysbench/fileio-4k-rand-write-throughput | Mb/s |
+| sysbench/fileio-4k-rand-write-throughput | Mb/s or Kb/s |
 | sysbench/fileio-file-total-size | GB |
 | sysbench/memory-default-block-size-duration | seconds |
 | sysbench/memory-default-block-size-throughput | MB/s |
