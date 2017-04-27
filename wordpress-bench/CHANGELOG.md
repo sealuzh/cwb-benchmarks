@@ -1,3 +1,20 @@
+# 2.1.2 (2017-04-15)
+
+* Stop services in a delayed manner such that delayed restarts (e.g., apache2) do not start the service again at the end of the Chef run
+
+# 2.1.1 (2017-04-13)
+
+* Enable all samplers on `test_plan.jmx` to ease migration
+* Improve test plan updater documentation
+
+# 2.1.0 (2017-03-29)
+
+* Use new notification scheme. Upon completed execution, the load-generator (i.e., `wordpress-bench-client.rb`) instance now notifies the server where Wordpress is installed that the load testing is completed using a TCP connection.
+* Remove `http://` prefix for load-generator config
+* Update testplan according to `wordpress-bench-test-plan` (see CHANGELOG up to `0.1.5` there)
+* Submit metrics per scenario
+* Add `throughput` metric
+
 # 2.0.4 (2017-03-14)
 
 * Add support and docs for distributed testing mode

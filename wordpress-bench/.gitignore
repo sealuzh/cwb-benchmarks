@@ -3,6 +3,13 @@ files/default/jmeter.log
 files/default/node.yml
 files/default/results.csv
 files/default/test_plan.jtl
+files/default/scenario1-read-only.csv
+files/default/scenario2-read-and-search.csv
+files/default/scenario3-write-comment.csv
+files/default/perfmon.csv
+
+# Generated test plan (data set specific)
+files/default/test_plan_new.jmx
 
 # Ignore secret install folder
 /install/*

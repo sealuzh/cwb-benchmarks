@@ -21,14 +21,30 @@ Use the attribute `['wordpress-bench']['test_plan_cookbook']` to configure an al
 
 ### Cloud WorkBench
 
-| Metric Name                  | Unit              | Scale Type    |
-| ---------------------------- | ----------------- | ------------- |
-| **response_time**            | milliseconds      | ratio         |
-| num_failures                 | count             | ratio         |
-| failure_rate                 | ratio             | ratio         |
-| cpu                          | model-name        | nominal       |
+* All metrics are `nominal` scale to unify the DB export process
 
-**bold-written** metrics are mandatory
+| Metric Name                      | Unit           |
+| -------------------------------- | -------------- |
+| wordpress-bench/s1-response_time | milliseconds   |
+| wordpress-bench/s1-throughput    | operations per second |
+| wordpress-bench/s1-num_failures  | count          |
+| wordpress-bench/s1-failure_rate  | ratio          |
+| wordpress-bench/s2-response_time | milliseconds   |
+| wordpress-bench/s2-throughput    | operations per second |
+| wordpress-bench/s2-num_failures  | count          |
+| wordpress-bench/s2-failure_rate  | ratio          |
+| wordpress-bench/s3-response_time | milliseconds   |
+| wordpress-bench/s3-throughput    | operations per second |
+| wordpress-bench/s3-num_failures  | count          |
+| wordpress-bench/s3-failure_rate  | ratio          |
+
+### Testplan migration
+
+See `files/default/update_testplan.rb`
+
+Whenever a new data set is created, the URLs of the image resources need to be migrated. Given a hostname of an instance running the target data set, the update script automatically rewrites the test plan URLs and yields a list of samplers to disable.
+
+Encapsulate the new `test_plan.jmx` into a cookbook and add it to the Chef run list BEFORE the wordpress benchmark. See `test-plan-aws-pv`.
 
 ### wordpress-bench::default
 
@@ -36,13 +52,12 @@ Add the `wordpress-bench` default recipe to your Chef configuration in the Vagra
 
 ```ruby
 config.vm.provision 'chef_client' do |chef|
-  chef.add_recipe 'wordpress-bench@2.0.0'  # Version is optional
+  chef.add_recipe 'wordpress-bench'
   chef.json =
   {
     'wordpress-bench' => {
-        'metric_name' => 'response_time',
         'num_repetitions' => 1,
-        'load_generator' => 'http://192.168.33.44',
+        'load_generator' => '192.168.33.44',
         # Used to generate sample images
         '500px_customer_key' => 'YOUR_CUSTOMER_KEY',
         'jmeter' => {

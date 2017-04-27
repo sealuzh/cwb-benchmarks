@@ -1,0 +1,9 @@
+stress-ng: info:  [4916] apparmor stressor will be skipped, AppArmor is not available
+stress-ng: info:  [4916] dispatching hogs: 1 epoll, 1 icmp-flood, 1 sockfd, 1 udp
+stress-ng: info:  [4916] successful run completed in 40.01s
+stress-ng: info:  [4916] stressor       bogo ops real time  usr time  sys time   bogo ops/s   bogo ops/s
+stress-ng: info:  [4916]                           (secs)    (secs)    (secs)   (real time) (usr+sys time)
+stress-ng: info:  [4916] epoll            685880     10.00      2.83      6.76     68586.14     71520.33
+stress-ng: info:  [4916] icmp-flood      4041251     10.00      1.01      8.70    404121.26    416194.75
+stress-ng: info:  [4916] sockfd              727     10.01      1.65      8.21        72.63        73.73
+stress-ng: info:  [4916] udp             2779614     10.00      1.36      8.41    277955.73    284505.02

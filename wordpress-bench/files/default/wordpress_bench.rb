@@ -1,29 +1,44 @@
 require 'cwb'
 require 'faraday'
 require 'faraday_middleware'
+require 'socket'
 
 class WordpressBench < Cwb::Benchmark
   def execute
-    @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
-    start_service('mysql-default')
-    start_service('apache2')
-    start_service('perfmon')
+    all_services('start')
     start_load_generator
-    # HACK: Exit with success without bothering about notifying that
-    # the execution is finished. The load generator will do this.
-    exit
+    wait_for_completion
+    all_services('stop')
+    # Give the instance some time to recover
+    sleep 30
   end
 
-  def timestamp
-    Time.now.to_i
+  def all_services(op)
+    services.each { |s| service(s, op) }
   end
 
-  def cpu_model_name
-    @cwb.deep_fetch('cpu', '0', 'model_name')
+  def service(name, op)
+    `sudo service #{name} #{op}`
   end
 
-  def start_service(name)
-    `sudo service #{name} start`
+  def services
+    %w(mysql-default apache2 perfmon)
+  end
+
+  def wait_for_completion
+    server = TCPServer.new(host, port)
+    session = server.accept
+    session.puts 'OK'
+    session.close
+    server.close
+  end
+
+  def host
+    '0.0.0.0'
+  end
+
+  def port
+    5679
   end
 
   def start_load_generator
@@ -39,7 +54,7 @@ class WordpressBench < Cwb::Benchmark
   end
 
   def setup_connection
-    Faraday.new(:url => load_generator) do |f|
+    Faraday.new(url: "http://#{load_generator}") do |f|
       f.request :multipart
       f.request :json
       f.response :json

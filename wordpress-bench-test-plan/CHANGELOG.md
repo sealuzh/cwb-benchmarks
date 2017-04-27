@@ -1,3 +1,7 @@
+# 0.1.6 (2017-03-29)
+
+* Update `wordpress-bench` to new notification scheme
+
 # 0.1.5 (2017-03-15)
 
 * Use machine-dependent thread names for distributed testing

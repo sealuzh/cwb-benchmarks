@@ -1,5 +1,4 @@
 # Cloud WorkBench
-default['wordpress-bench']['metric_name'] = 'response_time'
 default['wordpress-bench']['num_repetitions'] = 1
 
 # Fake data generator
@@ -7,7 +6,7 @@ default['wordpress-bench']['500px_customer_key'] = ''
 default['wordpress-bench']['batch_size'] = 25
 
 # Load generator endpoint
-default['wordpress-bench']['load_generator'] = 'http://localhost'
+default['wordpress-bench']['load_generator'] = 'localhost'
 
 # Cookbook wherein the `test_plan.jmx` resides
 default['wordpress-bench']['test_plan_cookbook'] = 'wordpress-bench'
@@ -27,3 +26,11 @@ default['wordpress-bench']['jmeter']['properties']['hold_target_rate_time'] = 2 
 # HTTP defaults
 default['wordpress-bench']['jmeter']['properties']['connect_timeout'] = 10000
 default['wordpress-bench']['jmeter']['properties']['response_timeout'] = 40000
+
+### EXTERNAL
+# Setting here at attribute resolution time because of the dependent
+# attribute `default['wordpress']['url']` in the `wordpress` cookbook
+default['wordpress']['version'] = '4.7.1'
+default['wordpress']['url'] = "https://wordpress.org/wordpress-#{node['wordpress']['version']}.tar.gz"
+# # Make sure the dependent wordpress url gets updated
+# include_attribute 'wordpress::default'
