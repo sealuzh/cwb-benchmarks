@@ -5,13 +5,14 @@ require 'open3'
 # Recommended to test single and multi thread performance to check how well the CPUs scale
 class SysbenchCpu < Cwb::Benchmark
   def execute
-    stdout, stderr, status = Open3.capture3(single_thread_cmd)
-    raise "[sysbench/cpu-single-thread] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/cpu-single-thread-duration', timestamp, extract_duration(stdout))
+    run('sysbench/cpu-single-thread', single_thread_cmd)
+    run('sysbench/cpu-multi-thread', multi_thread_cmd)
+  end
 
-    stdout, stderr, status = Open3.capture3(multi_thread_cmd)
-    raise "[sysbench/cpu-multi-thread] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/cpu-multi-thread-duration', timestamp, extract_duration(stdout))
+  def run(name, cmd)
+    stdout, stderr, status = Open3.capture3(cmd)
+    raise "[#{name}] #{stderr}" unless status.success?
+    @cwb.submit_metric("#{name}-duration", timestamp, extract_duration(stdout))
   end
 
   def single_thread_cmd
@@ -19,15 +20,15 @@ class SysbenchCpu < Cwb::Benchmark
   end
 
   def multi_thread_cmd
-    "sysbench --test=cpu --cpu-max-prime=20000 --num-threads=#{cpu_cores} run"
+    "sysbench --test=cpu --cpu-max-prime=20000 --num-threads=#{num_cpu_cores} run"
+  end
+
+  def num_cpu_cores
+    @cwb.deep_fetch('cpu', '0', 'cores').to_i
   end
 
   def timestamp
     Time.now.to_i
-  end
-
-  def cpu_cores
-    @cwb.deep_fetch('cpu', '0', 'cores').to_i
   end
 
   def extract_duration(string)
