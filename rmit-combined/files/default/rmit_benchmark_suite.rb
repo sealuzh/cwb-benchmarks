@@ -70,12 +70,8 @@ module Cwb
       # described in the paper: Conducting Repeatable Experiments in Highly Variable Cloud Computing Environments
       # A. Abedi and T. Brecht (2017)
       def rmit_list(list)
-        repeated_list(list, repetitions).shuffle
-      end
-
-      def repeated_list(list, repetitions)
         repeated_list = []
-        repetitions.times { repeated_list.concat list }
+        repetitions.times { repeated_list.concat list.shuffle }
         repeated_list
       end
 
