@@ -1,3 +1,8 @@
+# 1.2.0 (2017-05-17)
+
+* Fix wrong fio metric name: `fio/8k-rand-write` => `fio/8k-rand-read`
+* Refactor benchmark plugins
+
 # 1.2.0 (2017-04-13)
 
 * Bump `wordpress-bench` dependency.
