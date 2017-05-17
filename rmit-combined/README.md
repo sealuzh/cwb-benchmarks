@@ -106,10 +106,12 @@ See `attributes/default.rb` for all details or the Vagrantfile usage example bel
 
 ### rmit-combined::default
 
-Add the `rmit-combined` default recipe to your Chef configuration in the Vagrantfile:
+1. Add a WordpressBench test plan cookbook `BEFORE` including `rmit-combined`
+2 .Add the `rmit-combined` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
 config.vm.provision 'cwb', type: 'chef_client' do |chef|
+  chef.add_recipe 'test-plan-aws-hvm' # Add your test plan cookbook FIRST
   chef.add_recipe 'rmit-combined'
   chef.json =
   {
