@@ -3,11 +3,13 @@ require 'socket'
 
 # Also see `iperf.rb`
 class IperfClient < Cwb::Benchmark
+  DURATION = 30 # seconds
+
   def execute
-    run('single-thread', single_thread_cmd)
-    run('multi-thread', multi_thread_cmd)
+    run('single-thread', cmd(1))
+    run('multi-thread', cmd(num_cpu_cores))
     notify_completion
-    # Exit with success without bothering about notifyingthat the
+    # Exit with success without bothering about notifying that the
     # execution is finished because this would terminate the benchmark.
     exit
   end
@@ -15,24 +17,15 @@ class IperfClient < Cwb::Benchmark
   def run(method, cmd)
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[iperf/load-generator-#{method}] #{stderr}" unless status.success?
-    @cwb.submit_metric("iperf/#{method}-duration", timestamp, duration)
+    @cwb.submit_metric("iperf/#{method}-duration", timestamp, DURATION)
     @cwb.submit_metric("iperf/#{method}-bandwidth", timestamp, extract_bandwidth(stdout))
   end
 
-  def single_thread_cmd
-    "iperf -c #{host} -l 128k -t #{duration}"
+  def cmd(num_threads)
+    "iperf -c #{host} -l 128k -t #{DURATION} -P #{num_threads}"
   end
 
-  def multi_thread_cmd
-    "iperf -c #{host} -l 128k -t #{duration} -P #{cpu_cores}"
-  end
-
-  # in seconds
-  def duration
-    30
-  end
-
-  def cpu_cores
+  def num_cpu_cores
     @cwb.deep_fetch('cpu', '0', 'cores').to_i
   end
 

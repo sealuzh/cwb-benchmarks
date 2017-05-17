@@ -2,7 +2,9 @@ require 'cwb'
 require 'open3'
 
 # Guidance on stress-ng local Network Tests:
-# * http://kernel.ubuntu.com/~cking/stress-ng/
+# * HTML overview docs: http://kernel.ubuntu.com/~cking/stress-ng/
+# * Detailed docs: http://kernel.ubuntu.com/~cking/stress-ng/stress-ng.pdf
+# * https://wiki.ubuntu.com/Kernel/Reference/stress-ng
 class StressngNetwork < Cwb::Benchmark
   def execute
     stdout, stderr, status = Open3.capture3(cmd(exclude))
