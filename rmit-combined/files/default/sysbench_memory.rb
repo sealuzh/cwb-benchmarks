@@ -6,17 +6,18 @@ require 'open3'
 # therefore taking a small load to complete quickly.
 class SysbenchMemory < Cwb::Benchmark
   def execute
-    stdout, stderr, status = Open3.capture3(default_block_size_cmd)
-    raise "[sysbench/memory-default-block-size] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/memory-default-block-size-duration', timestamp, extract_duration(stdout))
-    @cwb.submit_metric('sysbench/memory-default-block-size-throughput', timestamp, extract_throughput(stdout))
-
-    stdout, stderr, status = Open3.capture3(large_block_size_cmd)
-    raise "[sysbench/memory-large-block-size] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/memory-large-block-size-duration', timestamp, extract_duration(stdout))
-    @cwb.submit_metric('sysbench/memory-large-block-size-throughput', timestamp, extract_throughput(stdout))
+    run('sysbench/memory-default-block-size', default_block_size_cmd)
+    run('sysbench/memory-large-block-size', large_block_size_cmd)
   end
 
+  def run(name, cmd)
+    stdout, stderr, status = Open3.capture3(cmd)
+    raise "[#{name}] #{stderr}" unless status.success?
+    @cwb.submit_metric('#{name}-duration', timestamp, extract_duration(stdout))
+    @cwb.submit_metric('#{name}-throughput', timestamp, extract_throughput(stdout))
+  end
+
+  # Default: --memory-block-size=1K
   def default_block_size_cmd
     'sysbench --test=memory --memory-total-size=1G run'
   end

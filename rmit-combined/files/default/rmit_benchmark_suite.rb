@@ -7,7 +7,7 @@ module Cwb
     def execute_suite(cwb_benchmarks)
       submit_global_metrics
       filtered_benchmarks = filtered_list(cwb_benchmarks)
-      rmit_benchmarks = rmit_list(filtered_benchmarks)
+      rmit_benchmarks = rmit_list(filtered_benchmarks, repetitions)
       @cwb.submit_metric('benchmark/order', timestamp, rmit_benchmarks.map(&:class).to_s)
       execute_all(rmit_benchmarks)
       @cwb.notify_finished_execution
@@ -69,10 +69,10 @@ module Cwb
       # Reorders a list to follow the Randomized Multiple Interleaved Trials (RMIT) methodology
       # described in the paper: Conducting Repeatable Experiments in Highly Variable Cloud Computing Environments
       # A. Abedi and T. Brecht (2017)
-      def rmit_list(list)
-        repeated_list = []
-        repetitions.times { repeated_list.concat list.shuffle }
-        repeated_list
+      def rmit_list(list, repetitions)
+        rmit_list = []
+        repetitions.times { rmit_list.concat list.shuffle }
+        rmit_list
       end
 
       def includes

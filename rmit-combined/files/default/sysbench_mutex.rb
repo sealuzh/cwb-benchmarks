@@ -5,10 +5,14 @@ require 'open3'
 # * http://blog.siphos.be/2013/04/comparing-performance-with-sysbench-part-2/
 class SysbenchMutex < Cwb::Benchmark
   def execute
-    stdout, stderr, status = Open3.capture3(mutex_cmd)
-    raise "[sysbench/mutex] #{stderr}" unless status.success?
-    @cwb.submit_metric('sysbench/mutex-duration', timestamp, extract_duration(stdout))
-    @cwb.submit_metric('sysbench/mutex-latency', timestamp, extract_latency(stdout))
+    run('sysbench/mutex', mutex_cmd)
+  end
+
+  def run(name, cmd)
+    stdout, stderr, status = Open3.capture3(cmd)
+    raise "[#{name}] #{stderr}" unless status.success?
+    @cwb.submit_metric('#{name}-duration', timestamp, extract_duration(stdout))
+    @cwb.submit_metric('#{name}-latency', timestamp, extract_latency(stdout))
   end
 
   def mutex_cmd

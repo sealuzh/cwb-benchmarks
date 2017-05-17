@@ -25,12 +25,12 @@ See `attributes/default.rb` for all details or the Vagrantfile usage example bel
 | fio/4k-seq-write-iops | iops |
 | fio/4k-seq-write-latency | microseconds |
 | fio/4k-seq-write-latency-95-percentile | microseconds |
-| fio/8k-rand-write-bandwidth | KiB/s |
-| fio/8k-rand-write-disk-util | % |
-| fio/8k-rand-write-duration | milliseconds |
-| fio/8k-rand-write-iops | iops |
-| fio/8k-rand-write-latency | microseconds |
-| fio/8k-rand-write-latency-95-percentile | microseconds |
+| fio/8k-rand-read-bandwidth | KiB/s |
+| fio/8k-rand-read-disk-util | % |
+| fio/8k-rand-read-duration | milliseconds |
+| fio/8k-rand-read-iops | iops |
+| fio/8k-rand-read-latency | microseconds |
+| fio/8k-rand-read-latency-95-percentile | microseconds |
 | fio/version | version number |
 | instance/cpu-cores | number of cores |
 | instance/cpu-model | model name |
@@ -106,10 +106,12 @@ See `attributes/default.rb` for all details or the Vagrantfile usage example bel
 
 ### rmit-combined::default
 
-Add the `rmit-combined` default recipe to your Chef configuration in the Vagrantfile:
+1. Add a WordpressBench test plan cookbook `BEFORE` including `rmit-combined`
+2 .Add the `rmit-combined` default recipe to your Chef configuration in the Vagrantfile:
 
 ```ruby
 config.vm.provision 'cwb', type: 'chef_client' do |chef|
+  chef.add_recipe 'test-plan-aws-hvm' # Add your test plan cookbook FIRST
   chef.add_recipe 'rmit-combined'
   chef.json =
   {
