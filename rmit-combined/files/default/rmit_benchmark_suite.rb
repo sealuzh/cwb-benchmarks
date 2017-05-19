@@ -31,7 +31,7 @@ module Cwb
 
     def submit_global_metrics
       @cwb.submit_metric('instance/cpu-model', timestamp, cpu_model_name)
-      @cwb.submit_metric('instance/cpu-cores', timestamp, cpu_cores)
+      @cwb.submit_metric('instance/cpu-cores', timestamp, num_cpu_cores)
       @cwb.submit_metric('instance/ram-total', timestamp, node_ram_in_kB)
       @cwb.submit_metric('instance/gcc-version', timestamp, `gcc --version | head -n 1`.strip)
       @cwb.submit_metric('sysbench/version', timestamp, `sysbench --version`.strip)
@@ -104,8 +104,8 @@ module Cwb
         @cwb.deep_fetch('cpu', '0', 'model_name')
       end
 
-      def cpu_cores
-        @cwb.deep_fetch('cpu', '0', 'cores')
+      def num_cpu_cores
+        @cwb.deep_fetch('cpu', 'cores')
       end
 
       def node_ram_in_kB

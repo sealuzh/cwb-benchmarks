@@ -4,6 +4,7 @@ require 'socket'
 # Also see `iperf.rb`
 class IperfClient < Cwb::Benchmark
   DURATION = 30 # seconds
+  PORT = 5678
 
   def execute
     run('single-thread', cmd(1))
@@ -25,14 +26,10 @@ class IperfClient < Cwb::Benchmark
     "iperf -c #{host} -l 128k -t #{DURATION} -P #{num_threads}"
   end
 
-  def num_cpu_cores
-    @cwb.deep_fetch('cpu', '0', 'cores').to_i
-  end
-
   def notify_completion
-    server = TCPSocket.new(host, port)
+    server = TCPSocket.new(host, PORT)
     line = server.gets
-    raise "[iperf/load-generator] Could not notify completion to #{host}:#{port}" if line.strip != 'OK'
+    raise "[iperf/load-generator] Could not notify completion to #{host}:#{PORT}" if line.strip != 'OK'
     server.close
   end
 
@@ -40,12 +37,8 @@ class IperfClient < Cwb::Benchmark
     @cwb.deep_fetch('rmit-combined', 'public_host')
   end
 
-  def port
-    5678
-  end
-
-  def cpu_cores
-    @cwb.deep_fetch('cpu', '0', 'cores').to_i
+  def num_cpu_cores
+    @cwb.deep_fetch('cpu', 'cores').to_i
   end
 
   def timestamp
