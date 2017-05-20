@@ -1,4 +1,8 @@
-# 1.2.0 (2017-05-17)
+# 1.4.0 (2017-05-20)
+
+* Fix erroneous reported number of CPU cores
+
+# 1.3.0 (2017-05-17)
 
 * Fix wrong fio metric name: `fio/8k-rand-write` => `fio/8k-rand-read`
 * Refactor benchmark plugins
