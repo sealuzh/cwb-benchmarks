@@ -1,6 +1,7 @@
-# 1.4.0 (2017-05-20)
+# 1.4.0 (2017-05-24)
 
 * Fix erroneous reported number of CPU cores
+* Fix refactoring string interpolation error (patched)
 
 # 1.3.0 (2017-05-17)
 

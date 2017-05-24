@@ -13,8 +13,8 @@ class SysbenchMemory < Cwb::Benchmark
   def run(name, cmd)
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[#{name}] #{stderr}" unless status.success?
-    @cwb.submit_metric('#{name}-duration', timestamp, extract_duration(stdout))
-    @cwb.submit_metric('#{name}-throughput', timestamp, extract_throughput(stdout))
+    @cwb.submit_metric("#{name}-duration", timestamp, extract_duration(stdout))
+    @cwb.submit_metric("#{name}-throughput", timestamp, extract_throughput(stdout))
   end
 
   # Default: --memory-block-size=1K
