@@ -38,7 +38,7 @@ class IperfClient < Cwb::Benchmark
   end
 
   def num_cpu_cores
-    @cwb.deep_fetch('cpu', 'cores').to_i
+    @cwb.deep_fetch('cpu', 'total').to_i
   end
 
   def timestamp

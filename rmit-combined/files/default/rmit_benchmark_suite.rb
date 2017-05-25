@@ -105,7 +105,7 @@ module Cwb
       end
 
       def num_cpu_cores
-        @cwb.deep_fetch('cpu', 'cores')
+        @cwb.deep_fetch('cpu', 'total')
       end
 
       def node_ram_in_kB
