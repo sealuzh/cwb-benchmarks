@@ -1,6 +1,8 @@
-# 1.4.0 (2017-05-20)
+# 1.4.0 (2017-05-24)
 
 * Fix erroneous reported number of CPU cores
+* Fix refactoring string interpolation error (patched)
+* Finally fix the cpu cores bug by using `['cpu'][total]` according to [ohai](https://github.com/chef/ohai/blob/master/lib/ohai/plugins/linux/cpu.rb) and manual investigation of the ohai reports for various instances types
 
 # 1.3.0 (2017-05-17)
 

@@ -13,8 +13,8 @@ class SysbenchThreads < Cwb::Benchmark
   def run(name, cmd)
     stdout, stderr, status = Open3.capture3(cmd)
     raise "[#{name}] #{stderr}" unless status.success?
-    @cwb.submit_metric('#{name}-duration', timestamp, extract_duration(stdout))
-    @cwb.submit_metric('#{name}-latency', timestamp, extract_latency(stdout))
+    @cwb.submit_metric("#{name}-duration", timestamp, extract_duration(stdout))
+    @cwb.submit_metric("#{name}-latency", timestamp, extract_latency(stdout))
   end
 
   def threads_cmd(num_threads = 1)
