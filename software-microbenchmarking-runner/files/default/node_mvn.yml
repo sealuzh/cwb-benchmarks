@@ -1,0 +1,20 @@
+---
+software-microbenchmarking-runner:
+  github:
+    group: protostuff
+    name: protostuff
+  project:
+    skip_build: false
+    skip_checkout: false
+    jmh_jar: 'target/protostuff-benchmarks.jar'
+    backend: :mvn
+    mvn:
+      perf_test_dir: 'protostuff-benchmarks'
+  bmconfig:
+    tool_forks: 1
+    jmh_config: '-wi 1 -i 2 -f 1'
+  env:
+    java: 'java'
+    mvn: '/Users/philipp/apache-maven-3.3.9/bin/mvn'
+    mvn_compile: 'clean install -DskipTests'
+    tmp_file_name: 'tmp.json'
