@@ -3,7 +3,7 @@ module Timeable
   def time
     t1 = Time.now
     yield
-    (Time.now - t1) / 60 / 60 # these are secs, convert to hours
+    (Time.now - t1) # secs
   end
 
 end

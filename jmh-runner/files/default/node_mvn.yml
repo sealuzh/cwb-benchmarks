@@ -1,5 +1,5 @@
 ---
-software-microbenchmarking-runner:
+jmh-runner:
   github:
     group: protostuff
     name: protostuff

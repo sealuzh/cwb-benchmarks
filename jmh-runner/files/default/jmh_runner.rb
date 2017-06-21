@@ -1,9 +1,8 @@
 require 'cwb'
 require_relative("framework")
 require_relative("jmh_projects")
-require("pry")
 
-class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
+class JmhRunner < Cwb::Benchmark
   def execute
 
     puts ">>> Starting benchmarks"
@@ -12,7 +11,7 @@ class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
     puts ">>> Setting up defaults"
     set_up_defaults
 
-    projects = config 'software-microbenchmarking-runner', 'projects'
+    projects = config 'jmh-runner', 'projects'
 
     puts ">>> We have #{projects.size} projects to run benchmarks for"
 
@@ -90,19 +89,19 @@ class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
 
   def set_up_defaults
     JavaProject.class_variable_set(:@@java,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'java'))
+      @cwb.deep_fetch('jmh-runner', 'env', 'java'))
     JavaProject.class_variable_set(:@@tmp_file,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'tmp_file_name'))
+      @cwb.deep_fetch('jmh-runner', 'env', 'tmp_file_name'))
     JavaProject.class_variable_set(:@@jmh_config,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'bmconfig', 'tool_forks'))
+      @cwb.deep_fetch('jmh-runner', 'bmconfig', 'tool_forks'))
     JavaProject.class_variable_set(:@@jmh_config,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'bmconfig', 'jmh_config'))
+      @cwb.deep_fetch('jmh-runner', 'bmconfig', 'jmh_config'))
     MvnProject.class_variable_set(:@@mvn,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'mvn'))
+      @cwb.deep_fetch('jmh-runner', 'env', 'mvn'))
     MvnProject.class_variable_set(:@@compile,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'mvn_compile'))
+      @cwb.deep_fetch('jmh-runner', 'env', 'mvn_compile'))
     GradleProject.class_variable_set(:@@gradle,
-      @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'gradle'))
+      @cwb.deep_fetch('jmh-runner', 'env', 'gradle'))
   end
 
   def config(*keys)
