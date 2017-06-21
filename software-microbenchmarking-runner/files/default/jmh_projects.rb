@@ -27,7 +27,7 @@ class JavaProject < Project
   def run_benchmarks
     Dir.chdir(perftestdir) do
       cmd = "%s %s %s " % [@@java, @@jmh, @jmh_jar]
-      cmd << @benchmarks << " " if @benchmarks  # see if we want to run only a subset of benchmarks
+      cmd << "\"" << @benchmarks << "\" " if @benchmarks  # see if we want to run only a subset of benchmarks
       cmd << "%s %s %s" % [@@jmh_config, @@tmp_file_config, @@tmp_file]
       puts ">>> Running benchmark command #{cmd}"
       system(cmd)

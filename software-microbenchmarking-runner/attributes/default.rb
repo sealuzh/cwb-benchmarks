@@ -2,18 +2,18 @@
 
 # benchmark setup - this is what you will need to set up for most tests
 # some of these are sensible defaults, but many of these settings need to be changed
-default['software-microbenchmarking-runner']['github']['group'] = 'ReactiveX'
-default['software-microbenchmarking-runner']['github']['name'] = 'RxJava'
-default['software-microbenchmarking-runner']['project']['skip_checkout'] = 'false'
-default['software-microbenchmarking-runner']['project']['skip_build'] = 'false'
-default['software-microbenchmarking-runner']['project']['jmh_jar'] = 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
-default['software-microbenchmarking-runner']['project']['backend'] = 'gradle'
-default['software-microbenchmarking-runner']['project']['version'] = nil # defaults to Latest
-default['software-microbenchmarking-runner']['project']['benchmarks'] = nil # defaults to all benchmarks
-default['software-microbenchmarking-runner']['project']['skip_benchmarks'] = nil # defaults to all benchmarks
-default['software-microbenchmarking-runner']['project']['mvn']['perf_test_dir'] = 'perf'
-default['software-microbenchmarking-runner']['project']['gradle']['build_cmd'] = 'clean build -x test'
-default['software-microbenchmarking-runner']['project']['gradle']['build_dir'] = 'build'
+default['software-microbenchmarking-runner']['projects'][0]['project']['github']['group'] = 'ReactiveX'
+default['software-microbenchmarking-runner']['projects'][0]['project']['github']['name'] = 'RxJava'
+default['software-microbenchmarking-runner']['projects'][0]['project']['skip_checkout'] = 'false'
+default['software-microbenchmarking-runner']['projects'][0]['project']['skip_build'] = 'false'
+default['software-microbenchmarking-runner']['projects'][0]['project']['jmh_jar'] = 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+default['software-microbenchmarking-runner']['projects'][0]['project']['backend'] = 'gradle'
+default['software-microbenchmarking-runner']['projects'][0]['project']['version'] = nil # defaults to Latest
+default['software-microbenchmarking-runner']['projects'][0]['project']['benchmarks'] = nil # defaults to all benchmarks
+default['software-microbenchmarking-runner']['projects'][0]['project']['skip_benchmarks'] = nil # defaults to all benchmarks
+default['software-microbenchmarking-runner']['projects'][0]['project']['mvn']['perf_test_dir'] = 'perf'
+default['software-microbenchmarking-runner']['projects'][0]['project']['gradle']['build_cmd'] = 'clean build -x test'
+default['software-microbenchmarking-runner']['projects'][0]['project']['gradle']['build_dir'] = 'build'
 
 # benchmark config - these are the defaults, but we can override them
 default['software-microbenchmarking-runner']['bmconfig']['tool_forks'] = '1'

@@ -6,25 +6,43 @@ require("pry")
 class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
   def execute
 
-    puts "Starting benchmark"
+    puts ">>> Starting benchmarks"
     @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
 
-    puts "Setting up defaults"
+    puts ">>> Setting up defaults"
     set_up_defaults
 
-    backend = config 'software-microbenchmarking-runner', 'project', 'backend'
-    group = config 'software-microbenchmarking-runner', 'github', 'group'
-    name = config 'software-microbenchmarking-runner', 'github', 'name'
-    version = config('software-microbenchmarking-runner', 'project', 'version') || "LATEST"
-    gradle_build_dir = config 'software-microbenchmarking-runner', 'project', 'gradle', 'build_dir'
-    gradle_build_cmd = config 'software-microbenchmarking-runner', 'project', 'gradle', 'build_cmd'
-    jmh_jar = config 'software-microbenchmarking-runner', 'project', 'jmh_jar'
-    mvn_perf_dir = config 'software-microbenchmarking-runner', 'project', 'mvn', 'perf_test_dir'
-    benchmarks = config 'software-microbenchmarking-runner', 'project', 'benchmarks'
-    skip_checkout = true?(config('software-microbenchmarking-runner', 'project', 'skip_checkout'))
-    skip_compile = true?(config('software-microbenchmarking-runner', 'project', 'skip_build'))
-    skip_benchmarks = config 'software-microbenchmarking-runner', 'project', 'skip_benchmarks'
-    tool_forks = config('software-microbenchmarking-runner', 'bmconfig', 'tool_forks').to_i
+    projects = config 'software-microbenchmarking-runner', 'projects'
+
+    puts ">>> We have #{projects.size} projects to run benchmarks for"
+
+    projects.each {|project| execute_project(project['project']) }
+
+    puts ">>> Finished all projects"
+
+  end
+
+  private
+
+  def execute_project(project)
+
+    puts ">>> Config:"
+    puts project
+
+    backend = project['backend']
+    group = project['github']['group']
+    name = project['github']['name']
+    version = project['version'] || "LATEST"
+    gradle_build_dir = project['gradle']['build_dir'] if project['gradle']
+    gradle_build_cmd = project['gradle']['build_cmd'] if project['gradle']
+    jmh_jar = project['jmh_jar']
+    mvn_perf_dir = project['mvn']['perf_test_dir'] if project['mvn']
+    benchmarks = project['benchmarks']
+    skip_checkout = true?(project['skip_checkout'])
+    skip_compile = true?(project['skip_build'])
+    skip_benchmarks = project['skip_benchmarks']
+
+    puts ">>> Starting project #{name}"
 
     project = case backend
       when 'gradle'
@@ -37,7 +55,7 @@ class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
 
     project.benchmarks = benchmarks if benchmarks
 
-    experiment = Experiment.new(tool_forks)
+    experiment = Experiment.new
     experiment.project = project
     experiment.skip_checkout = skip_checkout
     experiment.skip_compile = skip_compile
@@ -57,10 +75,10 @@ class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
         end
       end
     end
-    puts "Finished benchmark"
-  end
 
-  private
+    puts ">>> Finished project #{name}"
+
+  end
 
   def timestamp
     Time.now.to_i
@@ -75,6 +93,8 @@ class SoftwareMicrobenchmarkingRunner < Cwb::Benchmark
       @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'java'))
     JavaProject.class_variable_set(:@@tmp_file,
       @cwb.deep_fetch('software-microbenchmarking-runner', 'env', 'tmp_file_name'))
+    JavaProject.class_variable_set(:@@jmh_config,
+      @cwb.deep_fetch('software-microbenchmarking-runner', 'bmconfig', 'tool_forks'))
     JavaProject.class_variable_set(:@@jmh_config,
       @cwb.deep_fetch('software-microbenchmarking-runner', 'bmconfig', 'jmh_config'))
     MvnProject.class_variable_set(:@@mvn,
