@@ -3,10 +3,13 @@ require_relative("framework")
 require_relative("jmh_projects")
 
 class JmhRunner < Cwb::Benchmark
+
+  attr_accessor :trial
+
   def execute
 
     puts ">>> Starting benchmarks"
-    @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
+    # @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
 
     puts ">>> Setting up defaults"
     set_up_defaults
@@ -64,13 +67,15 @@ class JmhRunner < Cwb::Benchmark
     outcome = experiment.run_experiment
 
     outcome.exectimes.each do |fork, duration|
-      @cwb.submit_metric('Duration', fork, duration)
+      # @cwb.submit_metric('Duration', fork, duration)
+      @cwb.submit_metric('Duration', @trial, duration)
     end
 
     outcome.forks.each do |fork, forkresults|
       forkresults.each do |benchmark, bmresults|
         bmresults.each do |individual_value|
-          @cwb.submit_metric(benchmark, fork, individual_value)
+          # @cwb.submit_metric(benchmark, fork, individual_value)
+          @cwb.submit_metric(benchmark, @trial, individual_value)
         end
       end
     end

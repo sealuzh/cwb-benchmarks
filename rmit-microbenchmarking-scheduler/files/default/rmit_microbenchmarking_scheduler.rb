@@ -27,6 +27,7 @@ class RmitMicrobenchmarkingScheduler < Cwb::Benchmark
 
   def execute(benchmark, trial)
     puts ">>> Starting #{benchmark.class.to_s} in trial #{trial}"
+    benchmark.trial = trial
     benchmark.execute_in_working_dir
   end
 
