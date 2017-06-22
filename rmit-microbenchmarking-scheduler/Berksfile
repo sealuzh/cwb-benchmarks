@@ -1,3 +1,7 @@
+require_relative "../helper"
+
 source "https://supermarket.chef.io"
+
+local_cookbook "jmh-runner"
 
 metadata
