@@ -1,7 +1,12 @@
 require 'fileutils'
+require 'pathname'
 
 projects = node['jmh-runner']['projects']
-path = Cwb::BenchmarkUtil.new('jmh-runner', node).path
+
+# this is a bit of a hack, but the jmh-runner dir is not yet available
+# at this point in the Chef run - so clone to the base dir for now
+path = node['jmh-runner']['env']['basedir']
+
 puts "Starting to install Java projects to benchmark into path #{path}"
 
 projects.each do |project|
@@ -18,7 +23,6 @@ projects.each do |project|
   bash "clone_project" do
    cwd path
    code "git clone #{url}"
-   puts "Successfully cloned project"
   end
 
   version = project['project']['version']
@@ -35,19 +39,23 @@ projects.each do |project|
     when 'gradle'
       target = project['project']['gradle']['build_cmd']
       bash "compile_project" do
-       timeout 30 * 60  # increase timeout to 30 mins
+       timeout 60 * 60  # increase timeout to 60 mins
        cwd full_name
        code "./gradlew #{target}"
       end
     when 'mvn'
       bash "compile_project" do
-       timeout 30 * 60  # increase timeout to 30 mins
+       timeout 60 * 60  # increase timeout to 60 mins
        cwd full_name
        code 'mvn clean install -DskipTests'
       end
     else
       raise "Unsupported backend " + backend
   end
-  puts "Successfully compiled project"
+
+  bash "fix_permissions" do
+   cwd path
+   code "chmod -R 0777 #{full_name}"
+  end
 
 end

@@ -20,6 +20,7 @@ default['jmh-runner']['bmconfig']['tool_forks'] = '1'
 default['jmh-runner']['bmconfig']['jmh_config'] = '-wi 10 -i 20 -f 1'
 
 # environment setup - you should not need to change those, but you can
+default['jmh-runner']['env']['basedir'] = '/home/ubuntu'
 default['jmh-runner']['env']['java'] = 'java'
 default['jmh-runner']['env']['mvn'] = 'mvn'
 default['jmh-runner']['env']['gradle'] = './gradlew'

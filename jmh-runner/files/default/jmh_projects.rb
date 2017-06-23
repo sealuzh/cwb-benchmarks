@@ -2,6 +2,7 @@ require("json")
 require_relative("framework")
 class JavaProject < Project
 
+  @@basedir = "/home/ubuntu"
   @@java = "java"
   @@jmh = "-jar "
   @@jmh_config = "-wi 10 -i 20 -f 1"
@@ -17,7 +18,7 @@ class JavaProject < Project
   end
 
   def perftestdir
-    "#{@dir}/#{@perftestrepo}"
+    "#{@@basedir}/#{@dir}/#{@perftestrepo}"
   end
 
   def perftestresultfile

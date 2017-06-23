@@ -1,4 +1,5 @@
 require 'cwb'
+require 'fileutils'
 require_relative("framework")
 require_relative("jmh_projects")
 
@@ -101,6 +102,8 @@ class JmhRunner < Cwb::Benchmark
       @cwb.deep_fetch('jmh-runner', 'bmconfig', 'tool_forks'))
     JavaProject.class_variable_set(:@@jmh_config,
       @cwb.deep_fetch('jmh-runner', 'bmconfig', 'jmh_config'))
+    JavaProject.class_variable_set(:@@basedir,
+      @cwb.deep_fetch('jmh-runner', 'env', 'basedir'))      
     MvnProject.class_variable_set(:@@mvn,
       @cwb.deep_fetch('jmh-runner', 'env', 'mvn'))
     MvnProject.class_variable_set(:@@compile,
