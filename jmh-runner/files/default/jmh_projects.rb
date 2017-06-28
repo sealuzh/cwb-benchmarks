@@ -10,6 +10,7 @@ class JavaProject < Project
   @@tmp_file = "tmp.json"
 
   attr_accessor :benchmarks
+  attr_accessor :params
 
   def initialize(group, name, perftestrepo, jmh_jar = "target/microbenchmarks.jar", version = "LATEST")
     super(group, name, version)
@@ -28,6 +29,10 @@ class JavaProject < Project
   def run_benchmarks
     Dir.chdir(perftestdir) do
       cmd = "%s %s %s " % [@@java, @@jmh, @jmh_jar]
+      if @params  # see if we want to provide a custom params string
+        puts @params
+        @params.each{|param| cmd << "-p " << param << " " }
+      end
       cmd << "\"" << @benchmarks << "\" " if @benchmarks  # see if we want to run only a subset of benchmarks
       cmd << "%s %s %s" % [@@jmh_config, @@tmp_file_config, @@tmp_file]
       puts ">>> Running benchmark command #{cmd}"

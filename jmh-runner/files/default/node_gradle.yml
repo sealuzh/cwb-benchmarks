@@ -7,9 +7,10 @@ jmh-runner:
     skip_build: false
     skip_checkout: false
     jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
-    backend: :hugo
+    backend: 'gradle'
     version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
-    benchmarks: 'rx.operators.FlatMapAsFilterPerf.*'
+    benchmarks: 'serializedTwoStreamsSlightlyContended|rangeEmptyConcatMap|OperatorPublishPerf.benchmark|ComputationSchedulerPerf.observeOn'
+    params_string: 'size={1,100,1000,1000000},mask={3},async={false},batchFrequency={4,8},childCount={0,5}'
     mvn:
       perf_test_dir: 'perf'
     gradle:

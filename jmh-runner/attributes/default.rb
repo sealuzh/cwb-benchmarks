@@ -10,6 +10,7 @@ default['jmh-runner']['projects'][0]['project']['jmh_jar'] = 'libs/rxjava-1.2.10
 default['jmh-runner']['projects'][0]['project']['backend'] = 'gradle'
 default['jmh-runner']['projects'][0]['project']['version'] = nil # defaults to Latest
 default['jmh-runner']['projects'][0]['project']['benchmarks'] = nil # defaults to all benchmarks
+default['jmh-runner']['projects'][0]['project']['params'] = nil # defaults to no params
 default['jmh-runner']['projects'][0]['project']['skip_benchmarks'] = nil # defaults to all benchmarks
 default['jmh-runner']['projects'][0]['project']['mvn']['perf_test_dir'] = 'perf'
 default['jmh-runner']['projects'][0]['project']['gradle']['build_cmd'] = 'clean build -x test'
