@@ -9,10 +9,10 @@ path = node['go-runner']['env']['basedir']
 
 puts "Starting to install Go projects to benchmark into path #{path}"
 
-go_path = default['go-runner']['env']['go']
-go_root = default['go-runner']['env']['go-root']
-go_binaries = default['go-runner']['env']['go-binaries']
-go_own_path = default['go-runner']['env']['go-own-path']
+go_path = node['go-runner']['env']['go']
+go_root = node['go-runner']['env']['go-root']
+go_binaries = node['go-runner']['env']['go-binaries']
+go_own_path = node['go-runner']['env']['go-own-path']
 
 projects.each do |project|
 
@@ -30,7 +30,6 @@ projects.each do |project|
   bash "create_project_path" do
     cwd go_own_path
     code "mkdir -p #{path_to_group}"
-    EOT
   end
 
   bash "clone_project" do
@@ -50,30 +49,24 @@ projects.each do |project|
   # fetch dependencies using the appropriate backend
   backend = project['project']['backend']
   case backend
-  # case install glide
-  when 'glide'
-    bash "deps_glide" do
-      ENV['GOROOT'] = go_root
-      ENV['GOPATH'] = project_path
-      ENV['PATH'] += (":%s" % [go_binaries])
-      timeout 60 * 60  # increase timeout to 60 mins
-      cwd path_to_project
-      code "glide install"
-    end
-  end
-  # case install go get
-  when 'get'
-    bash "deps_goget" do
-      ENV['GOROOT'] = go_root
-      ENV['GOPATH'] = project_path
-      ENV['PATH'] += (":%s" % [go_binaries])
-      timeout 60 * 60  # increase timeout to 60 mins
-      cwd path_to_project
-      code "go get $(go list ./... | grep -v vendor)"
-    end
-  end
-  else 
-    raise "Unsupported Package Management System: " + backend
+    # case install glide
+    when 'glide'
+      bash "deps_glide" do
+        ENV['GOPATH'] = project_path
+        timeout 60 * 60  # increase timeout to 60 mins
+        cwd path_to_project
+        code "glide install"
+      end
+    # case install go get
+    when 'get'
+      bash "deps_goget" do
+        ENV['GOPATH'] = project_path
+        timeout 60 * 60  # increase timeout to 60 mins
+        cwd path_to_project
+        code "go get $(go list ./... | grep -v vendor)"
+      end
+    else
+      raise "Unsupported Package Management System: " + backend
   end
 
   bash "fix_permissions" do
