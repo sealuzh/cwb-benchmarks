@@ -3,8 +3,6 @@ require 'pathname'
 
 projects = node['jmh-runner']['projects']
 
-# this is a bit of a hack, but the jmh-runner dir is not yet available
-# at this point in the Chef run - so clone to the base dir for now
 path = node['jmh-runner']['env']['basedir']
 
 puts "Starting to install Java projects to benchmark into path #{path}"
