@@ -3,20 +3,87 @@ jmh-runner:
   projects:
     - project:
         github:
-          group: protostuff
-          name: protostuff
-        skip_build: false
-        skip_checkout: false
-        jmh_jar: 'target/protostuff-benchmarks.jar'
-        backend: 'mvn'
-        benchmarks: 'baseline|runtime_deserialize_1_int_field'
+          group: ReactiveX
+          name: RxJava
+        skip_build: 'true'
+        skip_checkout: 'true'
+        jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+        backend: 'gradle'
+        version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
+        benchmarks: 'serializedTwoStreamsSlightlyContended|rx.operators.FlatMapAsFilterPerf.rangeEmptyConcatMap'
+        params:
+          - param: 'size={1000,}'
+          - param: 'count={1000,}'
+          - param: 'mask={3,}'
         mvn:
-          perf_test_dir: 'protostuff-benchmarks'
+          perf_test_dir: 'perf'
+        gradle:
+          build_cmd: 'clean build -x test'
+          build_dir: 'build'
+    - project:
+        github:
+          group: ReactiveX
+          name: RxJava
+        skip_build: 'true'
+        skip_checkout: 'true'
+        jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+        backend: 'gradle'
+        version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
+        benchmarks: 'OperatorPublishPerf.benchmark'
+        params:
+          - param: 'async={false,}'
+          - param: 'batchFrequency={4,}'
+          - param: 'childCount={5,}'
+          - param: 'size={1000000,}'
+        mvn:
+          perf_test_dir: 'perf'
+        gradle:
+          build_cmd: 'clean build -x test'
+          build_dir: 'build'
+    - project:
+        github:
+          group: ReactiveX
+          name: RxJava
+        skip_build: 'true'
+        skip_checkout: 'true'
+        jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+        backend: 'gradle'
+        version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
+        benchmarks: 'OperatorPublishPerf.benchmark'
+        params:
+          - param: 'async={false,}'
+          - param: 'batchFrequency={8,}'
+          - param: 'childCount={0,}'
+          - param: 'size={1,}'
+        mvn:
+          perf_test_dir: 'perf'
+        gradle:
+          build_cmd: 'clean build -x test'
+          build_dir: 'build'
+    - project:
+        github:
+          group: ReactiveX
+          name: RxJava
+        skip_build: 'true'
+        skip_checkout: 'true'
+        jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+        backend: 'gradle'
+        version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
+        benchmarks: 'ComputationSchedulerPerf.observeOn'
+        params:
+          - param: 'size={100,}'
+        mvn:
+          perf_test_dir: 'perf'
+        gradle:
+          build_cmd: 'clean build -x test'
+          build_dir: 'build'
   bmconfig:
-    tool_forks: '1'
-    jmh_config: '-wi 1 -i 2 -f 1'
+    tool_forks: 10
+    jmh_config: '-wi 10 -i 20 -f 1'
   env:
     java: 'java'
-    mvn: '/Users/philipp/maven/bin/mvn'
+    mvn: 'mvn'
+    gradle: './gradlew'
     mvn_compile: 'clean install -DskipTests'
     tmp_file_name: 'tmp.json'
+    basedir: '/Users/philipp/git_repos/projects/cwb_performance_test_runner/jmh-runner/files/default'

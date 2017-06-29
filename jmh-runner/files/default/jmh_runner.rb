@@ -41,6 +41,7 @@ class JmhRunner < Cwb::Benchmark
     jmh_jar = project['jmh_jar']
     mvn_perf_dir = project['mvn']['perf_test_dir'] if project['mvn']
     benchmarks = project['benchmarks']
+    params = project['params'] if project['params']
     skip_checkout = true?(project['skip_checkout'])
     skip_compile = true?(project['skip_build'])
     skip_benchmarks = project['skip_benchmarks']
@@ -57,6 +58,7 @@ class JmhRunner < Cwb::Benchmark
       end
 
     project.benchmarks = benchmarks if benchmarks
+    project.params = params.map{|param| param['param']} if params
 
     experiment = Experiment.new
     experiment.project = project
@@ -103,7 +105,7 @@ class JmhRunner < Cwb::Benchmark
     JavaProject.class_variable_set(:@@jmh_config,
       @cwb.deep_fetch('jmh-runner', 'bmconfig', 'jmh_config'))
     JavaProject.class_variable_set(:@@basedir,
-      @cwb.deep_fetch('jmh-runner', 'env', 'basedir'))      
+      @cwb.deep_fetch('jmh-runner', 'env', 'basedir'))
     MvnProject.class_variable_set(:@@mvn,
       @cwb.deep_fetch('jmh-runner', 'env', 'mvn'))
     MvnProject.class_variable_set(:@@compile,
