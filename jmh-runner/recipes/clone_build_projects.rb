@@ -19,23 +19,13 @@ projects.each_with_index do |project, index|
   full_name = "%s/%s" % [path,name]
   version = project['project']['version']
 
-  bash "clone_project_#{index}" do
-   cwd path
-   if not Dir.exists? full_name
-     code "git clone #{url}"
-     if version
-       notifies :run, "bash[checkout_version_#{index}]", :immediately
-     else
-       notifies :run, "bash[compile_project_#{index}]", :immediately
-     end
-   else
-      notifies :run, "fix_permissions_#{index}", :immediately
-   end
-  end
-
-  bash "checkout_version_#{index}" do
-    cwd full_name
-    code "git checkout #{version}"
+  git "clone_project_#{index}" do
+    repository url
+    if version
+      revision version
+    end
+    destination full_name
+    action :checkout
     notifies :run, "bash[compile_project_#{index}]", :immediately
   end
 
@@ -49,6 +39,7 @@ projects.each_with_index do |project, index|
        cwd full_name
        code "./gradlew #{target}"
        notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       action :nothing
       end
     when 'mvn'
       bash "compile_project_#{index}" do
@@ -56,6 +47,7 @@ projects.each_with_index do |project, index|
        cwd full_name
        code 'mvn clean install -DskipTests'
        notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       action :nothing
       end
     else
       raise "Unsupported backend " + backend
@@ -64,6 +56,7 @@ projects.each_with_index do |project, index|
   bash "fix_permissions_#{index}" do
    cwd path
    code "chmod -R 0777 #{full_name}"
+   action :nothing
   end
 
 
