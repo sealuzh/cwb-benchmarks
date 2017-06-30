@@ -3,16 +3,12 @@ require 'pathname'
 
 projects = node['go-runner']['projects']
 
-# this is a bit of a hack, but the go-runner dir is not yet available
-# at this point in the Chef run - so clone to the base dir for now
-path = node['go-runner']['env']['basedir']
-
-puts "Starting to install Go projects to benchmark into path #{path}"
-
 go_path = node['go-runner']['env']['go']
 go_root = node['go-runner']['env']['go-root']
 go_binaries = node['go-runner']['env']['go-binaries']
 go_own_path = node['go-runner']['env']['go-own-path']
+
+puts "Starting to install Go projects to benchmark into path #{go_own_path}"
 
 projects.each do |project|
 
@@ -23,9 +19,9 @@ projects.each do |project|
 
   puts "Installing #{url}"
 
-  project_path = "%s%s" % [go_own_path, name]
+  project_path = "%s/%s" % [go_own_path, name]
   # assume project is hosted on github
-  path_to_group = "%s/src/github.com/%s/" % [project_path, name]
+  path_to_group = "%s/src/github.com/%s" % [project_path, group]
   FileUtils.rm_rf(project_path) if File.exist?(project_path)
   bash "create_project_path" do
     cwd go_own_path
@@ -37,7 +33,7 @@ projects.each do |project|
     code "git clone #{url}"
   end
 
-  path_to_project = "%s%s" % [path_to_group, name]
+  path_to_project = "%s/%s" % [path_to_group, name]
   version = project['project']['version']
   if version
     bash "checkout_version" do
@@ -55,7 +51,12 @@ projects.each do |project|
         ENV['GOPATH'] = project_path
         timeout 60 * 60  # increase timeout to 60 mins
         cwd path_to_project
-        code "glide install"
+        code <<-EOT
+          echo "----------------------------------------------------------------------------"
+          echo $GOPATH
+          echo $PATH
+          glide install
+        EOT
       end
     # case install go get
     when 'get'

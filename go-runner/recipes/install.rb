@@ -97,6 +97,12 @@ bash "install_goptc" do
         go install
     EOT
     action :nothing
+    notifies :run, "ruby_block[clone_install_projects]", :immediately
 end
 
-include_recipe 'go-runner::clone_build_projects'
+ruby_block "clone_install_projects" do
+    block do
+        run_context.include_recipe 'go-runner::clone_build_projects'
+    end
+    action :nothing
+end
