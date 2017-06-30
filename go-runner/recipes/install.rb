@@ -10,13 +10,17 @@ package 'git'
 go_install_dir = node['go-runner']['env']['go-install']
 go_file_name = node['go-runner']['env']['go-file']
 go_file = "https://storage.googleapis.com/golang/" + go_file_name
+go_path = node['go-runner']['env']['go']
+goptc_group_folder = "%s/%s" % [go_path, "src/bitbucket.org/sealuzh"]
+ssh_dir = node['go-runner']['env']['ssh-dir']
 
-goptc_group_folder = "%s%s" % [node['go-runner']['env']['go'], "src/bitbucket.org/sealuzh/"]
 bash "create_paths" do
     cwd node['go-runner']['env']['basedir']
     code <<-EOT
         mkdir -p #{go_install_dir}
         mkdir -p #{goptc_group_folder}
+        mkdir -p #{go_path}/bin
+        mkdir -p #{ssh_dir}
         mkdir -p #{node['go-runner']['env']['go-own-path']}
     EOT
     notifies :create_if_missing, "remote_file[#{go_file}]", :immediately
@@ -24,66 +28,75 @@ end
 
 remote_file go_file do
     source go_file
-    path go_install_dir + go_file_name
+    path ("%s/%s" % [go_install_dir, go_file_name])
     action :nothing
     notifies :run, "bash[install_go]", :immediately
 end
 
+# set environment
+ENV['GOROOT'] = node['go-runner']['env']['go-root']
+ENV['GOPATH'] = node['go-runner']['env']['go']
+ENV['PATH'] = "#{ENV['PATH']}:#{node['go-runner']['env']['go-binaries']}:#{node['go-runner']['env']['go']}/bin"
+
 bash "install_go" do
     cwd go_install_dir
-    environment 'GOROOT' => node['go-runner']['env']['go-root']
-    environment 'GOPATH' => node['go-runner']['env']['go']
-    environment 'PATH' => "#{ENV['PATH']}:#{node['go-runner']['env']['go']}"
     code <<-EOT
+        echo $PATH
         tar -C /usr/local -xzf #{go_file_name}
     EOT
     action :nothing
     notifies :run, "bash[install_glide]", :immediately
 end
 
-#transfer key
-ssh_file = go_file_name = node['go-runner']['env']['basedir'] + "ssh/key"
-
 bash "install_glide" do
-    environment 'GOROOT' => node['go-runner']['env']['go-root']
-    environment 'GOPATH' => node['go-runner']['env']['go']
-    environment 'PATH' => "#{ENV['PATH']}:#{node['go-runner']['env']['go']}"
     code <<-EOT
         curl https://glide.sh/get | sh
     EOT
     action :nothing
-    notifies :create_if_missing, "cookbook_file[#{ssh_file}]", :immediately
+    notifies :create_if_missing, "file[create_ssh_wrapper]", :immediately
 end
 
-cookbook_file ssh_file do
-  source '../keys/goptc_cwb'
-  owner 'ubuntu'
-  group 'ubuntu'
-  mode '0755'
-  action :nothing
-  notifies :checkout, "git[get_goptc]", :immediately
+ssh_wrapper = ssh_dir + "/git_wrapper.sh"
+ssh_file = ssh_dir + "/key"
+file "create_ssh_wrapper" do
+    path ssh_wrapper
+    owner "ubuntu"
+    group "ubuntu"
+    mode "0755"
+    content "#!/bin/sh\nssh-keyscan bitbucket.org >>~/.ssh/known_hosts\nexec /usr/bin/ssh -i #{ssh_file} -o StrictHostKeyChecking=no \"$@\""
+    action :create_if_missing
+    notifies :create_if_missing, "cookbook_file[create_ssh_key]", :immediately
 end
 
-goptc_folder = goptc_group_folder + "goptc"
+#transfer key
+cookbook_file "create_ssh_key" do
+    path ssh_file
+    source 'keys/goptc_cwb'
+    owner 'ubuntu'
+    group 'ubuntu'
+    mode '0600'
+    action :create_if_missing
+    notifies :checkout, "git[get_goptc]", :immediately
+end
+
+goptc_folder = goptc_group_folder + "/goptc"
 git "get_goptc" do
     destination goptc_folder
-    repository "git@bitbucket.org:sealuzh/goptc.git"
-    reference "master"
-    action :nothing
-    ssh_wrapper "ssh -i #{ssh_file}"
+    repository node['go-runner']['env']['goptc']
+    reference node['go-runner']['env']['goptc_branch']
+    action :checkout
+    ssh_wrapper ssh_wrapper
     notifies :run, "bash[install_goptc]", :immediately
 end
 
 bash "install_goptc" do
-    environment 'GOROOT' => node['go-runner']['env']['go-root']
-    environment 'GOPATH' => node['go-runner']['env']['go']
-    environment 'PATH' => "#{ENV['PATH']}:#{node['go-runner']['env']['go']}"
     cwd goptc_folder
     code <<-EOT
+        echo $PATH
         go get ./...
         go install
     EOT
     action :nothing
 end
 
-# include_recipe 'go-runner::clone_build_projects'
+include_recipe 'go-runner::clone_build_projects'
