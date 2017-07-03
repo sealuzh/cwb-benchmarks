@@ -228,8 +228,8 @@ binding.pry
 
 ## Local testing
 
-The `cwb` command line utility allows for "smoke-testing" benchmarks locally.
-Find examples in `cli-benchmark` (local node.yml attribute config), `sysbench` ([RSpec](http://rspec.info/) unit testing), `fio` (custom config file).
+The `cwb` command line utility allows for "smoke-testing" benchmarks locally. Chef node attributes can be mocked via a `node.yml` YAML file.
+Find examples in `cli-benchmark` (local [node.yml](cli-benchmark/files/default/node.yml) attribute config), `sysbench` ([RSpec](http://rspec.info/) unit testing), `fio` (custom config file).
 
 ```bash
 gem install cwb
