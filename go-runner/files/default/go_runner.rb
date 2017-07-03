@@ -1,7 +1,6 @@
 require 'cwb'
 require 'fileutils'
-require_relative("framework")
-require_relative("go_projects")
+require 'open3'
 
 class GoRunner < Cwb::Benchmark
 
@@ -11,9 +10,6 @@ class GoRunner < Cwb::Benchmark
 
     puts ">>> Starting benchmarks"
     # @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
-
-    puts ">>> Setting up defaults"
-    set_up_defaults
 
     projects = config 'go-runner', 'projects'
 
@@ -32,93 +28,86 @@ class GoRunner < Cwb::Benchmark
     puts ">>> Config:"
     puts project
 
-    backend = project['backend']
     group = project['github']['group']
     name = project['github']['name']
-    version = project['version'] || "LATEST"
-    gradle_build_dir = project['gradle']['build_dir'] if project['gradle']
-    gradle_build_cmd = project['gradle']['build_cmd'] if project['gradle']
-    go_jar = project['go_jar']
-    mvn_perf_dir = project['mvn']['perf_test_dir'] if project['mvn']
     benchmarks = project['benchmarks']
-    skip_checkout = true?(project['skip_checkout'])
-    skip_compile = true?(project['skip_build'])
-    skip_benchmarks = project['skip_benchmarks']
+
+    # create goptc config file
+    home_dir = @cwb.deep_fetch('go-runner', 'env', 'basedir')
+    in_file_path = "%s/%s-%s-in.json" % [home_dir, group, name]
+    puts "Create input file: #{in_file_path}"
+
+    go_path = "%s/%s" % [@cwb.deep_fetch('go-runner', 'env', 'go-own-path'), name]
+    project_dir = "%s/src/github.com/%s/%s" % [go_path, group, name]
+
+    puts project_dir
+    return
+
+    bench_regex = if benchmarks then benchmarks else ""
+    clear_folder = @cwb.deep_fetch('go-runner', 'env', 'clear_folder')
+    clear_folder = "" unless clear_folder
+
+    tool_forks = @cwb.deep_fetch('go-runner', 'bmconfig', 'tool_forks')
+    tool_forks = 1 unless tool_forks
+
+    f = File.open(in_file_path, "w+") do |f| 
+      content = <<-EOT
+        {
+          "project": "#{project_dir}",
+          "dynamic": {
+            "i": #{@cwb.deep_fetch('go-runner', 'bmconfig', 'i')},
+            "bench_regex": "#{bench_regex}",
+            "runs": #{tool_forks}
+          },
+          "clear": "#{clear_folder}"
+        }
+      EOT
+      f.write(content)
+    end
+    f.close
 
     puts ">>> Starting project #{name}"
 
-    project = case backend
-      when 'gradle'
-        GradleProject.new(group, name, gradle_build_dir, gradle_build_cmd, go_jar, version)
-      when 'mvn'
-        MvnProject.new(group, name, mvn_perf_dir, go_jar, version)
-      else
-        raise "Unsupported backend " + backend
-      end
+    out_file_path = in_file_path = "%s/%s-%s-out.csv" % [home_dir, group, name]
 
-    project.benchmarks = benchmarks if benchmarks
-
-    experiment = Experiment.new
-    experiment.project = project
-    experiment.skip_checkout = skip_checkout
-    experiment.skip_compile = skip_compile
-    experiment.skip_benchmarks = skip_benchmarks if (skip_benchmarks && skip_benchmarks.size > 0)
-
-    # this starts the actual benchmark run
-    outcome = experiment.run_experiment
-
-    outcome.exectimes.each do |fork, duration|
-      # @cwb.submit_metric('Duration', fork, duration)
-      @cwb.submit_metric('Duration', @trial, duration)
+    env = {
+      "PATH" => "$PATH:/usr/local/go/bin:#{@cwb.deep_fetch('go-runner', 'env', 'go')}/bin",
+      "GOPATH" => "#{go_path}"
+    }
+    cmd = [
+      "goptc",
+      "-c #{in_file_path}", 
+      "-o #{out_file_path}", 
+      "-d"
+    ]
+    stdout, stderr, status = Open3.capture3(env, cmd)
+    if !status.success?
+      puts "goptc was no success: %s" % status
+      return
+    elsif stderr != ""
+      puts "goptc has stderr: %s" % stderr
+      return
     end
-
-    outcome.forks.each do |fork, forkresults|
-      forkresults.each do |benchmark, bmresults|
-        bmresults.each do |individual_value|
-          # @cwb.submit_metric(benchmark, fork, individual_value)
-          @cwb.submit_metric(benchmark, @trial, individual_value)
-        end
-      end
+    
+    # do not care about stdout now. could parse the execution time in the future
+     
+    o = File.open(out_file_path).each do |l|
+      lineArr = l.split(';')
+      bench = lineArr[2]
+      val = lineArr[3]
+      @cwb.submit_metric(bench, @trial, val)
     end
 
     puts ">>> Finished project #{name}"
 
+    # remove config file
+    #FileUtils.rm f
+    #FileUtils.rm 0
   end
-
-  def timestamp
-    Time.now.to_i
-  end
-
-  def cpu_model_name
-    @cwb.deep_fetch('cpu', '0', 'model_name')
-  end
-
-  def set_up_defaults
-    JavaProject.class_variable_set(:@@java,
-      @cwb.deep_fetch('go-runner', 'env', 'java'))
-    JavaProject.class_variable_set(:@@tmp_file,
-      @cwb.deep_fetch('go-runner', 'env', 'tmp_file_name'))
-    JavaProject.class_variable_set(:@@go_config,
-      @cwb.deep_fetch('go-runner', 'bmconfig', 'tool_forks'))
-    JavaProject.class_variable_set(:@@go_config,
-      @cwb.deep_fetch('go-runner', 'bmconfig', 'go_config'))
-    JavaProject.class_variable_set(:@@basedir,
-      @cwb.deep_fetch('go-runner', 'env', 'basedir'))      
-    MvnProject.class_variable_set(:@@mvn,
-      @cwb.deep_fetch('go-runner', 'env', 'mvn'))
-    MvnProject.class_variable_set(:@@compile,
-      @cwb.deep_fetch('go-runner', 'env', 'mvn_compile'))
-    GradleProject.class_variable_set(:@@gradle,
-      @cwb.deep_fetch('go-runner', 'env', 'gradle'))
-  end
+end
 
   def config(*keys)
     tmp = @cwb.deep_fetch *keys
     tmp == '' ? nil : tmp
   end
-
-  def true?(str)
-    str == 'true'
-  end
-
 end

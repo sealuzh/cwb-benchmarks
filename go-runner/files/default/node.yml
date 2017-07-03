@@ -1,22 +1,13 @@
 ---
-jmh-runner:
+go-runner:
   projects:
     - project:
         github:
-          group: protostuff
-          name: protostuff
-        skip_build: false
-        skip_checkout: false
-        jmh_jar: 'target/protostuff-benchmarks.jar'
-        backend: 'mvn'
-        benchmarks: 'baseline|runtime_deserialize_1_int_field'
-        mvn:
-          perf_test_dir: 'protostuff-benchmarks'
+          group: coreos
+          name: etcd
+        benchmarks: '^BenchmarkManySmallResponseUnmarshal|BenchmarkMutex4Waiters|BenchmarkMediumResponseUnmarshal|BenchmarkStorePut|BenchmarkBackendPut$'
   bmconfig:
-    tool_forks: '1'
-    jmh_config: '-wi 1 -i 2 -f 1'
+    tool_forks: 1
+    i: 2
   env:
-    java: 'java'
-    mvn: '/Users/philipp/maven/bin/mvn'
-    mvn_compile: 'clean install -DskipTests'
-    tmp_file_name: 'tmp.json'
+    clear_folder: "/tmp/"
