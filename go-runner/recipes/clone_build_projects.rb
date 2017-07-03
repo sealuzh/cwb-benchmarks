@@ -10,11 +10,14 @@ go_own_path = node['go-runner']['env']['go-own-path']
 
 puts "Starting to install Go projects to benchmark into path #{go_own_path}"
 
-projects.each do |project|
+projects.each_with_index do |project, index|
 
   # clone and checkout repo
   group = project['project']['github']['group']
   name = project['project']['github']['name']
+
+  puts "Clone and install %s/%s" % [group, name]
+
   url = "https://github.com/%s/%s.git" % [group, name]
 
   puts "Installing #{url}"
@@ -23,23 +26,25 @@ projects.each do |project|
   # assume project is hosted on github
   path_to_group = "%s/src/github.com/%s" % [project_path, group]
   FileUtils.rm_rf(project_path) if File.exist?(project_path)
-  bash "create_project_path" do
+  bash "create_project_path_#{index}" do
     cwd go_own_path
-    code "mkdir -p #{path_to_group}"
-  end
-
-  bash "clone_project" do
-    cwd path_to_group
-    code "git clone #{url}"
+    code <<-EOT
+      mkdir -p #{path_to_group}
+    EOT
+    notifies :checkout, "git[clone_project_#{index}]", :immediately
   end
 
   path_to_project = "%s/%s" % [path_to_group, name]
   version = project['project']['version']
-  if version
-    bash "checkout_version" do
-      cwd path_to_project
-      code "git checkout #{version}"
+
+  git "clone_project_#{index}" do
+    repository url
+    if version
+      revision version
     end
+    destination path_to_project
+    action :nothing
+    notifies :run, "bash[deps_#{index}]", :immediately
   end
 
   # fetch dependencies using the appropriate backend
@@ -47,32 +52,35 @@ projects.each do |project|
   case backend
     # case install glide
     when 'glide'
-      bash "deps_glide" do
-        ENV['GOPATH'] = project_path
+      bash "deps_#{index}" do
         timeout 60 * 60  # increase timeout to 60 mins
         cwd path_to_project
+        environment "GOPATH" => project_path
         code <<-EOT
-          echo "----------------------------------------------------------------------------"
-          echo $GOPATH
-          echo $PATH
           glide install
         EOT
+       notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       action :nothing
       end
     # case install go get
     when 'get'
-      bash "deps_goget" do
-        ENV['GOPATH'] = project_path
+      bash "deps_#{index}" do
         timeout 60 * 60  # increase timeout to 60 mins
         cwd path_to_project
-        code "go get $(go list ./... | grep -v vendor)"
+        environment "GOPATH" => project_path
+        code <<-EOT
+          go get $(go list ./... | grep -v vendor)
+        EOT
+       notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       action :nothing
       end
     else
       raise "Unsupported Package Management System: " + backend
   end
 
-  bash "fix_permissions" do
-   cwd path
+  bash "fix_permissions_#{index}" do
    code "chmod -R 0777 #{project_path}"
+   action :nothing
   end
 
 end
