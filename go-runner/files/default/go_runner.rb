@@ -45,7 +45,7 @@ class GoRunner < Cwb::Benchmark
 
     bench_regex = benchmarks ? benchmarks : ""
 
-    clear_folder = @cwb.deep_fetch('go-runner', 'env', 'clear_folder')
+    clear_folder = project['clear_folder']
     clear_folder = "" unless clear_folder
 
     tool_forks = @cwb.deep_fetch('go-runner', 'bmconfig', 'tool_forks')
@@ -71,36 +71,28 @@ class GoRunner < Cwb::Benchmark
     out_file_path = "%s/%s-%s-out.csv" % [home_dir, group, name]
 
     cmd = "PATH=$PATH:/usr/local/go/bin:#{@cwb.deep_fetch('go-runner', 'env', 'go')}/bin GOPATH=#{go_path} goptc -c #{in_file_path} -o #{out_file_path} -d"
-    stdin, stdout, stderr, wait_thr = Open3.popen3(cmd)
+    stdout, stderr, status = Open3.capture3(cmd)
+    if !status.success?
+      out = "goptc returned with error (%s)\n" % status
+      binding.pry
+      out << "---------- stderr ----------\n" << stderr
+      out << "---------- stdout ----------\n" << stdout
+      raise "goptc execution error:\n%s" % out
+    end
 
     printStdout = false || @cwb.deep_fetch('go-runner', 'env', 'print-stdout')
     if printStdout
-      stdout.each_line do |l|
-        puts l
-      end
+      puts stdout
     end
-
-    
-    stdin.close
-    stdout.close
-    exit_status = wait_thr.value
-    if !exit_status.success?
-      puts "goptc returned with error (%s)" % exit_status
-      stderr.each_line do |l|
-        puts l
-      end
-      raise "goptc execution error"
-    end
-    stderr.close
-    
-    # do not care about stdout now. could parse the execution time in the future
      
     o = File.open(out_file_path).each do |l|
       lineArr = l.split(';')
       bench = lineArr[2]
       val = lineArr[3]
       @cwb.submit_metric(bench, @trial, val)
-      puts "submit_metric(%s,%s,%s)" % [bench, @trial, val]
+      if printStdout
+        puts "submit_metric(%s,%s,%s)" % [bench, @trial, val]
+      end
     end
 
     puts ">>> Finished project #{name}"

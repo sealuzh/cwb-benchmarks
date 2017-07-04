@@ -6,11 +6,11 @@ go-runner:
           group: coreos
           name: etcd
         benchmarks: '^BenchmarkManySmallResponseUnmarshal$|^BenchmarkMutex4Waiters$|^BenchmarkMediumResponseUnmarshal$|^BenchmarkStorePut$|^BenchmarkBackendPut$'
+        clear_folder: "/tmp/"
   bmconfig:
     tool_forks: 1
     i: 2
   env:
-    clear_folder: "/tmp/"
     basedir: '/Users/christophlaaber'
     go: '/Users/christophlaaber/Documents/Go'
     go-own-path: '/Users/christophlaaber/tmp/benchmark-projects/Go-Own-Path'

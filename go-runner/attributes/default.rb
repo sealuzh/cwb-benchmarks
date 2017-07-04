@@ -11,3 +11,5 @@ default['go-runner']['env']['ssh-dir'] = "/home/ubuntu/ssh"
 
 default['go-runner']['env']['goptc'] = "git@bitbucket.org:sealuzh/goptc.git"
 default['go-runner']['env']['goptc_branch'] = "cloudbenchstudy"
+
+default['go-runner']['env']['print-stdout'] = false
