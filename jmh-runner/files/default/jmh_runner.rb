@@ -22,7 +22,10 @@ class JmhRunner < Cwb::Benchmark
     projects.each {|project| execute_project(project['project']) }
 
     puts ">>> Finished all projects"
-
+    @cwb.notify_finished_execution
+  rescue => error
+      @cwb.notify_failed_execution(error.message)
+      raise error
   end
 
   private
