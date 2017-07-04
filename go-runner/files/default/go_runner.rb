@@ -89,9 +89,10 @@ class GoRunner < Cwb::Benchmark
       lineArr = l.split(';')
       bench = lineArr[2]
       val = lineArr[3]
-      @cwb.submit_metric(bench, @trial, val)
+      bench_name = "#{name}:#{bench}"
+      @cwb.submit_metric(bench_name, @trial, val)
       if printStdout
-        puts "submit_metric(%s,%s,%s)" % [bench, @trial, val]
+        puts "submit_metric(%s,%s,%s)" % [bench_name, @trial, val]
       end
     end
 
