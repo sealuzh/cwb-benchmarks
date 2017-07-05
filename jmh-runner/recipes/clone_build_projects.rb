@@ -17,14 +17,14 @@ projects.each_with_index do |project, index|
   full_name = "%s/%s" % [path,name]
   version = project['project']['version']
 
-  git "clone_project_#{index}" do
+  git "jmh_clone_project_#{index}" do
     repository url
     if version
       revision version
     end
     destination full_name
     action :checkout
-    notifies :run, "bash[compile_project_#{index}]", :immediately
+    notifies :run, "bash[jmh_compile_project_#{index}]", :immediately
   end
 
   # compile using the appropriate backend
@@ -32,26 +32,26 @@ projects.each_with_index do |project, index|
   case backend
     when 'gradle'
       target = project['project']['gradle']['build_cmd']
-      bash "compile_project_#{index}" do
+      bash "jmh_compile_project_#{index}" do
        timeout 60 * 60  # increase timeout to 60 mins
        cwd full_name
        code "./gradlew #{target}"
-       notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       notifies :run, "bash[jmh_fix_permissions_#{index}]", :immediately
        action :nothing
       end
     when 'mvn'
-      bash "compile_project_#{index}" do
+      bash "jmh_compile_project_#{index}" do
        timeout 60 * 60  # increase timeout to 60 mins
        cwd full_name
        code 'mvn clean install -DskipTests'
-       notifies :run, "bash[fix_permissions_#{index}]", :immediately
+       notifies :run, "bash[jmh_fix_permissions_#{index}]", :immediately
        action :nothing
       end
     else
       raise "Unsupported backend " + backend
   end
 
-  bash "fix_permissions_#{index}" do
+  bash "jmh_fix_permissions_#{index}" do
    cwd path
    code "chmod -R 0777 #{full_name}"
    action :nothing

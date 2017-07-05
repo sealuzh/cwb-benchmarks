@@ -5,8 +5,15 @@ go-runner:
         github:
           group: coreos
           name: etcd
+        version: e7e7451213d32fdea530050446f709ea9db6c2f7
         benchmarks: '^BenchmarkManySmallResponseUnmarshal$|^BenchmarkMutex4Waiters$|^BenchmarkMediumResponseUnmarshal$|^BenchmarkStorePut$|^BenchmarkBackendPut$'
         clear_folder: "/tmp/"
+    - project:
+        github:
+          group: blevesearch
+          name: bleve
+        version: 0b1034dcbe067789a206f3267f41c6a1f9760b56
+        benchmarks: '^BenchmarkTop100of50Scores$|^BenchmarkNullIndexing1Workers10Batch$|^BenchmarkTermFrequencyRowDecode$|^BenchmarkTop1000of100000Scores$|^BenchmarkGoLevelDBIndexing2Workers10Batch$'
   bmconfig:
     tool_forks: 1
     i: 2
