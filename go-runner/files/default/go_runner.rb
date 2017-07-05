@@ -8,7 +8,7 @@ class GoRunner < Cwb::Benchmark
 
   def execute
 
-    puts ">>> Starting benchmarks"
+    puts ">>> Starting Go benchmarks"
     # @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
 
     projects = config 'go-runner', 'projects'
@@ -17,8 +17,7 @@ class GoRunner < Cwb::Benchmark
 
     projects.each {|project| execute_project(project['project']) }
 
-    puts ">>> Finished all projects"
-    @cwb.notify_finished_execution
+    puts ">>> Finished all Go projects"
   rescue => error
     @cwb.notify_failed_execution(error.message)
     raise error

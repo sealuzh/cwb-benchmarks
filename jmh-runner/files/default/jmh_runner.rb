@@ -9,7 +9,7 @@ class JmhRunner < Cwb::Benchmark
 
   def execute
 
-    puts ">>> Starting benchmarks"
+    puts ">>> Starting JMH benchmarks"
     # @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
 
     puts ">>> Setting up defaults"
@@ -21,8 +21,7 @@ class JmhRunner < Cwb::Benchmark
 
     projects.each {|project| execute_project(project['project']) }
 
-    puts ">>> Finished all projects"
-    @cwb.notify_finished_execution
+    puts ">>> Finished all JMH projects"
   rescue => error
       @cwb.notify_failed_execution(error.message)
       raise error
