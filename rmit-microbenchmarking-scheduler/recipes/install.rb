@@ -5,4 +5,4 @@
 ## Example:
 # Update apt package index (make sure you declare dependencies in metadata.rb)
 include_recipe 'apt'
-package 'default-jdk'
+# package 'default-jdk'

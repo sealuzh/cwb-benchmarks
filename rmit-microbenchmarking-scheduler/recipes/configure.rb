@@ -4,3 +4,4 @@
 cwb_benchmark_suite 'rmit-microbenchmarking-scheduler'
 
 include_recipe 'jmh-runner'
+include_recipe 'go-runner'
