@@ -73,7 +73,6 @@ class GoRunner < Cwb::Benchmark
     stdout, stderr, status = Open3.capture3(cmd)
     if !status.success?
       out = "goptc returned with error (%s)\n" % status
-      binding.pry
       out << "---------- stderr ----------\n" << stderr
       out << "---------- stdout ----------\n" << stdout
       raise "goptc execution error:\n%s" % out
