@@ -43,7 +43,7 @@ projects.each_with_index do |project, index|
       bash "jmh_compile_project_#{index}" do
        timeout 60 * 60  # increase timeout to 60 mins
        cwd full_name
-       code 'mvn clean install -DskipTests'
+       code 'mvn -q clean install -DskipTests'
        notifies :run, "bash[jmh_fix_permissions_#{index}]", :immediately
        action :nothing
       end
