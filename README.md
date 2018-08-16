@@ -10,7 +10,10 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 * CWB Client *(RubyGem)*: https://github.com/sealuzh/cwb
     * Docs: http://www.rubydoc.info/gems/cwb/
     * Cwb::Client: http://www.rubydoc.info/gems/cwb/Cwb/Client
-
+* CWB configuration for different providers
+    * [aws](./docs/AWS.md)
+    * [google](./docs/GOOGLE.md)
+    * [azure](./docs/AZURE.md)
 
 ## Execute a basic CLI Benchmark
 
