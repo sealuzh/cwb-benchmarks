@@ -4,8 +4,8 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
-  apt (2.7.0)
-  cli-benchmark (1.0.1)
+  apt (7.0.0)
+  cli-benchmark (1.0.2)
     apt (>= 0.0.0)
     cwb (>= 0.0.0)
-  cwb (0.1.2)
+  cwb (0.1.3)

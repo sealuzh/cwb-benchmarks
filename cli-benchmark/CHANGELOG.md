@@ -1,3 +1,6 @@
+# 1.0.2 (2018-08-16)
+* Update dependencies
+
 # 1.0.1 (2015-04-29)
 
 * Breaking API change (feasible because hardly used yet)
