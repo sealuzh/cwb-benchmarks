@@ -1,6 +1,20 @@
 # AWS
 
 * [vagrant-aws](https://github.com/mitchellh/vagrant-aws)
+* EC2: https://aws.amazon.com/ec2/
+* Console: https://console.aws.amazon.com/ec2
+* Create AWS credentials: http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
+
+## CWB Configuration
+
+```ruby
+'providers' => {
+  'aws' => {
+    'access_key' => 'AWS_ACCESS_KEY',
+    'secret_key' => 'AWS_SECRET_KEY',
+  },
+},
+```
 
 ## Example CWB Vagrantfile
 
@@ -51,3 +65,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 end
 ```
+
+### AWS Configuration
+
+* [Instance types](https://www.ec2instances.info/)
+* Instance pricing: https://aws.amazon.com/ec2/pricing/on-demand/
+* Canonical Ubuntu images: https://cloud-images.ubuntu.com/locator/ec2/
+  * Release history: https://cloud-images.ubuntu.com/query/trusty/server/released.txt
+* Regions: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
