@@ -2,6 +2,7 @@ require 'cwb'
 
 class CliBenchmark < Cwb::Benchmark
   def execute
+    @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
     repetitions.times do |i|
       execute_run
     end
@@ -13,7 +14,6 @@ class CliBenchmark < Cwb::Benchmark
 
   def execute_run
     pre_run
-    @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
     output = `#{run_cmd}` unless run_cmd.empty?
     fail "Run script '#{run_cmd} did exit unsuccessfully." unless $?.success?
     submit_metrics(output)
