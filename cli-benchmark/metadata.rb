@@ -4,7 +4,7 @@ maintainer_email 'joel.scheuner.dev@gmail.com'
 license          'MIT'
 description      'Installs/Configures cli-benchmark'
 long_description 'Installs/Configures cli-benchmark'
-version          '1.0.2'
+version          '1.1.0'
 
 depends 'cwb'
 depends 'apt'
