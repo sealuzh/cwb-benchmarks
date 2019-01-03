@@ -1,4 +1,11 @@
+# 1.1.0 (2019-01-03)
+
+* Update dependencies
+* Add `repetitions` feature
+* Add `post_run` feature
+
 # 1.0.2 (2018-08-16)
+
 * Update dependencies
 
 # 1.0.1 (2015-04-29)

@@ -1,5 +1,8 @@
 ---
 cli-benchmark:
+  pre_run: echo 'pre_run'
   run: date
+  repetitions: 3
+  post_run: echo 'post_run'
   metrics:
     execution_time: .*

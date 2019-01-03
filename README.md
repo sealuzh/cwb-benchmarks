@@ -2,18 +2,21 @@
 
 The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository install and configure benchmarks that are aimed to be used with [Cloud WorkBench](https://github.com/sealuzh/cloud-workbench).
 
-
 ## Quicklinks
 
 * CWB Server: https://github.com/sealuzh/cloud-workbench
 * CWB Cookbook *(Chef)*: https://github.com/sealuzh/cwb-benchmarks/tree/master/cwb
 * CWB Client *(RubyGem)*: https://github.com/sealuzh/cwb
-    * Docs: http://www.rubydoc.info/gems/cwb/
-    * Cwb::Client: http://www.rubydoc.info/gems/cwb/Cwb/Client
-* CWB configuration for different providers
-    * [aws](./docs/AWS.md)
-    * [google](./docs/GOOGLE.md)
-    * [azure](./docs/AZURE.md)
+  * Docs: http://www.rubydoc.info/gems/cwb/
+  * Cwb::Client: http://www.rubydoc.info/gems/cwb/Cwb/Client
+
+## Providers
+
+General conventions about [Providers](./docs/PROVIDERS.md)
+
+* [aws](./docs/AWS.md)
+* [google](./docs/GOOGLE.md)
+* [azure](./docs/AZURE.md)
 
 ## Execute a basic CLI Benchmark
 
@@ -23,13 +26,11 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 4. Fill in `Name=execution_time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
 5. Click `Start Execution` and confirm the popup dialog.
 
-
 ## Schedule a Benchmark
 
 1. Within your benchmark definition, click `Create Schedule`
 2. Enter your Cron expression (e.g., `* 0,12 * * *` for midnight and lunchtime every day) and click `Create Schedule`
 3. Don't forget to deactivate your schedules if you don't need them anymore! Review active schedules here http://cwb-server.io/benchmark_schedules?active=true
-
 
 ## Setup
 
@@ -157,6 +158,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 CWB comes with an interactive debug mode to ease benchmark development in case your benchmark fails during preparation (i.e., provisioning) or execution.
 
 *Preparation:* Click the `Enable Keep Alive` button within your benchmark execution view.
+
 * **WARNING:** Make sure you toggle this button once you're done because otherwise your VMs will live and cost *FOREVER*!
 * CWB will automatically terminate VMs on failure after a configurable timout. Per default, you'll have 15 minutes time to enable the `Keep Alive` mode.
 
@@ -189,7 +191,6 @@ CWB comes with an interactive debug mode to ease benchmark development in case y
     cwb execute benchmark-name/benchmark_name.rb
     cwb execute .
     ```
-
 
 ## Advanced debugging
 
@@ -228,7 +229,6 @@ binding.pry
 
 1. Simply manually start the benchmark according to `Debug your benchmark > Failed on running`
 
-
 ## Local testing
 
 The `cwb` command line utility allows for "smoke-testing" benchmarks locally. Chef node attributes can be mocked via a `node.yml` YAML file.
@@ -240,7 +240,6 @@ cwb execute benchmark-name/benchmark_name.rb
 ```
 
 More sophisticated integration testing can be achieved with [Test Kitchen](http://kitchen.ci/). Have a look at `.kitchen.yml` in `sysbench`, `cli-benchmark`, and `iperf`. In order to use this feature, you'll have to install [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/downloads.html), and the Vagrant plugin `vagrant plugin install vagrant-omnibus`. An example integration test can be found in the `cwb` cookbook.
-
 
 ## Local Cookbook Dependencies
 

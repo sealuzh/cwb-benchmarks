@@ -27,7 +27,7 @@ Add the `cli-benchmark` default recipe to your Chef configuration:
 
 ```ruby
 config.vm.provision "chef_client", id: "chef_client" do |chef|
-  chef.add_recipe "cli-benchmark@1.0.1" # Version is optional
+  chef.add_recipe "cli-benchmark@1.1.0" # Version is optional
   chef.json =
   {
     'cli-benchmark' => {
@@ -39,8 +39,11 @@ config.vm.provision "chef_client", id: "chef_client" do |chef|
           '[ -e file.tar.gz ] && wget http://example.com/folder/file.tar.gz',
           'tar -xzf file.tar.gz',
         ],
-        'pre_run' => 'echo "This will be run immediately before the benchmark starts" > pre_run.txt',
+        'pre_run' => 'echo "This will be run immediately BEFORE the benchmark starts" > log.txt',
         'run' => 'sysbench --test=cpu --cpu-max-prime=20000 run',
+        # Repetitions include pre_run and post_run
+        'repetitions' => 3,
+        'post_run' => 'echo "This will be run immediately AFTER the benchmark ends" > log.txt',
         'metrics' => {
           # [name of the metric] => [regex to extract result from stdout]
           'execution_time' => 'total time:\s*(\d+\.\d+)s',

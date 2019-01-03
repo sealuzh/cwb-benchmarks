@@ -20,7 +20,10 @@ suites:
         ssh_username: vagrant
         logging_enabled: true
       cli-benchmark:
+        pre_run: echo 'pre_run'
         run: date
+        repetitions: 3
+        post_run: echo 'post_run'
         install:
         - cd /home/vagrant
         - echo "first" > 1st.txt
