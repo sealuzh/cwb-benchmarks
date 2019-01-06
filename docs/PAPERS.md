@@ -6,7 +6,7 @@ This overview lists which benchmarks were used for which study/paper:
 
 ## Performance testing in the cloud. How bad is it really? (EMSE'19)
 
-[Replication Package](https://www.ifi.uzh.ch/en/seal/people/laaber/Tools-Dataset/SMB-Cloud-Study.html)
+[Replication Package](https://doi.org/10.6084/m9.figshare.7546703)
 
 * [rmit-microbenchmarking-scheduler](../rmit-microbenchmarking-scheduler/README.md) (benchmark suite)
   * [jmh-runner](../jmh-runner/README.md)
