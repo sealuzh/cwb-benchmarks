@@ -18,8 +18,10 @@ See `attributes/default.rb`
 
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
-| metric_name                  | unit              | ratio/nominal |
-| cpu                          | model name        | nominal       |
+| *metric_name*                | *unit*            | ratio/nominal |
+| instance/cpu_model           | model name        | nominal       |
+| instance/cpu_cores           | count             | ratio         |
+| instance/ram_total           | kB                | nominal       |
 
 ### cli-benchmark::default
 

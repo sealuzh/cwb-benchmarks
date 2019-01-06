@@ -1,4 +1,10 @@
 ---
+cpu:
+  total: 4
+  '0':
+    model_name: i7_my_cpu
+memory:
+  total: 13334020kB
 cli-benchmark:
   pre_run: echo 'pre_run'
   run: date

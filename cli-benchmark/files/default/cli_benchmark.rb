@@ -2,10 +2,28 @@ require 'cwb'
 
 class CliBenchmark < Cwb::Benchmark
   def execute
-    @cwb.submit_metric('cpu', timestamp, cpu_model_name) rescue nil
+    submit_global_metrics
     repetitions.times do |i|
       execute_run
     end
+  end
+
+  def submit_global_metrics
+    @cwb.submit_metric('instance/cpu_model', timestamp, cpu_model_name) rescue nil
+    @cwb.submit_metric('instance/cpu_cores', timestamp, num_cpu_cores) rescue nil
+    @cwb.submit_metric('instance/ram_total', timestamp, node_ram_in_kB) rescue nil
+  end
+
+  def cpu_model_name
+    @cwb.deep_fetch('cpu', '0', 'model_name')
+  end
+
+  def num_cpu_cores
+    @cwb.deep_fetch('cpu', 'total')
+  end
+
+  def node_ram_in_kB
+    @cwb.deep_fetch('memory', 'total')
   end
 
   def repetitions
@@ -40,10 +58,6 @@ class CliBenchmark < Cwb::Benchmark
     metrics.each do |metric_name, regex_string|
       @cwb.submit_metric(metric_name, timestamp, result(stdout, regex(regex_string)))
     end
-  end
-
-  def cpu_model_name
-    @cwb.deep_fetch('cpu', '0', 'model_name')
   end
 
   def timestamp

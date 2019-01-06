@@ -1,5 +1,6 @@
 # 1.1.1 (2019-01-06)
 
+* Submit more instance metrics by default + rename existing (!)
 * Update docs
 * Update example vagrantfiles
 
