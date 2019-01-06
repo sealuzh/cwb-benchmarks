@@ -1,3 +1,3 @@
-# 0.1.0 (2015-MM-DD)
+# 0.1.0 (2019-MM-DD)
 
 Initial release of `benchmark-name`

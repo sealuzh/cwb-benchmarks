@@ -12,10 +12,8 @@ See `attributes/default.rb`
 
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
-| **metric-name**              | unit              | ratio/nominal |
+| metric-name                  | unit              | ratio/nominal |
 | cpu                          | model-name        | nominal       |
-
-**bold-written** metrics are mandatory
 
 ### benchmark-name::default
 
