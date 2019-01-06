@@ -9,6 +9,7 @@ The [Chef Cookbooks](http://docs.chef.io/cookbooks.html) within this repository 
 * CWB Client *(RubyGem)*: https://github.com/sealuzh/cwb
   * Docs: http://www.rubydoc.info/gems/cwb/
   * Cwb::Client: http://www.rubydoc.info/gems/cwb/Cwb/Client
+* CWB Benchmark Examples used in [Papers](./docs/PAPERS.md)
 
 ## Providers
 
