@@ -28,7 +28,7 @@ General conventions about [Providers](./docs/PROVIDERS.md)
 ## Create or update a metric definition (optional)
 
 1. Open a CWB benchmark definition
-2. Click `Create New Metric Definition` (right sidebar)
+2. Click `Create New Metric Definition` or edit an existing one (right sidebar)
 3. Fill in `Name=execution_time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition`
 
 > NOTE: CWB now automatically creates new metric definitions whenever a new metric instance is submitted.
