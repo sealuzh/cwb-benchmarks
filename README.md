@@ -23,9 +23,15 @@ General conventions about [Providers](./docs/PROVIDERS.md)
 
 1. Go to your CWB-server `http://cwb-server.io/benchmark_definitions/new` (i.e., BENCHMARK > Definitions > Create New Benchmark)
 2. Chose a `Name` and click `Create New Benchmark`
-3. Click `Create New Metric Definition`
-4. Fill in `Name=execution_time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition` (Optionally add another one with `Name=cpu`, `Unit=model name`, and `Scale type=Nominal`)
-5. Click `Start Execution` and confirm the popup dialog.
+3. Click `Start Execution` and confirm the popup dialog.
+
+## Create or update a metric definition (optional)
+
+1. Open a CWB benchmark definition
+2. Click `Create New Metric Definition` (right sidebar)
+3. Fill in `Name=execution_time`, `Unit=seconds`, `Scale type=Ratio`, and click `Create Metric Definition`
+
+> NOTE: CWB now automatically creates new metric definitions whenever a new metric instance is submitted.
 
 ## Schedule a Benchmark
 
