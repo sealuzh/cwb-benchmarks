@@ -1,0 +1,27 @@
+---
+jmh-runner:
+  github:
+    group: ReactiveX
+    name: RxJava
+  project:
+    skip_build: false
+    skip_checkout: false
+    jmh_jar: 'libs/rxjava-1.2.10-SNAPSHOT-benchmarks.jar'
+    backend: 'gradle'
+    version: '2162d6d35a8e162f408e1bfd4083924c0987751b'
+    benchmarks: 'serializedTwoStreamsSlightlyContended|rangeEmptyConcatMap|OperatorPublishPerf.benchmark|ComputationSchedulerPerf.observeOn'
+    params_string: 'size={1,100,1000,1000000},mask={3},async={false},batchFrequency={4,8},childCount={0,5}'
+    mvn:
+      perf_test_dir: 'perf'
+    gradle:
+      build_cmd: 'clean build -x test'
+      build_dir: 'build'
+  bmconfig:
+    tool_forks: 1
+    jmh_config: '-wi 1 -i 2 -f 1'
+  env:
+    java: 'java'
+    mvn: 'mvn'
+    gradle: './gradlew'
+    mvn_compile: 'clean install -DskipTests'
+    tmp_file_name: 'tmp.json'
