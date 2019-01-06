@@ -1,3 +1,8 @@
+# 1.1.1 (2019-01-06)
+
+* Update docs
+* Update example vagrantfiles
+
 # 1.1.0 (2019-01-03)
 
 * Update dependencies

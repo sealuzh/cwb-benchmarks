@@ -5,6 +5,8 @@ Cloud WorkBench (CWB) helper cookbook which allows to define simple benchmarks t
 ## Supported Platforms
 
 * Ubuntu 14.04 LTS 64 bit (manually tested)
+* Ubuntu 16.04 LTS 64 bit (manually tested)
+* Ubuntu 18.04 LTS 64 bit (manually tested 2019-01-04)
 
 ## Attributes
 
@@ -16,10 +18,8 @@ See `attributes/default.rb`
 
 | Metric Name                  | Unit              | Scale Type    |
 | ---------------------------- | ----------------- | ------------- |
-| **metric_name**              | unit              | ratio/nominal |
+| metric_name                  | unit              | ratio/nominal |
 | cpu                          | model name        | nominal       |
-
-**bold-written** metrics are mandatory
 
 ### cli-benchmark::default
 
@@ -27,7 +27,7 @@ Add the `cli-benchmark` default recipe to your Chef configuration:
 
 ```ruby
 config.vm.provision "chef_client", id: "chef_client" do |chef|
-  chef.add_recipe "cli-benchmark@1.1.0" # Version is optional
+  chef.add_recipe "cli-benchmark" # @x.x.x version is optional
   chef.json =
   {
     'cli-benchmark' => {

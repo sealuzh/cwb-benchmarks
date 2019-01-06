@@ -6,7 +6,7 @@ issues_url       'https://github.com/sealuzh/cwb-benchmarks/issues'
 license          'MIT'
 description      'Installs/Configures cli-benchmark'
 long_description 'Installs/Configures cli-benchmark'
-version          '1.1.0'
+version          '1.1.1'
 
 supports 'ubuntu'
 chef_version '~> 12'
